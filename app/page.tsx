@@ -2,14 +2,13 @@ import type { Metadata } from "next";
 import { LeadForm } from "@/components/forms/lead-form";
 import { AppBadge } from "@/components/layout/app-badge";
 import { CheckIcon } from "@/components/icons";
-import { DemoVideo, Faq } from "@/components/marketing/blocks";
-import { Marquee, Reveal } from "@/components/motion";
+import { Faq } from "@/components/marketing/blocks";
+import { Reveal } from "@/components/motion";
 import { HeroEngine } from "@/components/product/hero-engine";
 import { DashboardDemo } from "@/components/product/live-demos";
 import { ProductTour } from "@/components/product/product-tour";
 import { BuiltForThree, CampusToCareer, Differences, FactsBand, ScatteredVsConnected } from "@/components/product/sections";
 import { JourneyStepper } from "@/components/marketing/journey-stepper";
-import { PhoneMockup } from "@/components/marketing/phone-mockup";
 import { VideoPlayer } from "@/components/marketing/video-player";
 import { ButtonLink, Container, H2, Section, SectionHeader } from "@/components/ui";
 import { faqs } from "@/content/journey";
@@ -21,16 +20,6 @@ export const metadata: Metadata = {
   alternates: { canonical: "/" },
 };
 
-const previewScreens = [
-  { src: "/screens/home-diagnose.webp", label: "Home", alt: "App home screen showing the Diagnose, Train and Place journey" },
-  { src: "/screens/basics.webp", label: "Your profile", alt: "Profile screen with target role" },
-  { src: "/screens/assessment.webp", label: "Skill assessment", alt: "Skill assessment question screen" },
-  { src: "/screens/interview.webp", label: "AI mock interview", alt: "Practice interview chat" },
-  { src: "/screens/report.webp", label: "Your report", alt: "Skill report with readiness score and skill gaps" },
-  { src: "/screens/plan.webp", label: "Your roadmap", alt: "Personal plan with a monthly breakdown" },
-  { src: "/screens/job-ready.webp", label: "Job-ready check", alt: "Job-ready check with three checks passed" },
-  { src: "/screens/home-place.webp", label: "Job matches", alt: "Home screen showing jobs matched to the student's skills" },
-];
 
 export default function HomePage() {
   return (
@@ -217,31 +206,6 @@ export default function HomePage() {
             <p className="text-xs text-muted">Shown with each college&apos;s written permission.</p>
           </div>
         </Container>
-      </section>
-
-      {/* See it before launch */}
-      <Section tone="ink" labelledBy="preview-title">
-        <div className="flex flex-col gap-2 lg:flex-row lg:items-end lg:justify-between">
-          <H2 id="preview-title" className="text-white">
-            See it before launch.
-          </H2>
-          <p className="text-sm text-subtle lg:text-[15px]">Real app screens from the GetHyre.ai app, launching soon</p>
-        </div>
-        {site.demoVideoUrl ? (
-          <div className="mt-6 lg:mt-9">
-            <DemoVideo />
-          </div>
-        ) : null}
-      </Section>
-      <section aria-label="App screens" className="-mt-6 bg-ink pb-16 lg:-mt-12 lg:pb-24">
-        <Marquee label="App screens" duration={50}>
-          {previewScreens.map((s) => (
-            <figure key={s.label} className="flex flex-col items-center gap-3 px-2">
-              <PhoneMockup src={s.src} alt={s.alt} width={220} frame="soft" />
-              <figcaption className="text-sm font-medium text-line-strong">{s.label}</figcaption>
-            </figure>
-          ))}
-        </Marquee>
       </section>
 
       {/* Campus survey */}
