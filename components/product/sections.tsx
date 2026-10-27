@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { CheckIcon } from "@/components/icons";
+import type { ReactNode } from "react";
+import { Photo } from "@/components/marketing/photos";
 import { CountUp, Marquee, Reveal } from "@/components/motion";
 import { cx } from "@/components/ui";
 
@@ -209,22 +211,12 @@ export function BuiltForThree() {
   return (
     <ul className="mt-8 grid gap-4 md:grid-cols-3 lg:mt-12 lg:gap-6">
       <Reveal as="li" className="flex flex-col overflow-hidden rounded-[24px] bg-primary text-white">
-        <div className="flex flex-col gap-2.5 bg-primary-strong/60 p-5">
-          {[
-            ["Readiness", "81", "w-[81%]"],
-            ["Roadmap", "72%", "w-[72%]"],
-          ].map(([k, v, w]) => (
-            <div key={k} className="flex flex-col gap-1">
-              <span className="flex justify-between text-xs">
-                <span className="text-sky">{k}</span>
-                <span className="font-bold">{v}</span>
-              </span>
-              <span className="block h-2 rounded-full bg-white/20">
-                <span className={cx("block h-full rounded-full bg-white", w)} />
-              </span>
-            </div>
-          ))}
-        </div>
+        <Photo name="studentLaptop" className="h-[220px] rounded-none" sizes="(min-width: 768px) 33vw, 100vw" position="50% 35%">
+          <OverlayChip>
+            <span className="text-muted">Readiness</span> <b className="text-ink">81</b>
+            <span className="ml-1.5 rounded-full bg-success-tint px-2 py-0.5 text-[11px] font-bold text-success-strong">Job-ready</span>
+          </OverlayChip>
+        </Photo>
         <Card3
           kicker="Students"
           title="See your real gaps, follow one roadmap, get matched to jobs that fit."
@@ -234,11 +226,12 @@ export function BuiltForThree() {
         />
       </Reveal>
       <Reveal as="li" delay={100} className="flex flex-col overflow-hidden rounded-[24px] border border-line bg-white">
-        <div className="flex h-[92px] items-end gap-2 bg-surface px-5 pb-4 pt-5" aria-hidden>
-          {[38, 52, 47, 63, 70, 76, 84].map((h, i) => (
-            <span key={i} className="flex-1 rounded-t-md bg-primary/80" style={{ height: `${h}%` }} />
-          ))}
-        </div>
+        <Photo name="campusWalk" className="h-[220px] rounded-none" sizes="(min-width: 768px) 33vw, 100vw">
+          <OverlayChip>
+            <span className="text-muted">Batch readiness</span> <b className="text-ink">68</b>
+            <span className="ml-1.5 text-[11px] font-bold text-success-strong">▲ 14 this term</span>
+          </OverlayChip>
+        </Photo>
         <Card3
           kicker="Colleges"
           title="A placement-readiness partner with batch-level progress you can report on."
@@ -247,17 +240,12 @@ export function BuiltForThree() {
         />
       </Reveal>
       <Reveal as="li" delay={200} className="flex flex-col overflow-hidden rounded-[24px] border border-line bg-white">
-        <div className="flex flex-col gap-2 bg-surface p-5" aria-hidden>
-          {[
-            ["Assessed: product design", "92%"],
-            ["Interview-practised", "4 mocks"],
-          ].map(([k, v]) => (
-            <span key={k} className="flex items-center justify-between rounded-xl bg-white px-3 py-2 text-xs">
-              <span className="font-semibold text-ink">{k}</span>
-              <span className="rounded-full bg-success-tint px-2 py-0.5 font-bold text-success-strong">{v}</span>
-            </span>
-          ))}
-        </div>
+        <Photo name="hiringTeam" className="h-[220px] rounded-none" sizes="(min-width: 768px) 33vw, 100vw">
+          <OverlayChip>
+            <span className="text-muted">Shortlist</span> <b className="text-ink">12 assessed</b>
+            <span className="ml-1.5 rounded-full bg-tint px-2 py-0.5 text-[11px] font-bold text-primary-strong">92% match</span>
+          </OverlayChip>
+        </Photo>
         <Card3
           kicker="Companies"
           title="Shortlist freshers who are already assessed and interview-practised."
@@ -266,6 +254,57 @@ export function BuiltForThree() {
         />
       </Reveal>
     </ul>
+  );
+}
+
+function OverlayChip({ children }: { children: ReactNode }) {
+  return (
+    <span className="absolute bottom-3 left-3 right-3 flex w-fit max-w-[calc(100%-24px)] items-center gap-1 rounded-xl bg-white/95 px-3 py-2 text-[13px] shadow-sm backdrop-blur">
+      {children}
+    </span>
+  );
+}
+
+/* ---------- From campus to career (photo mosaic) ---------- */
+
+export function CampusToCareer() {
+  return (
+    <div className="mt-8 grid grid-cols-2 gap-3 lg:mt-12 lg:grid-cols-4 lg:grid-rows-[260px_260px] lg:gap-5">
+      <Reveal className="col-span-2 lg:row-span-2">
+        <Photo name="studentOutdoor" className="aspect-[4/3] lg:aspect-auto lg:h-full" sizes="(min-width: 1024px) 50vw, 100vw">
+          <div className="animate-float absolute bottom-4 left-4 flex items-center gap-3 rounded-2xl bg-white/95 px-4 py-3 shadow-[0_14px_36px_rgb(10_22_51/0.18)] backdrop-blur">
+            <span className="flex size-11 items-center justify-center rounded-full bg-primary text-base font-extrabold text-white">81</span>
+            <span className="flex flex-col">
+              <span className="text-xs font-semibold text-muted">Readiness, week 7</span>
+              <span className="text-sm font-bold text-ink">Job-ready: all 3 checks passed</span>
+            </span>
+          </div>
+        </Photo>
+      </Reveal>
+      <Reveal delay={100}>
+        <Photo name="studyGroup" className="aspect-square lg:aspect-auto lg:h-full" sizes="(min-width: 1024px) 25vw, 50vw">
+          <MosaicChip>Roadmap · Month 2</MosaicChip>
+        </Photo>
+      </Reveal>
+      <Reveal delay={200} className="lg:row-span-2">
+        <Photo name="youngProfessional" className="aspect-square lg:aspect-auto lg:h-full" sizes="(min-width: 1024px) 25vw, 50vw" position="50% 30%">
+          <MosaicChip>Matched: UX designer · 92%</MosaicChip>
+        </Photo>
+      </Reveal>
+      <Reveal delay={150} className="col-span-2 lg:col-span-1">
+        <Photo name="graduate" className="aspect-[2/1] lg:aspect-auto lg:h-full" sizes="(min-width: 1024px) 25vw, 100vw" position="50% 25%">
+          <MosaicChip>Final year, placement-ready</MosaicChip>
+        </Photo>
+      </Reveal>
+    </div>
+  );
+}
+
+function MosaicChip({ children }: { children: ReactNode }) {
+  return (
+    <span className="absolute bottom-3 left-3 rounded-full bg-white/95 px-3 py-1.5 text-[12px] font-bold text-ink shadow-sm backdrop-blur lg:text-[13px]">
+      {children}
+    </span>
   );
 }
 

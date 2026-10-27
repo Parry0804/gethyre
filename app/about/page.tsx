@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { FeatureCards, LinkCard, PhotoPlaceholder } from "@/components/marketing/blocks";
+import { PhotoBand } from "@/components/marketing/photos";
 import { Container, Eyebrow, H1, Lead, Section, SectionHeader } from "@/components/ui";
 import { site } from "@/lib/site";
 
@@ -30,6 +31,8 @@ export default function AboutPage() {
           </Lead>
         </Container>
       </section>
+
+      <PhotoBand names={["classroom", "campusLawn", "youngProfessional"]} />
 
       <Section tone="white" labelledBy="story-title">
         <div className="grid gap-6 lg:grid-cols-[420px_minmax(0,1fr)] lg:gap-18">

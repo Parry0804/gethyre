@@ -84,6 +84,7 @@ lib/site.ts          contact details, social links, downloads, nav
 lib/forms.ts         form fields, validation rules, sheet columns
 public/screens/      app screens exported from Figma (780×1688, 2×)
 public/brand/        logo, logo mark, social share image
+content/photos.ts    photos (Unsplash License, loaded from images.unsplash.com) with credits
 app/globals.css      design tokens from Figma (colours, font, radii)
 ```
 

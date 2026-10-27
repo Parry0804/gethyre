@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { LeadForm } from "@/components/forms/lead-form";
 import { FeatureCards, NumberedSteps, PageHero } from "@/components/marketing/blocks";
+import { PhotoBand } from "@/components/marketing/photos";
 import { CheckIcon } from "@/components/icons";
 import { ButtonLink, Pill, Section, SectionHeader } from "@/components/ui";
 import { fields } from "@/lib/forms";
@@ -25,6 +26,11 @@ export default function CompaniesPage() {
           </ButtonLink>
         }
         aside={<CandidateCard />}
+      />
+
+      <PhotoBand
+        names={["hiringTeam", "recruiter", "youngProfessional"]}
+        captions={["Your hiring team", "Shortlists you can trust", "Freshers ready on day one"]}
       />
 
       <Section tone="white" labelledBy="why-title">

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { LeadForm } from "@/components/forms/lead-form";
 import { Bullets, DownloadCard, FeatureCards, NumberedSteps, PageHero } from "@/components/marketing/blocks";
+import { PhotoBand } from "@/components/marketing/photos";
 import { ButtonLink, Pill, Section, SectionHeader } from "@/components/ui";
 import { fields } from "@/lib/forms";
 import { site } from "@/lib/site";
@@ -31,6 +32,11 @@ export default function CollegesPage() {
           </>
         }
         aside={<BatchDashboard />}
+      />
+
+      <PhotoBand
+        names={["campusWalk", "campusBuilding", "studyGroup"]}
+        captions={["Final-year students", "Your campus", "Batch-wide prep"]}
       />
 
       <Section tone="white" labelledBy="gets-title">

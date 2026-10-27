@@ -7,7 +7,7 @@ import { Marquee, Reveal } from "@/components/motion";
 import { HeroEngine } from "@/components/product/hero-engine";
 import { DashboardDemo } from "@/components/product/live-demos";
 import { ProductTour } from "@/components/product/product-tour";
-import { BuiltForThree, Differences, FactsBand, FeatureTicker, ScatteredVsConnected } from "@/components/product/sections";
+import { BuiltForThree, CampusToCareer, Differences, FactsBand, FeatureTicker, ScatteredVsConnected } from "@/components/product/sections";
 import { JourneyStepper } from "@/components/marketing/journey-stepper";
 import { PhoneMockup } from "@/components/marketing/phone-mockup";
 import { ButtonLink, Container, H2, Section, SectionHeader } from "@/components/ui";
@@ -107,6 +107,17 @@ export default function HomePage() {
           <ProductTour />
         </Container>
       </section>
+
+      {/* People */}
+      <Section labelledBy="people-title">
+        <SectionHeader
+          id="people-title"
+          eyebrow="From campus to career"
+          title="Made for students on their way to a first job."
+          intro="GetHyre.ai stays with a student from the first assessment in their final years to the job they're matched to."
+        />
+        <CampusToCareer />
+      </Section>
 
       {/* How it works */}
       <Section id="how-it-works" tone="white" labelledBy="how-title">

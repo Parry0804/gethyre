@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Bullets, CtaBand, DownloadCard, PageHero } from "@/components/marketing/blocks";
 import { PhoneMockup } from "@/components/marketing/phone-mockup";
+import { PhotoBand } from "@/components/marketing/photos";
 import { InterviewDemo, ReportDemo } from "@/components/product/live-demos";
 import { ProductTour } from "@/components/product/product-tour";
 import { ButtonLink, Container, Section, SectionHeader } from "@/components/ui";
@@ -59,6 +60,11 @@ export default function StudentsPage() {
             <InterviewDemo />
           </div>
         }
+      />
+
+      <PhotoBand
+        names={["studentLaptop", "peerReview", "graduate"]}
+        captions={["Know where you stand", "Practise and improve", "Walk into placements ready"]}
       />
 
       <Section tone="white" labelledBy="journey-title">
