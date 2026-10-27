@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Bullets, CtaBand, DownloadCard, PageHero } from "@/components/marketing/blocks";
 import { PhoneMockup } from "@/components/marketing/phone-mockup";
-import { ButtonLink, Section, SectionHeader } from "@/components/ui";
+import { InterviewDemo, ReportDemo } from "@/components/product/live-demos";
+import { ProductTour } from "@/components/product/product-tour";
+import { ButtonLink, Container, Section, SectionHeader } from "@/components/ui";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -47,18 +49,15 @@ export default function StudentsPage() {
             <ButtonLink href="/early-access" track="students-hero">
               Get early access
             </ButtonLink>
-            <ButtonLink href="/#how-it-works" variant="secondary">
+            <ButtonLink href="/product" variant="secondary">
               See how it works
             </ButtonLink>
           </>
         }
         aside={
-          <PhoneMockup
-            src="/screens/interview.webp"
-            alt="Practice interview chat in the GetHyre.ai app"
-            width={300}
-            priority
-          />
+          <div className="w-full max-w-[460px] lg:w-[460px]">
+            <InterviewDemo />
+          </div>
         }
       />
 
@@ -78,10 +77,24 @@ export default function StudentsPage() {
         </ul>
       </Section>
 
+      <section aria-labelledby="students-tour-title" className="relative overflow-hidden bg-night py-16 text-white lg:py-24">
+        <div className="bg-dots-night absolute inset-0 [mask-image:linear-gradient(180deg,#000,transparent_70%)]" aria-hidden />
+        <Container className="relative">
+          <SectionHeader
+            id="students-tour-title"
+            eyebrow="Inside the app"
+            title="What you'll actually do."
+            intro="Live previews of each step. Pick one or let it play."
+            invert
+          />
+          <ProductTour />
+        </Container>
+      </section>
+
       <Section id="sample-report" labelledBy="report-title">
         <div className="grid items-center gap-10 lg:grid-cols-[auto_minmax(0,1fr)] lg:gap-18">
-          <div className="order-2 flex justify-center lg:order-1">
-            <PhoneMockup src="/screens/report.webp" alt="Skill report with readiness score and ranked skill gaps" width={300} />
+          <div className="order-2 w-full max-w-[460px] justify-self-center lg:order-1 lg:w-[460px]">
+            <ReportDemo />
           </div>
           <div className="order-1 flex flex-col gap-5 lg:order-2">
             <SectionHeader

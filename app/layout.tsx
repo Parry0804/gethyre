@@ -40,7 +40,11 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en-IN" className={inter.variable}>
+    <html lang="en-IN" className={inter.variable} suppressHydrationWarning>
+      <head>
+        {/* Marks JS as available so scroll-reveal styles only hide content when they can show it again. */}
+        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
+      </head>
       <body className="flex min-h-dvh flex-col">
         <SiteNav />
         <main id="main" className="flex-1">

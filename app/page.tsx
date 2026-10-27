@@ -1,8 +1,13 @@
 import type { Metadata } from "next";
-import type { ReactNode } from "react";
 import { LeadForm } from "@/components/forms/lead-form";
 import { AppBadge } from "@/components/layout/app-badge";
-import { DemoVideo, Faq, FeatureCards, LinkCard, PhotoPlaceholder, TextCards } from "@/components/marketing/blocks";
+import { CheckIcon } from "@/components/icons";
+import { DemoVideo, Faq, PhotoPlaceholder } from "@/components/marketing/blocks";
+import { Marquee, Reveal } from "@/components/motion";
+import { HeroEngine } from "@/components/product/hero-engine";
+import { DashboardDemo } from "@/components/product/live-demos";
+import { ProductTour } from "@/components/product/product-tour";
+import { BuiltForThree, Differences, FactsBand, FeatureTicker, ScatteredVsConnected } from "@/components/product/sections";
 import { JourneyStepper } from "@/components/marketing/journey-stepper";
 import { PhoneMockup } from "@/components/marketing/phone-mockup";
 import { ButtonLink, Container, H2, Section, SectionHeader } from "@/components/ui";
@@ -16,79 +21,150 @@ export const metadata: Metadata = {
 };
 
 const previewScreens = [
+  { src: "/screens/home-diagnose.webp", label: "Home", alt: "App home screen showing the Diagnose, Train and Place journey" },
+  { src: "/screens/basics.webp", label: "Your profile", alt: "Profile screen with target role" },
   { src: "/screens/assessment.webp", label: "Skill assessment", alt: "Skill assessment question screen" },
+  { src: "/screens/interview.webp", label: "AI mock interview", alt: "Practice interview chat" },
   { src: "/screens/report.webp", label: "Your report", alt: "Skill report with readiness score and skill gaps" },
   { src: "/screens/plan.webp", label: "Your roadmap", alt: "Personal plan with a monthly breakdown" },
   { src: "/screens/job-ready.webp", label: "Job-ready check", alt: "Job-ready check with three checks passed" },
+  { src: "/screens/home-place.webp", label: "Job matches", alt: "Home screen showing jobs matched to the student's skills" },
 ];
 
 export default function HomePage() {
   return (
     <>
       {/* Hero */}
-      <section className="pb-10 pt-8 lg:pb-12 lg:pt-16">
-        <Container className="grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_540px] lg:gap-10">
+      <section className="relative overflow-hidden pb-8 pt-8 lg:pb-10 lg:pt-14">
+        <div className="bg-dots absolute inset-0 [mask-image:radial-gradient(ellipse_at_70%_30%,#000_20%,transparent_70%)]" aria-hidden />
+        <Container className="relative grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_560px] lg:gap-8">
           <div className="flex flex-col items-start gap-5 lg:gap-6">
-            <span className="inline-flex items-center gap-2 rounded-full bg-tint px-3.5 py-2 text-[13px] font-semibold text-primary-strong lg:text-sm">
-              <span className="size-2 rounded-full bg-primary" aria-hidden />
+            <span className="inline-flex items-center gap-2 rounded-full border border-sky bg-white px-3.5 py-2 text-[13px] font-semibold text-primary-strong shadow-sm lg:text-sm">
+              <span className="relative flex size-2">
+                <span className="animate-ping-soft absolute inline-flex size-full rounded-full bg-primary" />
+                <span className="relative inline-flex size-2 rounded-full bg-primary" />
+              </span>
               Now onboarding pilot colleges
             </span>
-            <h1 className="text-[44px] font-extrabold leading-[1.04] tracking-[-0.035em] text-ink lg:text-[68px]">
+            <h1 className="text-[44px] font-extrabold leading-[1.02] tracking-[-0.04em] text-ink sm:text-[56px] lg:text-[72px]">
               Know your gaps.
               <br />
               Close them.
               <br />
               <span className="text-primary">Get hired.</span>
             </h1>
-            <p className="max-w-[560px] text-[17px] leading-relaxed text-body lg:text-[19px]">
-              GetHyre.ai diagnoses your skills with an assessment and an AI mock interview, trains you on a roadmap built
-              from your gaps, then places you in jobs matched to your profile.
+            <p className="max-w-[540px] text-[17px] leading-relaxed text-body lg:text-[19px]">
+              The AI placement journey for college students. A skill assessment and an AI mock interview find your gaps, a
+              roadmap closes them, and jobs are matched to the skills you&apos;ve proved.
             </p>
             <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
-              <ButtonLink href="/early-access" track="hero">
+              <ButtonLink href="/early-access" track="hero" className="shadow-[0_10px_24px_rgb(37_99_235/0.3)]">
                 Get early access
               </ButtonLink>
-              <ButtonLink href="/colleges" variant="secondary" track="hero-college">
-                Partner as a college
+              <ButtonLink href="/product" variant="secondary" track="hero-product">
+                See how it works
               </ButtonLink>
             </div>
-            <ul className="hidden flex-wrap gap-2.5 sm:flex" aria-label="The three phases">
-              {["1 · Diagnose", "2 · Train", "3 · Place"].map((p) => (
-                <li key={p} className="rounded-full border border-line bg-white px-3.5 py-2 text-sm font-semibold">
-                  {p}
-                </li>
-              ))}
-            </ul>
-            <AppBadge />
-          </div>
-
-          <div className="relative mx-auto flex w-full max-w-[540px] justify-center overflow-hidden rounded-[28px] bg-sky pt-7 lg:h-[680px] lg:items-center lg:overflow-visible lg:rounded-none lg:bg-transparent lg:pt-0">
-            <div className="absolute left-1/2 top-1/2 hidden size-[520px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-sky lg:block" aria-hidden />
-            <div className="relative -mb-40 lg:mb-0 lg:translate-x-12">
-              <PhoneMockup
-                src="/screens/home-diagnose.webp"
-                alt="GetHyre.ai app home screen showing the Diagnose, Train and Place journey"
-                width={290}
-                priority
-              />
+            <div className="flex flex-wrap items-center gap-4 pt-1">
+              <AppBadge />
+              <a href="/colleges" className="text-[15px] font-semibold text-primary-strong underline-offset-4 hover:underline">
+                Run placements at a college?
+              </a>
             </div>
-            <FloatCard className="-left-4 top-[200px] w-[170px]!">
-              <span className="text-xs text-muted">Readiness</span>
-              <span className="text-xl font-extrabold">
-                75 <span className="text-sm font-semibold text-primary-strong">Nearly there</span>
-              </span>
-            </FloatCard>
-            <FloatCard className="bottom-[150px] right-0">
-              <span className="text-xs text-muted">Biggest gap</span>
-              <span className="text-[15px] font-bold">Design systems</span>
-              <span className="text-xs font-semibold text-danger">High priority</span>
-            </FloatCard>
           </div>
+          <HeroEngine />
         </Container>
       </section>
 
+      {/* What's inside */}
+      <section aria-label="What's inside" className="border-y border-line bg-white py-5">
+        <FeatureTicker />
+      </section>
+
+      {/* Problem */}
+      <Section labelledBy="problem-title">
+        <SectionHeader
+          id="problem-title"
+          eyebrow="The problem"
+          title="Placement season shouldn't be guesswork."
+          intro="Most students prepare with scattered tools and never find out which skill is holding them back. GetHyre.ai joins every step into one journey."
+        />
+        <ScatteredVsConnected />
+      </Section>
+
+      {/* Product tour */}
+      <section id="product-tour" aria-labelledby="tour-title" className="relative scroll-mt-20 overflow-hidden bg-night py-16 text-white lg:py-24">
+        <div className="bg-dots-night absolute inset-0 [mask-image:linear-gradient(180deg,#000,transparent_70%)]" aria-hidden />
+        <div className="absolute -right-40 -top-40 size-[520px] rounded-full bg-primary/25 blur-[120px]" aria-hidden />
+        <Container className="relative">
+          <SectionHeader
+            id="tour-title"
+            eyebrow="Product tour"
+            title="See the app at work."
+            intro="Every screen below is a live preview of the GetHyre.ai journey. Pick a step or let it play."
+            invert
+          />
+          <ProductTour />
+        </Container>
+      </section>
+
+      {/* How it works */}
+      <Section id="how-it-works" tone="white" labelledBy="how-title">
+        <SectionHeader
+          id="how-title"
+          eyebrow="How it works"
+          title="Diagnose. Train. Place."
+          intro="Seven steps across three phases. Each step unlocks the next, so every hour of prep goes where your gaps are."
+        />
+        <JourneyStepper />
+      </Section>
+
+      {/* Why */}
+      <Section labelledBy="why-title">
+        <SectionHeader id="why-title" eyebrow="Why GetHyre.ai" title="Not another prep app. The whole path, connected." />
+        <Differences />
+        <Reveal className="mt-6 lg:mt-8">
+          <FactsBand />
+        </Reveal>
+      </Section>
+
+      {/* Dashboard */}
+      <Section tone="white" labelledBy="dash-title">
+        <div className="grid items-center gap-10 lg:grid-cols-[400px_minmax(0,1fr)] lg:gap-14">
+          <div className="flex flex-col gap-5">
+            <SectionHeader
+              id="dash-title"
+              eyebrow="Journey dashboard"
+              title="Every step tracked in one place."
+              intro="Readiness over time, gaps closed, roadmap progress, interviews and applications. Open the app and you always know what to do next."
+            />
+            <ul className="flex flex-col gap-2.5">
+              {["Readiness trend, week by week", "Gaps closed and gaps left", "Your next step, every time"].map((x) => (
+                <li key={x} className="flex items-center gap-3 text-[15px] font-semibold text-ink">
+                  <span className="flex size-6 items-center justify-center rounded-full bg-tint text-primary">
+                    <CheckIcon size={14} />
+                  </span>
+                  {x}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <Reveal>
+            <DashboardDemo />
+          </Reveal>
+        </div>
+      </Section>
+
+      {/* Built for three */}
+      <Section labelledBy="three-title">
+        <H2 id="three-title" className="text-ink">
+          Built for three people.
+        </H2>
+        <BuiltForThree />
+      </Section>
+
       {/* Proof */}
-      <section aria-label="Early proof" className="pb-10 lg:pb-6">
+      <section aria-label="Early proof" className="pb-14 lg:pb-22">
         <Container className="grid gap-3 lg:grid-cols-[420px_minmax(0,1fr)] lg:gap-5">
           <div className="flex flex-col gap-1.5 rounded-[20px] bg-ink p-6 text-white lg:px-7">
             <p className="text-[40px] font-extrabold tracking-[-0.03em] lg:text-[44px]">[X]%</p>
@@ -113,119 +189,30 @@ export default function HomePage() {
         </Container>
       </section>
 
-      {/* Problem */}
-      <Section labelledBy="problem-title" className="pt-6 lg:pt-14">
-        <SectionHeader id="problem-title" eyebrow="The problem" title="Placement season shouldn't be guesswork." />
-        <TextCards
-          items={[
-            {
-              title: "You don't know where you stand",
-              body: "Most students walk into drives without knowing which skills will hold them back.",
-            },
-            {
-              title: "Prep is scattered",
-              body: "A resume tool here, a mock interview app there, and nothing that ties progress together.",
-            },
-            {
-              title: "Job boards match keywords",
-              body: "Your strengths, gaps and goals never make it into how jobs are recommended.",
-            },
-          ]}
-        />
-      </Section>
-
-      {/* How it works */}
-      <Section id="how-it-works" tone="white" labelledBy="how-title">
-        <SectionHeader
-          id="how-title"
-          eyebrow="How it works"
-          title="Diagnose. Train. Place."
-          intro="Three phases, one app. Each step unlocks the next, so every hour of prep goes where your gaps are."
-        />
-        <JourneyStepper />
-      </Section>
-
-      {/* Why */}
-      <Section labelledBy="why-title">
-        <SectionHeader id="why-title" eyebrow="Why GetHyre.ai" title="Not another prep app. The whole path, connected." />
-        <FeatureCards
-          items={[
-            {
-              title: "One connected journey",
-              body: "Your report builds your roadmap, your roadmap builds your CV, and all of it shapes your job matches.",
-              icon: "arrow",
-            },
-            {
-              title: "Matched by assessed skills",
-              body: "Jobs are ranked by the skills you've proven, and each application gets a CV tailored to the role.",
-              icon: "target",
-            },
-            {
-              title: "Progress you can see",
-              body: "Track your readiness score as you train, then retake the assessment to show how far you've come.",
-              icon: "check",
-            },
-          ]}
-        />
-      </Section>
-
-      {/* Built for three */}
-      <Section labelledBy="three-title" className="pt-0 lg:pt-0">
-        <H2 id="three-title" className="text-ink">
-          Built for three people.
-        </H2>
-        <ul className="mt-8 grid gap-3 md:grid-cols-3 lg:gap-5">
-          <li>
-            <LinkCard
-              tone="primary"
-              kicker="Students"
-              title="See your real gaps, follow one roadmap, get matched to jobs that fit."
-              link="Get early access"
-              href="/early-access"
-            />
-          </li>
-          <li>
-            <LinkCard
-              kicker="Colleges"
-              title="A placement-readiness partner with batch-level progress you can report on."
-              link="Partner with us"
-              href="/colleges"
-            />
-          </li>
-          <li>
-            <LinkCard
-              kicker="Companies"
-              title="Shortlist freshers who are already assessed and interview-practised."
-              link="Register hiring interest"
-              href="/companies"
-            />
-          </li>
-        </ul>
-      </Section>
-
       {/* See it before launch */}
       <Section tone="ink" labelledBy="preview-title">
         <div className="flex flex-col gap-2 lg:flex-row lg:items-end lg:justify-between">
           <H2 id="preview-title" className="text-white">
             See it before launch.
           </H2>
-          <p className="text-sm text-subtle lg:text-[15px]">Real app screens · launching soon</p>
+          <p className="text-sm text-subtle lg:text-[15px]">Real app screens from the GetHyre.ai app, launching soon</p>
         </div>
-        <div className="mt-6 lg:mt-9">
-          <DemoVideo />
-        </div>
-        <ul
-          className="-mx-5 mt-6 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-2 lg:mx-0 lg:mt-9 lg:justify-center lg:gap-6 lg:overflow-visible lg:px-0"
-          aria-label="App screens"
-        >
-          {previewScreens.map((s) => (
-            <li key={s.label} className="flex snap-center flex-col items-center gap-3">
-              <PhoneMockup src={s.src} alt={s.alt} width={248} frame="soft" />
-              <span className="text-sm font-medium text-line-strong">{s.label}</span>
-            </li>
-          ))}
-        </ul>
+        {site.demoVideoUrl ? (
+          <div className="mt-6 lg:mt-9">
+            <DemoVideo />
+          </div>
+        ) : null}
       </Section>
+      <section aria-label="App screens" className="-mt-6 bg-ink pb-16 lg:-mt-12 lg:pb-24">
+        <Marquee label="App screens" duration={50}>
+          {previewScreens.map((s) => (
+            <figure key={s.label} className="flex flex-col items-center gap-3 px-2">
+              <PhoneMockup src={s.src} alt={s.alt} width={220} frame="soft" />
+              <figcaption className="text-sm font-medium text-line-strong">{s.label}</figcaption>
+            </figure>
+          ))}
+        </Marquee>
+      </section>
 
       {/* Team */}
       <Section labelledBy="team-title">
@@ -313,15 +300,5 @@ export default function HomePage() {
         </Container>
       </section>
     </>
-  );
-}
-
-function FloatCard({ className, children }: { className: string; children: ReactNode }) {
-  return (
-    <div
-      className={`absolute hidden w-[190px] flex-col gap-1 rounded-2xl border border-line bg-white px-4 py-3.5 text-ink shadow-[var(--shadow-float)] lg:flex ${className}`}
-    >
-      {children}
-    </div>
   );
 }

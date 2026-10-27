@@ -71,6 +71,7 @@ export function whatsappLink(message = "Hi GetHyre.ai, I have a question.") {
 }
 
 export const mainNav = [
+  { href: "/product", label: "Product" },
   { href: "/#how-it-works", label: "How it works" },
   { href: "/students", label: "Students" },
   { href: "/colleges", label: "Colleges" },
@@ -82,6 +83,7 @@ export const footerNav = [
   {
     title: "Product",
     links: [
+      { href: "/product", label: "Product tour" },
       { href: "/#how-it-works", label: "How it works" },
       { href: "/students", label: "For students" },
       { href: "/colleges", label: "For colleges" },

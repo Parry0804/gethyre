@@ -19,8 +19,9 @@ export function PageHero({
   aside?: ReactNode;
 }) {
   return (
-    <section className="py-10 lg:py-18">
-      <Container className="grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_auto] lg:gap-14">
+    <section className="relative overflow-hidden py-10 lg:py-18">
+      <div className="bg-dots absolute inset-0 [mask-image:radial-gradient(ellipse_at_80%_20%,#000_15%,transparent_65%)]" aria-hidden />
+      <Container className="relative grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_auto] lg:gap-14">
         <div className="flex max-w-[620px] flex-col gap-5">
           <Eyebrow>{eyebrow}</Eyebrow>
           <H1>{title}</H1>

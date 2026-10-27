@@ -10,6 +10,7 @@ import { ButtonLink, cx } from "@/components/ui";
 import { mainNav, whatsappLink } from "@/lib/site";
 
 const mobileLinks = [
+  { href: "/product", label: "Product" },
   { href: "/#how-it-works", label: "How it works" },
   { href: "/students", label: "For students" },
   { href: "/colleges", label: "For colleges" },
@@ -63,7 +64,7 @@ export function SiteNav() {
         <Logo className="h-7 w-auto lg:h-8" priority />
 
         <nav aria-label="Main" className="hidden lg:block">
-          <ul className="flex items-center gap-8">
+          <ul className="flex items-center gap-7">
             {mainNav.map((item) => (
               <li key={item.href}>
                 <Link

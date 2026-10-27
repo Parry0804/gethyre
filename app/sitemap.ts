@@ -3,6 +3,7 @@ import { site } from "@/lib/site";
 
 const routes = [
   "",
+  "/product",
   "/students",
   "/colleges",
   "/companies",
