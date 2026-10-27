@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { LeadForm } from "@/components/forms/lead-form";
 import { Bullets, DownloadCard, FeatureCards, NumberedSteps, PageHero } from "@/components/marketing/blocks";
 import { PhotoBand } from "@/components/marketing/photos";
-import { ButtonLink, Pill, Section, SectionHeader } from "@/components/ui";
+import { VideoPlayer } from "@/components/marketing/video-player";
+import { ButtonLink, Container, Pill, Section, SectionHeader } from "@/components/ui";
 import { fields } from "@/lib/forms";
 import { site } from "@/lib/site";
 
@@ -38,6 +39,23 @@ export default function CollegesPage() {
         names={["campusWalk", "campusBuilding", "studyGroup"]}
         captions={["Final-year students", "Your campus", "Batch-wide prep"]}
       />
+
+      {site.collegeVideo.src ? (
+        <section id="demo-video" aria-labelledby="video-title" className="relative scroll-mt-20 overflow-hidden bg-night py-16 text-white lg:py-24">
+          <div className="bg-dots-night absolute inset-0 [mask-image:linear-gradient(180deg,#000,transparent_75%)]" aria-hidden />
+          <Container className="relative flex flex-col items-center gap-8 text-center lg:gap-12">
+            <SectionHeader
+              id="video-title"
+              eyebrow="Watch the demo"
+              title="See what GetHyre.ai does for your students."
+              intro="A short walkthrough of the student journey and what your placement cell sees."
+              invert
+              className="items-center"
+            />
+            <VideoPlayer src={site.collegeVideo.src} poster={site.collegeVideo.poster} title={site.collegeVideo.title} className="max-w-[1040px]" />
+          </Container>
+        </section>
+      ) : null}
 
       <Section tone="white" labelledBy="gets-title">
         <SectionHeader id="gets-title" eyebrow="What your college gets" title="A placement partner, not another portal." />
