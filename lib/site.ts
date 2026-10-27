@@ -5,7 +5,12 @@
 
 export const site = {
   name: "GetHyre.ai",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
+  // Your own domain when set; otherwise the Vercel production address; localhost when running locally.
+  url:
+    process.env.NEXT_PUBLIC_SITE_URL ||
+    (process.env.VERCEL_PROJECT_PRODUCTION_URL
+      ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+      : "http://localhost:3000"),
   description:
     "The AI placement journey for college students: diagnose your gaps with an assessment and an AI mock interview, train on a roadmap built from them, and get matched to jobs.",
   tagline:
