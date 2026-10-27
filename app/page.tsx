@@ -182,32 +182,6 @@ export default function HomePage() {
         <BuiltForThree />
       </Section>
 
-      {/* Proof */}
-      <section aria-label="Early proof" className="pb-14 lg:pb-22">
-        <Container className="grid gap-3 lg:grid-cols-[420px_minmax(0,1fr)] lg:gap-5">
-          <div className="flex flex-col gap-1.5 rounded-[20px] bg-ink p-6 text-white lg:px-7">
-            <p className="text-[40px] font-extrabold tracking-[-0.03em] lg:text-[44px]">[X]%</p>
-            <p className="text-[15px] leading-normal text-line-strong lg:text-base">
-              of [N] students we surveyed don&apos;t know which skills are holding them back.
-            </p>
-            <p className="pt-1 text-xs text-subtle">Source: GetHyre.ai campus survey, [month] 2026</p>
-          </div>
-          <div className="flex flex-col justify-center gap-4 rounded-[20px] bg-white p-6 lg:px-7">
-            <p className="text-xs font-bold uppercase tracking-[0.08em] text-muted lg:text-sm">
-              Piloting with colleges in [region]
-            </p>
-            <ul className="grid grid-cols-2 gap-2.5 lg:grid-cols-4 lg:gap-4">
-              {[1, 2, 3, 4].map((i) => (
-                <li key={i} className="flex h-14 items-center justify-center rounded-xl bg-surface text-xs text-muted lg:h-16 lg:text-[13px]">
-                  [College logo]
-                </li>
-              ))}
-            </ul>
-            <p className="text-xs text-muted">Shown with each college&apos;s written permission.</p>
-          </div>
-        </Container>
-      </section>
-
       {/* Campus survey */}
       <section id="campus-survey" aria-labelledby="survey-title" className="scroll-mt-20 pb-14 lg:pb-22">
         <Container>
