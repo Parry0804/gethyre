@@ -52,7 +52,7 @@ export default function CollegesPage() {
               invert
               className="items-center"
             />
-            <VideoPlayer src={site.collegeVideo.src} poster={site.collegeVideo.poster} title={site.collegeVideo.title} className="max-w-[1040px]" />
+            <VideoPlayer src={site.collegeVideo.src} poster={site.collegeVideo.poster} title={site.collegeVideo.title} label={`Watch the demo · ${site.collegeVideo.length}`} className="max-w-[1040px]" />
           </Container>
         </section>
       ) : null}

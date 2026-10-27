@@ -1,3 +1,4 @@
+import { PosterVideo } from "@/components/marketing/poster-video";
 import { cx } from "@/components/ui";
 
 /** Turns a YouTube, Vimeo or Google Drive share link into an embeddable URL. Returns null for a plain file. */
@@ -27,11 +28,14 @@ export function VideoPlayer({
   src,
   poster,
   title,
+  label,
   className,
 }: {
   src: string;
   poster?: string;
   title: string;
+  /** Text under the play button, e.g. the running time. */
+  label?: string;
   className?: string;
 }) {
   const embed = toEmbed(src);
@@ -47,9 +51,7 @@ export function VideoPlayer({
           className="size-full"
         />
       ) : (
-        <video src={src} poster={poster} controls playsInline preload="metadata" className="size-full bg-night object-contain">
-          <track kind="captions" />
-        </video>
+        <PosterVideo src={src} poster={poster} title={title} label={label} />
       )}
     </div>
   );

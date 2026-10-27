@@ -47,9 +47,10 @@ export const site = {
    * or a YouTube, Vimeo or Google Drive link. Empty hides the video section.
    */
   collegeVideo: {
-    src: process.env.NEXT_PUBLIC_COLLEGE_VIDEO_URL || "",
-    poster: "/video/college-demo-poster.jpg",
-    title: "GetHyre.ai for colleges: demo",
+    src: process.env.NEXT_PUBLIC_COLLEGE_VIDEO_URL || "/video/gethyre-demo.mp4",
+    poster: "/video/gethyre-demo-poster.jpg",
+    title: "GetHyre.ai demo explainer",
+    length: "1 min",
   },
 
   /**

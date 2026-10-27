@@ -10,6 +10,7 @@ import { ProductTour } from "@/components/product/product-tour";
 import { BuiltForThree, CampusToCareer, Differences, FactsBand, FeatureTicker, ScatteredVsConnected } from "@/components/product/sections";
 import { JourneyStepper } from "@/components/marketing/journey-stepper";
 import { PhoneMockup } from "@/components/marketing/phone-mockup";
+import { VideoPlayer } from "@/components/marketing/video-player";
 import { ButtonLink, Container, H2, Section, SectionHeader } from "@/components/ui";
 import { faqs } from "@/content/journey";
 import { fields } from "@/lib/forms";
@@ -80,6 +81,29 @@ export default function HomePage() {
       <section aria-label="What's inside" className="border-y border-line bg-white py-5">
         <FeatureTicker />
       </section>
+
+      {/* Demo video */}
+      {site.collegeVideo.src ? (
+        <section id="demo" aria-labelledby="demo-title" className="scroll-mt-20 pt-14 lg:pt-22">
+          <Container className="flex flex-col items-center gap-8 text-center lg:gap-10">
+            <SectionHeader
+              id="demo-title"
+              eyebrow="Watch the demo"
+              title="GetHyre.ai in one minute."
+              intro="How one guided journey takes students from their first assessment to placement, and what colleges see along the way."
+              className="items-center"
+            />
+            <Reveal className="w-full max-w-[1080px]">
+              <VideoPlayer
+                src={site.collegeVideo.src}
+                poster={site.collegeVideo.poster}
+                title={site.collegeVideo.title}
+                label={`Watch the demo · ${site.collegeVideo.length}`}
+              />
+            </Reveal>
+          </Container>
+        </section>
+      ) : null}
 
       {/* Problem */}
       <Section labelledBy="problem-title">
