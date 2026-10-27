@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { LeadForm } from "@/components/forms/lead-form";
 import { AppBadge } from "@/components/layout/app-badge";
 import { CheckIcon } from "@/components/icons";
-import { DemoVideo, Faq, PhotoPlaceholder } from "@/components/marketing/blocks";
+import { DemoVideo, Faq } from "@/components/marketing/blocks";
 import { Marquee, Reveal } from "@/components/motion";
 import { HeroEngine } from "@/components/product/hero-engine";
 import { DashboardDemo } from "@/components/product/live-demos";
@@ -213,30 +213,6 @@ export default function HomePage() {
           ))}
         </Marquee>
       </section>
-
-      {/* Team */}
-      <Section labelledBy="team-title">
-        <div className="grid gap-10 lg:grid-cols-2 lg:gap-14">
-          <div className="flex flex-col gap-4">
-            <SectionHeader id="team-title" eyebrow="The team" title="Built by people who have coached students through placements." />
-            <p className="text-base leading-relaxed text-body lg:text-[17px]">
-              [Two lines on the team&apos;s coaching and placement background, and why you&apos;re building GetHyre.ai.]
-            </p>
-          </div>
-          <ul className="grid grid-cols-2 gap-4 lg:gap-5">
-            {[
-              { name: "Pranay Pawar", role: "Co-founder · Product and design" },
-              { name: "[Co-founder name]", role: "Co-founder · AI product" },
-            ].map((p) => (
-              <li key={p.name} className="flex flex-col gap-2">
-                <PhotoPlaceholder className="aspect-square" />
-                <p className="pt-1 text-base font-bold lg:text-lg">{p.name}</p>
-                <p className="text-[13px] text-muted lg:text-[15px]">{p.role}</p>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </Section>
 
       {/* Campus survey */}
       <section id="campus-survey" aria-labelledby="survey-title" className="scroll-mt-20 pb-14 lg:pb-22">
