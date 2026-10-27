@@ -7,7 +7,7 @@ import { Marquee, Reveal } from "@/components/motion";
 import { HeroEngine } from "@/components/product/hero-engine";
 import { DashboardDemo } from "@/components/product/live-demos";
 import { ProductTour } from "@/components/product/product-tour";
-import { BuiltForThree, CampusToCareer, Differences, FactsBand, FeatureTicker, ScatteredVsConnected } from "@/components/product/sections";
+import { BuiltForThree, CampusToCareer, Differences, FactsBand, ScatteredVsConnected } from "@/components/product/sections";
 import { JourneyStepper } from "@/components/marketing/journey-stepper";
 import { PhoneMockup } from "@/components/marketing/phone-mockup";
 import { VideoPlayer } from "@/components/marketing/video-player";
@@ -75,11 +75,6 @@ export default function HomePage() {
           </div>
           <HeroEngine />
         </Container>
-      </section>
-
-      {/* What's inside */}
-      <section aria-label="What's inside" className="border-y border-line bg-white py-5">
-        <FeatureTicker />
       </section>
 
       {/* Demo video */}

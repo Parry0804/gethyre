@@ -2,41 +2,8 @@ import Link from "next/link";
 import { CheckIcon } from "@/components/icons";
 import type { ReactNode } from "react";
 import { Photo } from "@/components/marketing/photos";
-import { CountUp, Marquee, Reveal } from "@/components/motion";
+import { CountUp, Reveal } from "@/components/motion";
 import { cx } from "@/components/ui";
-
-/* ---------- Feature ticker under the hero ---------- */
-
-const inside = [
-  "Skill assessment",
-  "AI mock interview",
-  "Readiness score",
-  "Ranked skill gaps",
-  "Month-by-month roadmap",
-  "Progress tracking",
-  "Reassessment",
-  "ATS-ready CV",
-  "Job-ready check",
-  "Skill-based job matching",
-  "Tailored CV per job",
-  "Journey dashboard",
-];
-
-export function FeatureTicker() {
-  return (
-    <Marquee label="What's inside GetHyre.ai" duration={45}>
-      {inside.map((x) => (
-        <span
-          key={x}
-          className="inline-flex items-center gap-2 whitespace-nowrap rounded-full border border-line bg-white px-4 py-2 text-sm font-semibold text-ink"
-        >
-          <span className="size-1.5 rounded-full bg-primary" aria-hidden />
-          {x}
-        </span>
-      ))}
-    </Marquee>
-  );
-}
 
 /* ---------- Scattered prep vs one connected journey ---------- */
 
