@@ -1,7 +1,6 @@
 import type { ReactNode } from "react";
-import { CheckIcon, DownloadIcon, FileIcon, PlayIcon, PlusIcon, featureIcons, type FeatureIconName } from "@/components/icons";
+import { CheckIcon, DownloadIcon, FileIcon, PlusIcon, featureIcons, type FeatureIconName } from "@/components/icons";
 import { ArrowLink, ButtonLink, Card, Container, Eyebrow, H1, Lead, cx } from "@/components/ui";
-import { site } from "@/lib/site";
 
 /* ---------- Page hero (inner pages) ---------- */
 
@@ -63,23 +62,6 @@ export function FeatureCards({
           </li>
         );
       })}
-    </ul>
-  );
-}
-
-/* ---------- Simple text cards (problem section etc.) ---------- */
-
-export function TextCards({ items, tone = "white" }: { items: { title: string; body: string }[]; tone?: "white" | "surface" }) {
-  return (
-    <ul className="mt-8 grid gap-3 md:grid-cols-3 lg:mt-10 lg:gap-5">
-      {items.map((c) => (
-        <li key={c.title}>
-          <Card tone={tone} className="flex h-full flex-col gap-2.5">
-            <h3 className="text-lg font-bold text-ink lg:text-xl">{c.title}</h3>
-            <p className="text-[15px] leading-relaxed text-body lg:text-base">{c.body}</p>
-          </Card>
-        </li>
-      ))}
     </ul>
   );
 }
@@ -206,34 +188,6 @@ export function CtaBand({
         </div>
       </Container>
     </section>
-  );
-}
-
-/* ---------- Demo video ---------- */
-
-export function DemoVideo() {
-  if (site.demoVideoUrl) {
-    return (
-      <div className="aspect-video w-full overflow-hidden rounded-[18px] bg-ink-soft lg:rounded-[24px]">
-        <iframe
-          src={site.demoVideoUrl}
-          title="GetHyre.ai 60-second walkthrough"
-          loading="lazy"
-          allow="accelerometer; encrypted-media; picture-in-picture"
-          allowFullScreen
-          className="size-full"
-        />
-      </div>
-    );
-  }
-  return (
-    <div className="flex aspect-video w-full flex-col items-center justify-center gap-3 rounded-[18px] bg-ink-soft text-center lg:gap-4 lg:rounded-[24px]">
-      <span className="flex size-16 items-center justify-center rounded-full bg-white text-ink lg:size-22">
-        <PlayIcon size={28} />
-      </span>
-      <p className="text-[15px] font-bold text-white lg:text-xl">Watch the 60-second walkthrough</p>
-      <p className="hidden text-sm text-subtle sm:block">[Demo video coming soon]</p>
-    </div>
   );
 }
 

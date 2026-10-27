@@ -16,7 +16,14 @@ export type FieldConfig = {
   multiline?: boolean;
 };
 
-const name = z.string().trim().min(2, "Please enter your name.").max(80);
+// Letters (any script), spaces, dots, apostrophes and hyphens only. Stops links and markup in names,
+// which are echoed in the auto-reply email.
+const name = z
+  .string()
+  .trim()
+  .min(2, "Please enter your name.")
+  .max(80)
+  .regex(/^[\p{L}\p{M}][\p{L}\p{M} .'-]*$/u, "Please use letters only in your name.");
 const email = z.string().trim().toLowerCase().email("Please enter a valid email address.").max(120);
 const phone = z
   .string()
@@ -26,6 +33,11 @@ const optionalPhone = z.union([z.literal(""), phone]).optional();
 const short = (label: string) => z.string().trim().min(2, `Please enter your ${label}.`).max(120);
 const optionalShort = z.string().trim().max(120).optional();
 const consent = z.literal("on", { error: "Please tick the box to continue." });
+
+/** Fields that hold phone numbers: validated by regex, so they may start with "+". */
+export const phoneFields = new Set(["phone", "whatsapp"]);
+/** Fields where line breaks are allowed. */
+export const multilineFields = new Set(["roles", "why"]);
 
 export const schemas = {
   student: z.object({

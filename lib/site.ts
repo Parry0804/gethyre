@@ -41,7 +41,6 @@ export const site = {
   bookingUrl: process.env.NEXT_PUBLIC_BOOKING_URL ?? "",
 
   /** Demo video embed URL (YouTube "embed" link). Empty shows the placeholder. */
-  demoVideoUrl: process.env.NEXT_PUBLIC_DEMO_VIDEO_URL ?? "",
   /**
    * The demo video for colleges. Either a file in public/video/ (e.g. "/video/college-demo.mp4")
    * or a YouTube, Vimeo or Google Drive link. Empty hides the video section.

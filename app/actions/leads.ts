@@ -1,11 +1,31 @@
 "use server";
 
-import { CONSENT_VERSION, leadKinds, schemas, sheetColumns, sheetTabs, type LeadKind, type LeadState } from "@/lib/forms";
+import { headers } from "next/headers";
+import {
+  CONSENT_VERSION,
+  leadKinds,
+  multilineFields,
+  phoneFields,
+  schemas,
+  sheetColumns,
+  sheetTabs,
+  type LeadKind,
+  type LeadState,
+} from "@/lib/forms";
+import { rateLimit } from "@/lib/rate-limit";
+import { cleanText, safeCell } from "@/lib/sanitize";
 import { appendRow, sheetsConfigured } from "@/lib/sheets";
 import { emailConfigured, sendAutoReply, sendLeadAlert } from "@/lib/email";
 import { verifyTurnstile } from "@/lib/turnstile";
 
 const META_FIELDS = ["page", "utm_source", "utm_medium", "utm_campaign"] as const;
+const MAX_FIELDS = 40;
+
+/** The visitor's IP as seen by Vercel (or the first proxy hop elsewhere). */
+async function clientIp() {
+  const h = await headers();
+  return (h.get("x-real-ip") ?? h.get("x-forwarded-for")?.split(",")[0] ?? "unknown").trim().slice(0, 64);
+}
 
 function istTimestamp() {
   return new Intl.DateTimeFormat("en-IN", {
@@ -26,18 +46,21 @@ export async function submitLead(_prev: LeadState, formData: FormData): Promise<
   }
   const kind = kindRaw as LeadKind;
 
+  // Only accept the fields this form actually has, as plain text, cleaned of control characters.
+  const allowed = new Set<string>([...sheetColumns[kind], "consent"]);
   const values: Record<string, string> = {};
+  let fieldCount = 0;
   for (const [key, value] of formData.entries()) {
-    if (typeof value === "string" && !key.startsWith("$ACTION")) values[key] = value;
+    if (++fieldCount > MAX_FIELDS) break;
+    if (typeof value !== "string" || !allowed.has(key)) continue;
+    values[key] = cleanText(value, { multiline: multilineFields.has(key) });
   }
+  const honeypot = String(formData.get("company_website") ?? "");
+  const turnstileToken = formData.get("cf-turnstile-response");
 
-  // Honeypot: real people never see or fill this field.
-  if (values.company_website) {
+  // Honeypot: real people never see or fill this field. Pretend it worked.
+  if (honeypot) {
     return { status: "success", firstName: "" };
-  }
-
-  if (!(await verifyTurnstile(values["cf-turnstile-response"] ?? null))) {
-    return { status: "error", message: "We couldn't confirm you're human. Please try again.", values };
   }
 
   const parsed = schemas[kind].safeParse(values);
@@ -50,18 +73,39 @@ export async function submitLead(_prev: LeadState, formData: FormData): Promise<
     return { status: "error", message: "Please check the highlighted fields.", fieldErrors, values };
   }
 
+  // Rate limits: per IP, and per email address so nobody can flood someone else's inbox with auto-replies.
+  const ip = await clientIp();
+  const byIp = rateLimit(`ip:${ip}`, { limit: 5, windowMs: 10 * 60_000 });
+  const byEmail = values.email ? rateLimit(`email:${values.email.toLowerCase()}`, { limit: 3, windowMs: 60 * 60_000 }) : { ok: true };
+  if (!byIp.ok || !byEmail.ok) {
+    return { status: "error", message: "Too many attempts. Please wait a few minutes and try again.", values };
+  }
+
+  if (!(await verifyTurnstile(typeof turnstileToken === "string" ? turnstileToken : null, ip))) {
+    return { status: "error", message: "We couldn't confirm you're human. Please try again.", values };
+  }
+
   const data = parsed.data as Record<string, string | undefined>;
   const clean: Record<string, string> = {};
   for (const col of sheetColumns[kind]) clean[col] = data[col] ?? "";
   const meta: Record<string, string> = {};
-  for (const m of META_FIELDS) meta[m] = (values[m] ?? "").slice(0, 200);
+  for (const m of META_FIELDS) {
+    const raw = formData.get(m);
+    meta[m] = typeof raw === "string" ? cleanText(raw).slice(0, 200) : "";
+  }
 
-  const row = [istTimestamp(), ...sheetColumns[kind].map((c) => clean[c]), ...META_FIELDS.map((m) => meta[m]), CONSENT_VERSION];
-  const firstName = clean.name.split(/\s+/)[0] ?? "";
+  const row = [
+    istTimestamp(),
+    ...sheetColumns[kind].map((c) => safeCell(clean[c], { isPhone: phoneFields.has(c) })),
+    ...META_FIELDS.map((m) => safeCell(meta[m])),
+    CONSENT_VERSION,
+  ];
+  const firstName = (clean.name.split(/\s+/)[0] ?? "").slice(0, 40);
 
   if (!sheetsConfigured() && !emailConfigured()) {
     if (process.env.NODE_ENV === "production") {
-      console.error("[leads] No storage configured; lead not saved", kind, clean.email);
+      // No personal data in logs.
+      console.error("[leads] No storage configured; lead not saved", kind);
       return {
         status: "error",
         message: "Our form isn't connected yet. Please email us instead.",
@@ -78,7 +122,7 @@ export async function submitLead(_prev: LeadState, formData: FormData): Promise<
       await appendRow(sheetTabs[kind], row);
       saved = true;
     } catch (err) {
-      console.error("[leads] Sheets error", err);
+      console.error("[leads] Sheets error", err instanceof Error ? err.message.slice(0, 300) : "unknown");
     }
   }
 
@@ -92,13 +136,13 @@ export async function submitLead(_prev: LeadState, formData: FormData): Promise<
         await sendLeadAlert(kind, { ...clean, ...meta });
       }
     } catch (err) {
-      console.error("[leads] Alert email error", err);
+      console.error("[leads] Alert email error", err instanceof Error ? err.message.slice(0, 300) : "unknown");
     }
     if (saved) {
       try {
         await sendAutoReply(kind, clean.email, firstName);
       } catch (err) {
-        console.error("[leads] Auto-reply error", err);
+        console.error("[leads] Auto-reply error", err instanceof Error ? err.message.slice(0, 300) : "unknown");
       }
     }
   }

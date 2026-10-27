@@ -1,19 +1,28 @@
 import "server-only";
 
-/** Verifies a Cloudflare Turnstile token. Skipped (returns true) when no secret is configured. */
-export async function verifyTurnstile(token: string | null) {
+/**
+ * Verifies a Cloudflare Turnstile token with Cloudflare.
+ * - No keys configured: skipped (the site still has the honeypot and rate limits).
+ * - Site key set but secret missing in production: fails closed, since that's a misconfiguration.
+ */
+export async function verifyTurnstile(token: string | null, ip?: string) {
   const secret = process.env.TURNSTILE_SECRET_KEY;
-  if (!secret) return true;
-  if (!token) return false;
+  if (!secret) {
+    return !(process.env.NODE_ENV === "production" && process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY);
+  }
+  if (!token || token.length > 2048) return false;
   try {
+    const body = new URLSearchParams({ secret, response: token });
+    if (ip) body.set("remoteip", ip);
     const res = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: new URLSearchParams({ secret, response: token }),
+      body,
       cache: "no-store",
+      signal: AbortSignal.timeout(5000),
     });
     const data = (await res.json()) as { success?: boolean };
-    return Boolean(data.success);
+    return data.success === true;
   } catch {
     return false;
   }

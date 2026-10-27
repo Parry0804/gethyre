@@ -5,8 +5,9 @@ import { useEffect } from "react";
 import { captureUtm } from "@/lib/utm";
 import { track } from "@/lib/track";
 
-const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
-const CLARITY_ID = process.env.NEXT_PUBLIC_CLARITY_ID;
+// IDs are pasted into inline scripts, so only accept the expected formats.
+const GA_ID = /^G-[A-Z0-9]{4,20}$/.test(process.env.NEXT_PUBLIC_GA_ID ?? "") ? process.env.NEXT_PUBLIC_GA_ID : undefined;
+const CLARITY_ID = /^[a-z0-9]{6,20}$/.test(process.env.NEXT_PUBLIC_CLARITY_ID ?? "") ? process.env.NEXT_PUBLIC_CLARITY_ID : undefined;
 
 /**
  * Loads GA4 and Microsoft Clarity when their IDs are set, stores first-touch UTM tags,

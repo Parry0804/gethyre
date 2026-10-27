@@ -88,6 +88,36 @@ content/photos.ts    photos (Unsplash License, loaded from images.unsplash.com) 
 app/globals.css      design tokens from Figma (colours, font, radii)
 ```
 
+## Security
+
+What's in place (see `next.config.ts`, `app/actions/leads.ts` and `lib/`):
+
+- **Secrets stay on the server.** Only `NEXT_PUBLIC_*` values reach the browser, and none of them are secret.
+  Google, Resend and Turnstile keys are read only in files marked `server-only`. Never put a secret in a
+  `NEXT_PUBLIC_` variable, and never commit `.env.local` (it's git-ignored).
+- **Security headers on every page:** Content-Security-Policy, HSTS, X-Frame-Options/frame-ancestors (no
+  embedding in other sites), nosniff, Referrer-Policy, Permissions-Policy, COOP. No `X-Powered-By` header.
+  If you add a new outside service (a chat widget, a new analytics tool), add its domain to the CSP in
+  `next.config.ts` or the browser will block it.
+- **Forms:** only the expected fields are accepted; text is cleaned of control and invisible characters and
+  length-capped; names may only contain letters; values that would run as spreadsheet formulas are neutralised;
+  personal data is kept out of server logs.
+- **Spam and abuse:** hidden honeypot field; rate limits of 5 valid submissions per IP per 10 minutes and 3 per
+  email address per hour (in memory, per server instance); Cloudflare Turnstile when its keys are set.
+  Server Actions only accept same-origin requests (built into Next.js), so there's no CORS to configure.
+
+Recommended before launch:
+
+1. Turn on **Cloudflare Turnstile** (`NEXT_PUBLIC_TURNSTILE_SITE_KEY` + `TURNSTILE_SECRET_KEY`).
+2. Add a **Vercel Firewall rate-limit rule** for POST requests to `/`, `/early-access`, `/colleges`,
+   `/companies` and `/ambassadors` (Vercel → Project → Firewall). It works across all instances.
+3. In Google Cloud, give the service account access to **only the leads sheet** (share just that sheet with it)
+   and keep its JSON key out of email and chat. Rotate the key if it's ever exposed.
+4. Keep dependencies patched: run `npm audit` and `npm outdated` monthly, and update `next`, `react` and
+   `react-dom` as soon as a security release comes out.
+5. If you add logins, a database or an admin area later, those need authentication, per-user access checks
+   and password hashing; none exist today because the site has no accounts.
+
 ## Before launch
 
 - Search the code for `[` and replace every bracketed placeholder (team, college logos, survey stat,

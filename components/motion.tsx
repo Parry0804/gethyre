@@ -147,30 +147,3 @@ export function CountUp({
     </span>
   );
 }
-
-/** An endlessly scrolling row. Children are rendered twice so the loop is seamless. */
-export function Marquee({
-  children,
-  duration = 40,
-  className,
-  label,
-}: {
-  children: ReactNode;
-  duration?: number;
-  className?: string;
-  label: string;
-}) {
-  return (
-    <div className={cx("marquee-mask overflow-hidden", className)} aria-label={label} role="region">
-      <div
-        className="animate-marquee flex w-max hover:[animation-play-state:paused]"
-        style={{ "--marquee-duration": `${duration}s` } as CSSProperties}
-      >
-        <div className="flex shrink-0 items-center gap-3 pr-3">{children}</div>
-        <div className="flex shrink-0 items-center gap-3 pr-3" aria-hidden>
-          {children}
-        </div>
-      </div>
-    </div>
-  );
-}

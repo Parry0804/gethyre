@@ -84,11 +84,6 @@
   transform: none;
 }
 
-@keyframes gh-marquee {
-  to {
-    transform: translateX(-50%);
-  }
-}
 @keyframes gh-float {
   0%,
   100% {
@@ -165,9 +160,6 @@
   }
 }
 
-.animate-marquee {
-  animation: gh-marquee var(--marquee-duration, 40s) linear infinite;
-}
 .animate-float {
   animation: gh-float 6s ease-in-out infinite;
 }
@@ -194,9 +186,6 @@
   animation-delay: 0.3s;
 }
 
-.marquee-mask {
-  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
-}
 
 /* Faint dotted grid used behind the hero and showcases. */
 .bg-dots {
@@ -213,7 +202,6 @@
     opacity: 1;
     transform: none;
   }
-  .animate-marquee,
   .animate-float {
     animation: none !important;
   }
