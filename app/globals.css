@@ -35,9 +35,9 @@
 
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
 
-  --radius-control: 12px;
-  --radius-card: 16px;
-  --radius-panel: 24px;
+  --radius-control: 8px;
+  --radius-card: 10px;
+  --radius-panel: 12px;
 
   --shadow-float: 0 8px 24px rgb(17 24 39 / 0.08);
   --shadow-lift: 0 16px 40px rgb(17 24 39 / 0.08);
@@ -109,6 +109,14 @@
   }
   to {
     opacity: 1;
+  }
+}
+@keyframes gh-bar-y {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
   }
 }
 @keyframes gh-bar {
@@ -223,4 +231,12 @@
 /* Hide the default disclosure triangle on FAQ items. */
 summary::-webkit-details-marker {
   display: none;
+}
+
+/* Fine square grid, used behind the hero phone. */
+.bg-grid {
+  background-image:
+    linear-gradient(to right, rgb(37 99 235 / 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(37 99 235 / 0.08) 1px, transparent 1px);
+  background-size: 32px 32px;
 }

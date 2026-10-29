@@ -40,7 +40,7 @@ export function VideoPlayer({
 }) {
   const embed = toEmbed(src);
   return (
-    <div className={cx("aspect-video w-full overflow-hidden rounded-[20px] bg-night shadow-[0_30px_70px_rgb(10_22_51/0.25)] lg:rounded-[28px]", className)}>
+    <div className={cx("aspect-video w-full overflow-hidden rounded-[10px] bg-night shadow-[0_30px_70px_rgb(10_22_51/0.25)] lg:rounded-[12px]", className)}>
       {embed ? (
         <iframe
           src={embed}

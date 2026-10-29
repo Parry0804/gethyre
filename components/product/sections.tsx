@@ -29,15 +29,15 @@ const thread = [
 export function ScatteredVsConnected() {
   return (
     <div className="mt-8 grid gap-4 lg:mt-12 lg:grid-cols-2 lg:gap-6">
-      <Reveal className="flex flex-col rounded-[24px] border border-line bg-white p-6 lg:p-8">
+      <Reveal className="flex flex-col rounded-[12px] border border-line bg-white p-6 lg:p-8">
         <h3 className="text-lg font-bold lg:text-xl">Placement prep today</h3>
         <p className="mt-1.5 text-[15px] text-body">Seven tools, none of them talking to each other, and no idea which skill to fix first.</p>
-        <div className="relative mt-6 min-h-[320px] flex-1 overflow-hidden rounded-2xl bg-surface bg-dots lg:min-h-[340px]">
+        <div className="relative mt-6 min-h-[320px] flex-1 overflow-hidden rounded-[10px] bg-surface bg-dots lg:min-h-[340px]">
           {scattered.map((x) => (
             <span
               key={x.t}
               className={cx(
-                "absolute whitespace-nowrap rounded-xl border border-dashed border-line-strong bg-white px-3.5 py-2 text-[13px] font-semibold text-muted shadow-sm",
+                "absolute whitespace-nowrap rounded-lg border border-dashed border-line-strong bg-white px-3.5 py-2 text-[13px] font-semibold text-muted shadow-sm",
                 x.c,
               )}
             >
@@ -47,7 +47,7 @@ export function ScatteredVsConnected() {
         </div>
       </Reveal>
 
-      <Reveal delay={120} className="flex flex-col rounded-[24px] bg-primary p-6 text-white lg:p-8">
+      <Reveal delay={120} className="flex flex-col rounded-[12px] bg-primary p-6 text-white lg:p-8">
         <h3 className="text-lg font-bold lg:text-xl">With GetHyre.ai</h3>
         <p className="mt-1.5 text-[15px] text-sky">One journey. Each step feeds the next, so nothing you do is wasted.</p>
         <ol className="relative mt-6 flex flex-col gap-2.5">
@@ -55,8 +55,8 @@ export function ScatteredVsConnected() {
             <span className="absolute left-0 h-16 w-full animate-[gh-scan_3s_linear_infinite] bg-gradient-to-b from-white/0 via-white to-white/0" />
           </span>
           {thread.map((x, i) => (
-            <li key={x.t} className="relative flex items-center gap-4 rounded-2xl bg-white/10 px-3 py-2.5 backdrop-blur-sm">
-              <span className="relative z-10 flex size-[30px] shrink-0 items-center justify-center rounded-full bg-white text-[13px] font-extrabold text-primary">
+            <li key={x.t} className="relative flex items-center gap-4 rounded-[10px] bg-white/10 px-3 py-2.5 backdrop-blur-sm">
+              <span className="relative z-10 flex size-[30px] shrink-0 items-center justify-center rounded-md bg-white text-[13px] font-extrabold text-primary">
                 {i + 1}
               </span>
               <span className="flex flex-col">
@@ -82,7 +82,7 @@ const facts = [
 
 export function FactsBand() {
   return (
-    <ul className="grid grid-cols-2 gap-px overflow-hidden rounded-[24px] border border-line bg-line lg:grid-cols-4">
+    <ul className="grid grid-cols-2 gap-px overflow-hidden rounded-[12px] border border-line bg-line lg:grid-cols-4">
       {facts.map((f) => (
         <li key={f.label} className="flex flex-col gap-1.5 bg-white p-5 lg:p-7">
           <CountUp to={f.n} suffix={f.suffix} className="text-[36px] font-extrabold tracking-[-0.03em] text-primary lg:text-[48px]" />
@@ -98,8 +98,8 @@ export function FactsBand() {
 export function Differences() {
   return (
     <ul className="mt-8 grid gap-4 lg:mt-12 lg:grid-cols-3 lg:gap-6">
-      <Reveal as="li" className="flex flex-col gap-4 rounded-[24px] border border-line bg-white p-6 lg:p-7">
-        <div className="flex flex-col gap-3 rounded-2xl bg-surface p-4">
+      <Reveal as="li" className="flex flex-col gap-4 rounded-[12px] border border-line bg-white p-6 lg:p-7">
+        <div className="flex flex-col gap-3 rounded-[10px] bg-surface p-4">
           <Compare label="Keyword match" value={41} tone="bg-line-strong" />
           <Compare label="GetHyre skill match" value={92} tone="bg-success" strong />
           <p className="text-xs text-muted">Example: the same student and the same job</p>
@@ -110,8 +110,8 @@ export function Differences() {
         </p>
       </Reveal>
 
-      <Reveal as="li" delay={100} className="flex flex-col gap-4 rounded-[24px] border border-line bg-white p-6 lg:p-7">
-        <div className="flex items-end justify-between gap-3 rounded-2xl bg-surface p-4">
+      <Reveal as="li" delay={100} className="flex flex-col gap-4 rounded-[12px] border border-line bg-white p-6 lg:p-7">
+        <div className="flex items-end justify-between gap-3 rounded-[10px] bg-surface p-4">
           <ScorePill label="Week 1" value={42} />
           <span className="mb-4 h-px flex-1 border-t-2 border-dashed border-primary/40" aria-hidden />
           <ScorePill label="Week 7" value={81} strong />
@@ -122,8 +122,8 @@ export function Differences() {
         </p>
       </Reveal>
 
-      <Reveal as="li" delay={200} className="flex flex-col gap-4 rounded-[24px] border border-line bg-white p-6 lg:p-7">
-        <ul className="flex flex-col gap-2 rounded-2xl bg-surface p-4">
+      <Reveal as="li" delay={200} className="flex flex-col gap-4 rounded-[12px] border border-line bg-white p-6 lg:p-7">
+        <ul className="flex flex-col gap-2 rounded-[10px] bg-surface p-4">
           {["Readiness 70 or more", "No high gaps left", "ATS-ready CV"].map((c) => (
             <li key={c} className="flex items-center gap-2.5 text-[13px] font-semibold">
               <span className="flex size-5 items-center justify-center rounded-full bg-success text-white">
@@ -177,11 +177,11 @@ function ScorePill({ label, value, strong }: { label: string; value: number; str
 export function BuiltForThree() {
   return (
     <ul className="mt-8 grid gap-4 md:grid-cols-3 lg:mt-12 lg:gap-6">
-      <Reveal as="li" className="flex flex-col overflow-hidden rounded-[24px] bg-primary text-white">
+      <Reveal as="li" className="flex flex-col overflow-hidden rounded-[12px] bg-primary text-white">
         <Photo name="studentLaptop" className="h-[220px] rounded-none" sizes="(min-width: 768px) 33vw, 100vw" position="50% 35%">
           <OverlayChip>
             <span className="text-muted">Readiness</span> <b className="text-ink">81</b>
-            <span className="ml-1.5 rounded-full bg-success-tint px-2 py-0.5 text-[11px] font-bold text-success-strong">Job-ready</span>
+            <span className="ml-1.5 rounded-md bg-success-tint px-2 py-0.5 text-[11px] font-bold text-success-strong">Job-ready</span>
           </OverlayChip>
         </Photo>
         <Card3
@@ -192,7 +192,7 @@ export function BuiltForThree() {
           light
         />
       </Reveal>
-      <Reveal as="li" delay={100} className="flex flex-col overflow-hidden rounded-[24px] border border-line bg-white">
+      <Reveal as="li" delay={100} className="flex flex-col overflow-hidden rounded-[12px] border border-line bg-white">
         <Photo name="campusWalk" className="h-[220px] rounded-none" sizes="(min-width: 768px) 33vw, 100vw">
           <OverlayChip>
             <span className="text-muted">Batch readiness</span> <b className="text-ink">68</b>
@@ -206,11 +206,11 @@ export function BuiltForThree() {
           href="/colleges"
         />
       </Reveal>
-      <Reveal as="li" delay={200} className="flex flex-col overflow-hidden rounded-[24px] border border-line bg-white">
+      <Reveal as="li" delay={200} className="flex flex-col overflow-hidden rounded-[12px] border border-line bg-white">
         <Photo name="hiringTeam" className="h-[220px] rounded-none" sizes="(min-width: 768px) 33vw, 100vw">
           <OverlayChip>
             <span className="text-muted">Shortlist</span> <b className="text-ink">12 assessed</b>
-            <span className="ml-1.5 rounded-full bg-tint px-2 py-0.5 text-[11px] font-bold text-primary-strong">92% match</span>
+            <span className="ml-1.5 rounded-md bg-tint px-2 py-0.5 text-[11px] font-bold text-primary-strong">92% match</span>
           </OverlayChip>
         </Photo>
         <Card3
@@ -226,7 +226,7 @@ export function BuiltForThree() {
 
 function OverlayChip({ children }: { children: ReactNode }) {
   return (
-    <span className="absolute bottom-3 left-3 right-3 flex w-fit max-w-[calc(100%-24px)] items-center gap-1 rounded-xl bg-white/95 px-3 py-2 text-[13px] shadow-sm backdrop-blur">
+    <span className="absolute bottom-3 left-3 right-3 flex w-fit max-w-[calc(100%-24px)] items-center gap-1 rounded-lg bg-white/95 px-3 py-2 text-[13px] shadow-sm backdrop-blur">
       {children}
     </span>
   );
@@ -239,7 +239,7 @@ export function CampusToCareer() {
     <div className="mt-8 grid grid-cols-2 gap-3 lg:mt-12 lg:grid-cols-4 lg:grid-rows-[260px_260px] lg:gap-5">
       <Reveal className="col-span-2 lg:row-span-2">
         <Photo name="studentOutdoor" className="aspect-[4/3] lg:aspect-auto lg:h-full" sizes="(min-width: 1024px) 50vw, 100vw">
-          <div className="animate-float absolute bottom-4 left-4 flex items-center gap-3 rounded-2xl bg-white/95 px-4 py-3 shadow-[0_14px_36px_rgb(10_22_51/0.18)] backdrop-blur">
+          <div className="animate-float absolute bottom-4 left-4 flex items-center gap-3 rounded-[10px] bg-white/95 px-4 py-3 shadow-[0_14px_36px_rgb(10_22_51/0.18)] backdrop-blur">
             <span className="flex size-11 items-center justify-center rounded-full bg-primary text-base font-extrabold text-white">81</span>
             <span className="flex flex-col">
               <span className="text-xs font-semibold text-muted">Readiness, week 7</span>
@@ -269,7 +269,7 @@ export function CampusToCareer() {
 
 function MosaicChip({ children }: { children: ReactNode }) {
   return (
-    <span className="absolute bottom-3 left-3 rounded-full bg-white/95 px-3 py-1.5 text-[12px] font-bold text-ink shadow-sm backdrop-blur lg:text-[13px]">
+    <span className="absolute bottom-3 left-3 rounded-md bg-white/95 px-3 py-1.5 text-[12px] font-bold text-ink shadow-sm backdrop-blur lg:text-[13px]">
       {children}
     </span>
   );

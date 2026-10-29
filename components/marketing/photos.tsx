@@ -23,7 +23,7 @@ export function Photo({
 }) {
   const p = photos[name];
   return (
-    <div className={cx("relative overflow-hidden rounded-[24px] bg-sky", className)}>
+    <div className={cx("relative overflow-hidden rounded-[12px] bg-sky", className)}>
       <Image
         src={p.src}
         alt={p.alt}
@@ -48,7 +48,7 @@ export function PhotoBand({ names, captions }: { names: [PhotoName, PhotoName, P
             <Reveal as="li" key={n} delay={i * 100} className="w-[78%] shrink-0 snap-center md:w-auto">
               <Photo name={n} className="aspect-[4/3] md:aspect-auto md:h-[300px]" sizes="(min-width: 768px) 33vw, 80vw">
                 {captions ? (
-                  <span className="absolute bottom-3 left-3 rounded-full bg-white/90 px-3 py-1.5 text-[13px] font-semibold text-ink backdrop-blur">
+                  <span className="absolute bottom-3 left-3 rounded-md bg-white/90 px-3 py-1.5 text-[13px] font-semibold text-ink backdrop-blur">
                     {captions[i]}
                   </span>
                 ) : null}

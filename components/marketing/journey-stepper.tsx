@@ -44,7 +44,7 @@ export function JourneyStepper() {
                 onClick={() => go(step.n)}
                 aria-pressed={on}
                 className={cx(
-                  "flex w-full items-start gap-4 rounded-[14px] border px-[18px] py-4 text-left transition-colors",
+                  "flex w-full items-start gap-4 rounded-lg border px-[18px] py-4 text-left transition-colors",
                   on ? "border-primary bg-tint" : "border-line bg-white hover:border-line-strong",
                 )}
               >
@@ -60,7 +60,7 @@ export function JourneyStepper() {
       </ol>
 
       {/* Mobile phase tabs */}
-      <div className="flex gap-1.5 rounded-xl bg-surface p-1 lg:hidden" role="tablist" aria-label="Phases">
+      <div className="flex gap-1.5 rounded-lg bg-surface p-1 lg:hidden" role="tablist" aria-label="Phases">
         {phases.map((phase) => {
           const on = current.phase === phase;
           return (
@@ -107,7 +107,7 @@ export function JourneyStepper() {
 
       {/* Mobile step card and controls */}
       <div className="flex flex-col gap-4 lg:hidden">
-        <div className="flex items-start gap-4 rounded-[14px] border border-primary bg-tint px-[18px] py-4" aria-live="polite">
+        <div className="flex items-start gap-4 rounded-lg border border-primary bg-tint px-[18px] py-4" aria-live="polite">
           <StepNumber n={current.n} on />
           <span className="flex flex-col gap-1">
             <span className="text-[17px] font-bold text-ink">{current.title}</span>

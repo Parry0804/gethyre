@@ -40,7 +40,7 @@ export function PosterVideo({ src, poster, title, label }: { src: string; poster
             <PlayIcon size={32} className="relative translate-x-0.5" />
           </span>
           {label ? (
-            <span className="rounded-full bg-night/80 px-4 py-2 text-sm font-semibold text-white backdrop-blur">{label}</span>
+            <span className="rounded-md bg-night/80 px-4 py-2 text-sm font-semibold text-white backdrop-blur">{label}</span>
           ) : null}
         </button>
       ) : null}

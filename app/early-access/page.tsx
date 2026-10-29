@@ -35,7 +35,7 @@ export default function EarlyAccessPage() {
           heading="Join early access"
           subheading="Takes 30 seconds."
           consentText="I agree to receive launch updates and accept the privacy policy."
-          className="shadow-[var(--shadow-lift)] lg:rounded-[24px] lg:p-9"
+          className="shadow-[var(--shadow-lift)] lg:rounded-[12px] lg:p-9"
         />
       </Container>
     </section>

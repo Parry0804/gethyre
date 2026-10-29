@@ -26,7 +26,7 @@ export default function AmbassadorsPage() {
         aside={
           <figure
             aria-label="Illustrative ambassador card"
-            className="flex w-full max-w-[460px] flex-col gap-3.5 rounded-[24px] bg-primary p-7 text-white lg:p-9"
+            className="flex w-full max-w-[460px] flex-col gap-3.5 rounded-[12px] bg-primary p-7 text-white lg:p-9"
           >
             <p className="text-[13px] font-bold uppercase tracking-[0.1em] text-sky">Ambassador</p>
             <p className="text-2xl font-extrabold lg:text-[28px]">[Student name]</p>
@@ -36,7 +36,7 @@ export default function AmbassadorsPage() {
                 ["[N]", "classmates onboarded"],
                 ["[N]", "sessions run"],
               ].map(([v, k]) => (
-                <div key={k} className="flex flex-col-reverse gap-0.5 rounded-2xl bg-white/12 p-4">
+                <div key={k} className="flex flex-col-reverse gap-0.5 rounded-[10px] bg-white/12 p-4">
                   <dt className="text-[13px] font-medium text-sky">{k}</dt>
                   <dd className="text-2xl font-extrabold">{v}</dd>
                 </div>

@@ -105,16 +105,6 @@ export const modules: Module[] = [
     youDo: ["Browse jobs ranked by your match score", "Apply with a CV tailored to the role", "Get placement support along the way"],
     youGet: ["Fewer, better-fit applications", "Employers who see your assessed skills"],
   },
-  {
-    id: "dashboard",
-    phase: "Track",
-    tab: "Dashboard",
-    title: "Your whole journey on one dashboard",
-    summary: "Readiness over time, gaps closed, roadmap progress, interviews and applications, all in one place.",
-    demo: "dashboard",
-    youDo: ["Check your readiness trend week by week", "See what to do next, every time you open the app"],
-    youGet: ["Proof of progress you can show a recruiter", "No more scattered tools and spreadsheets"],
-  },
 ];
 
 /** The short version used in the home page tour. */

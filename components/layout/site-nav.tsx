@@ -59,7 +59,7 @@ export function SiteNav() {
       >
         Skip to content
       </a>
-      <div className="mx-auto flex h-16 w-full max-w-[1240px] items-center justify-between gap-6 px-5 lg:h-[76px] lg:px-6">
+      <div className="mx-auto flex h-16 w-full max-w-[1440px] items-center justify-between gap-6 px-5 lg:h-[76px] lg:px-10 xl:px-14">
         <Logo className="h-7 w-auto lg:h-8" priority />
 
         <nav aria-label="Main" className="hidden lg:block">
@@ -90,7 +90,7 @@ export function SiteNav() {
         <button
           ref={menuButton}
           type="button"
-          className="inline-flex size-11 items-center justify-center rounded-xl border border-line bg-white text-ink lg:hidden"
+          className="inline-flex size-11 items-center justify-center rounded-lg border border-line bg-white text-ink lg:hidden"
           aria-expanded={open}
           aria-controls="mobile-menu"
           aria-label="Open menu"
@@ -116,7 +116,7 @@ export function SiteNav() {
             <button
               type="button"
               autoFocus
-              className="inline-flex size-11 items-center justify-center rounded-xl bg-surface text-ink"
+              className="inline-flex size-11 items-center justify-center rounded-lg bg-surface text-ink"
               aria-label="Close menu"
               onClick={() => {
                 setOpen(false);

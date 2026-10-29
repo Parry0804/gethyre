@@ -78,7 +78,7 @@ export function LeadForm({
         }
       }}
       className={cx(
-        "flex w-full flex-col gap-3.5 rounded-[20px] p-5 lg:p-7",
+        "flex w-full flex-col gap-3.5 rounded-[10px] p-5 lg:p-7",
         tone === "white" ? "bg-white" : "bg-surface",
         className,
       )}
@@ -187,7 +187,7 @@ export function LeadForm({
 
 function inputClass(invalid: boolean) {
   return cx(
-    "min-h-12 w-full rounded-xl border bg-white px-3.5 py-3 text-base text-ink placeholder:text-subtle focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20",
+    "min-h-12 w-full rounded-lg border bg-white px-3.5 py-3 text-base text-ink placeholder:text-subtle focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20",
     invalid ? "border-danger" : "border-line-strong",
   );
 }

@@ -71,7 +71,7 @@ export default function StudentsPage() {
         <SectionHeader id="journey-title" eyebrow="Your journey" title="From first assessment to matched jobs." />
         <ul className="mt-8 grid gap-4 lg:mt-10 lg:grid-cols-3 lg:gap-7">
           {phases.map((p) => (
-            <li key={p.phase} className="flex flex-col gap-4 rounded-[20px] bg-surface px-6 pb-7 pt-7 lg:px-7 lg:pt-8">
+            <li key={p.phase} className="flex flex-col gap-4 rounded-[10px] bg-surface px-6 pb-7 pt-7 lg:px-7 lg:pt-8">
               <div className="flex justify-center">
                 <PhoneMockup src={p.screen} alt={p.alt} width={230} />
               </div>

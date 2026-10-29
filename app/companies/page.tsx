@@ -83,10 +83,10 @@ function CandidateCard() {
   return (
     <figure
       aria-label="Illustrative candidate profile with verified skills"
-      className="flex w-full max-w-[520px] flex-col gap-4 rounded-[20px] border border-line bg-white p-5 shadow-[var(--shadow-lift)] lg:rounded-[24px] lg:p-7"
+      className="flex w-full max-w-[520px] flex-col gap-4 rounded-[10px] border border-line bg-white p-5 shadow-[var(--shadow-lift)] lg:rounded-[12px] lg:p-7"
     >
       <div className="flex items-center gap-3">
-        <span className="flex size-11 shrink-0 items-center justify-center rounded-full bg-sky text-sm font-bold text-primary-strong lg:size-13 lg:text-base">
+        <span className="flex size-11 shrink-0 items-center justify-center rounded-md bg-sky text-sm font-bold text-primary-strong lg:size-13 lg:text-base">
           AS
         </span>
         <div className="min-w-0 flex-1">
@@ -116,7 +116,7 @@ function CandidateCard() {
           ["60", "Communication"],
           ["65", "Clarity"],
         ].map(([v, k]) => (
-          <div key={k} className="flex flex-col-reverse gap-0.5 rounded-xl bg-surface p-3">
+          <div key={k} className="flex flex-col-reverse gap-0.5 rounded-lg bg-surface p-3">
             <dt className="text-[11px] font-medium text-muted lg:text-xs">{k}</dt>
             <dd className="text-xl font-extrabold lg:text-[22px]">{v}</dd>
           </div>

@@ -1,11 +1,9 @@
 import type { Metadata } from "next";
 import { LeadForm } from "@/components/forms/lead-form";
 import { AppBadge } from "@/components/layout/app-badge";
-import { CheckIcon } from "@/components/icons";
 import { Faq } from "@/components/marketing/blocks";
 import { Reveal } from "@/components/motion";
 import { HeroEngine } from "@/components/product/hero-engine";
-import { DashboardDemo } from "@/components/product/live-demos";
 import { ProductTour } from "@/components/product/product-tour";
 import { CampusToCareer, Differences, FactsBand, ScatteredVsConnected } from "@/components/product/sections";
 import { VideoPlayer } from "@/components/marketing/video-player";
@@ -26,9 +24,9 @@ export default function HomePage() {
       {/* Hero */}
       <section className="relative overflow-hidden pb-8 pt-8 lg:pb-10 lg:pt-14">
         <div className="bg-dots absolute inset-0 [mask-image:radial-gradient(ellipse_at_70%_30%,#000_20%,transparent_70%)]" aria-hidden />
-        <Container className="relative grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_560px] lg:gap-8">
+        <Container className="relative grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_600px] lg:gap-12">
           <div className="flex flex-col items-start gap-5 lg:gap-6">
-            <span className="inline-flex items-center gap-2 rounded-full border border-sky bg-white px-3.5 py-2 text-[13px] font-semibold text-primary-strong shadow-sm lg:text-sm">
+            <span className="inline-flex items-center gap-2 rounded-md border border-sky bg-white px-3.5 py-2 text-[13px] font-semibold text-primary-strong shadow-sm lg:text-sm">
               <span className="relative flex size-2">
                 <span className="animate-ping-soft absolute inline-flex size-full rounded-full bg-primary" />
                 <span className="relative inline-flex size-2 rounded-full bg-primary" />
@@ -47,7 +45,7 @@ export default function HomePage() {
               roadmap closes them, and jobs are matched to the skills you&apos;ve proved.
             </p>
             <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
-              <ButtonLink href="/early-access" track="hero" className="shadow-[0_10px_24px_rgb(37_99_235/0.3)]">
+              <ButtonLink href="/early-access" track="hero">
                 Get early access
               </ButtonLink>
               <ButtonLink href="/product" variant="secondary" track="hero-product">
@@ -101,14 +99,12 @@ export default function HomePage() {
 
       {/* Product tour */}
       <section id="product-tour" aria-labelledby="tour-title" className="relative scroll-mt-20 overflow-hidden bg-night py-16 text-white lg:py-24">
-        <div className="bg-dots-night absolute inset-0 [mask-image:linear-gradient(180deg,#000,transparent_70%)]" aria-hidden />
-        <div className="absolute -right-40 -top-40 size-[520px] rounded-full bg-primary/25 blur-[120px]" aria-hidden />
         <Container className="relative">
           <SectionHeader
             id="tour-title"
             eyebrow="Product tour"
             title="See the app at work."
-            intro="Every screen below is a live preview of the GetHyre.ai journey. Pick a step or let it play."
+            intro="Six steps from first assessment to a matched job. Each preview is the real flow, running live. Pick a step or let it play."
             invert
           />
           <ProductTour />
@@ -135,37 +131,10 @@ export default function HomePage() {
         </Reveal>
       </Section>
 
-      {/* Dashboard */}
-      <Section tone="white" labelledBy="dash-title">
-        <div className="grid items-center gap-10 lg:grid-cols-[400px_minmax(0,1fr)] lg:gap-14">
-          <div className="flex flex-col gap-5">
-            <SectionHeader
-              id="dash-title"
-              eyebrow="Journey dashboard"
-              title="Every step tracked in one place."
-              intro="Readiness over time, gaps closed, roadmap progress, interviews and applications. Open the app and you always know what to do next."
-            />
-            <ul className="flex flex-col gap-2.5">
-              {["Readiness trend, week by week", "Gaps closed and gaps left", "Your next step, every time"].map((x) => (
-                <li key={x} className="flex items-center gap-3 text-[15px] font-semibold text-ink">
-                  <span className="flex size-6 items-center justify-center rounded-full bg-tint text-primary">
-                    <CheckIcon size={14} />
-                  </span>
-                  {x}
-                </li>
-              ))}
-            </ul>
-          </div>
-          <Reveal>
-            <DashboardDemo />
-          </Reveal>
-        </div>
-      </Section>
-
       {/* Campus survey */}
       <section id="campus-survey" aria-labelledby="survey-title" className="scroll-mt-20 pb-14 lg:pb-22">
         <Container>
-          <div className="flex flex-col gap-5 rounded-[24px] border border-sky bg-tint p-6 lg:flex-row lg:items-center lg:justify-between lg:p-10">
+          <div className="flex flex-col gap-5 rounded-[12px] border border-sky bg-tint p-6 lg:flex-row lg:items-center lg:justify-between lg:p-10">
             <div className="flex flex-col gap-2">
               <h2 id="survey-title" className="text-[22px] font-extrabold tracking-[-0.02em] lg:text-[26px]">
                 Help us build GetHyre.ai
@@ -199,7 +168,7 @@ export default function HomePage() {
       {/* Early access */}
       <section id="early-access" aria-labelledby="ea-title" className="scroll-mt-20 py-14 lg:py-22">
         <Container>
-          <div className="grid items-center gap-6 rounded-[24px] bg-primary p-[18px] pt-7 text-white lg:grid-cols-[minmax(0,1fr)_500px] lg:gap-10 lg:rounded-[28px] lg:p-14">
+          <div className="grid items-center gap-6 rounded-[12px] bg-primary p-[18px] pt-7 text-white lg:grid-cols-[minmax(0,1fr)_500px] lg:gap-10 lg:rounded-[12px] lg:p-14">
             <div className="flex flex-col gap-3.5 px-1.5 lg:px-0">
               <h2 id="ea-title" className="text-[28px] font-extrabold leading-[1.12] tracking-[-0.025em] lg:text-[44px] lg:leading-[1.1]">
                 Be first in line when GetHyre.ai opens.

@@ -8,7 +8,7 @@ export function cx(...classes: Array<string | false | null | undefined>) {
 /* ---------- Layout ---------- */
 
 export function Container({ className, children }: { className?: string; children: ReactNode }) {
-  return <div className={cx("mx-auto w-full max-w-[1240px] px-5 lg:px-6", className)}>{children}</div>;
+  return <div className={cx("mx-auto w-full max-w-[1440px] px-5 lg:px-10 xl:px-14", className)}>{children}</div>;
 }
 
 type SectionTone = "surface" | "white" | "ink" | "none";
@@ -136,7 +136,7 @@ const variantClass: Record<ButtonVariant, string> = {
 };
 
 const buttonBase =
-  "inline-flex min-h-[52px] items-center justify-center gap-2 rounded-[14px] px-6 text-base font-semibold transition-colors disabled:cursor-not-allowed disabled:opacity-60";
+  "inline-flex min-h-[52px] items-center justify-center gap-2 rounded-lg px-6 text-base font-semibold transition-colors disabled:cursor-not-allowed disabled:opacity-60";
 
 type ButtonLinkProps = {
   href: string;
@@ -212,7 +212,7 @@ export function ArrowLink({
 
 export function Pill({ children, className }: { children: ReactNode; className?: string }) {
   return (
-    <span className={cx("inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold", className)}>
+    <span className={cx("inline-flex items-center rounded-md px-3 py-1 text-xs font-semibold", className)}>
       {children}
     </span>
   );
@@ -234,5 +234,5 @@ export function Card({
     primary: "bg-primary text-white",
     ink: "bg-ink text-white",
   };
-  return <div className={cx("rounded-[16px] p-6 lg:p-7", tones[tone], className)}>{children}</div>;
+  return <div className={cx("rounded-[10px] p-6 lg:p-7", tones[tone], className)}>{children}</div>;
 }

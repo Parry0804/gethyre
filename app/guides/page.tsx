@@ -34,7 +34,7 @@ export default function GuidesPage() {
               <li key={c} className="shrink-0">
                 <span
                   className={cx(
-                    "inline-flex rounded-full px-4 py-2 text-sm font-semibold",
+                    "inline-flex rounded-md px-4 py-2 text-sm font-semibold",
                     i === 0 ? "bg-ink text-white" : "border border-line bg-white text-ink",
                   )}
                 >
@@ -51,7 +51,7 @@ export default function GuidesPage() {
           <ul className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 lg:gap-5">
             {articles.map((a) => (
               <li key={a.title}>
-                <article className="flex h-full flex-col overflow-hidden rounded-[20px] bg-white">
+                <article className="flex h-full flex-col overflow-hidden rounded-[10px] bg-white">
                   <div className="flex h-44 items-center justify-center bg-sky text-[13px] text-body lg:h-50">[Cover image]</div>
                   <div className="flex flex-1 flex-col gap-2.5 p-5 lg:p-6">
                     <p className="text-xs font-bold uppercase tracking-[0.08em] text-primary lg:text-[13px]">{a.category}</p>
@@ -63,7 +63,7 @@ export default function GuidesPage() {
             ))}
           </ul>
 
-          <div className="mt-5 flex flex-col gap-5 rounded-[24px] bg-tint p-6 lg:flex-row lg:items-center lg:justify-between lg:p-10">
+          <div className="mt-5 flex flex-col gap-5 rounded-[12px] bg-tint p-6 lg:flex-row lg:items-center lg:justify-between lg:p-10">
             <div className="flex flex-col gap-1.5">
               <h2 className="text-[21px] font-extrabold tracking-[-0.01em] lg:text-2xl">New guides every week</h2>
               <p className="text-[15px] text-body lg:text-base">Join early access and we&apos;ll send them to you.</p>

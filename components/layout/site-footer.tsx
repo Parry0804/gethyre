@@ -13,7 +13,7 @@ export function SiteFooter() {
 
   return (
     <footer className="border-t border-line bg-white">
-      <div className="mx-auto w-full max-w-[1240px] px-5 pb-7 pt-12 lg:px-6 lg:pt-16">
+      <div className="mx-auto w-full max-w-[1440px] px-5 pb-7 pt-12 lg:px-10 xl:px-14 lg:pt-16">
         <div className="grid gap-8 lg:grid-cols-[340px_repeat(4,minmax(0,1fr))] lg:gap-12">
           <div className="flex flex-col items-start gap-4">
             <Link href="/" aria-label="GetHyre.ai home">

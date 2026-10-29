@@ -125,7 +125,7 @@ function BatchDashboard() {
   return (
     <figure
       aria-label="Illustrative college dashboard showing batch readiness"
-      className="flex w-full max-w-[560px] flex-col gap-4 rounded-[20px] border border-line bg-white p-5 shadow-[var(--shadow-lift)] lg:gap-5 lg:rounded-[24px] lg:p-7"
+      className="flex w-full max-w-[560px] flex-col gap-4 rounded-[10px] border border-line bg-white p-5 shadow-[var(--shadow-lift)] lg:gap-5 lg:rounded-[12px] lg:p-7"
     >
       <div className="flex items-start justify-between gap-3">
         <div>
@@ -140,7 +140,7 @@ function BatchDashboard() {
           ["368", "Reports ready"],
           ["64", "Avg readiness"],
         ].map(([v, k]) => (
-          <div key={k} className="flex flex-col-reverse gap-0.5 rounded-xl bg-surface p-3 lg:rounded-2xl lg:p-4">
+          <div key={k} className="flex flex-col-reverse gap-0.5 rounded-lg bg-surface p-3 lg:rounded-[10px] lg:p-4">
             <dt className="text-[11px] font-medium text-muted lg:text-xs">{k}</dt>
             <dd className="text-[22px] font-extrabold lg:text-[28px]">{v}</dd>
           </div>

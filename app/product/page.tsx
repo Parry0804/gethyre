@@ -45,7 +45,7 @@ export default function ProductPage() {
 
           {/* Fanned phones */}
           <div className="relative mt-12 flex h-[300px] w-full max-w-[760px] items-start justify-center sm:h-[400px] lg:mt-16 lg:h-[480px]">
-            <div className="absolute bottom-0 left-1/2 h-[70%] w-[90%] -translate-x-1/2 rounded-t-[40px] bg-sky" aria-hidden />
+            <div className="absolute bottom-0 left-1/2 h-[70%] w-[90%] -translate-x-1/2 rounded-t-[12px] bg-sky" aria-hidden />
             <div className="absolute left-1/2 top-10 hidden -translate-x-[150%] -rotate-6 sm:block">
               <PhoneMockup src="/screens/report.webp" alt="Skill report screen" width={220} />
             </div>
@@ -70,7 +70,7 @@ export default function ProductPage() {
               <li key={m.id} className="shrink-0">
                 <a
                   href={`#${m.id}`}
-                  className="flex items-center gap-2 rounded-full border border-line px-3.5 py-2 text-[13px] font-semibold text-ink transition-colors hover:border-primary hover:text-primary"
+                  className="flex items-center gap-2 rounded-md border border-line px-3.5 py-2 text-[13px] font-semibold text-ink transition-colors hover:border-primary hover:text-primary"
                 >
                   <span className="text-muted">{i + 1}</span>
                   {m.tab}
@@ -94,10 +94,10 @@ export default function ProductPage() {
             <Container className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
               <div className={cx("flex flex-col gap-4", flip && "lg:order-2")}>
                 <div className="flex items-center gap-3">
-                  <span className="flex size-9 items-center justify-center rounded-full bg-ink text-sm font-extrabold text-white">
+                  <span className="flex size-9 items-center justify-center rounded-md bg-ink text-sm font-extrabold text-white">
                     {i + 1}
                   </span>
-                  <span className={cx("rounded-full px-3 py-1 text-xs font-bold", phaseTone[m.phase])}>{m.phase}</span>
+                  <span className={cx("rounded-md px-3 py-1 text-xs font-bold", phaseTone[m.phase])}>{m.phase}</span>
                 </div>
                 <h2
                   id={`${m.id}-title`}
@@ -141,14 +141,14 @@ export default function ProductPage() {
           intro="Every student begins with the same diagnosis. What happens next depends on what it shows."
         />
         <div className="mt-8 grid gap-4 lg:mt-12 lg:grid-cols-2 lg:gap-6">
-          <Reveal className="flex flex-col gap-5 rounded-[24px] bg-primary p-6 text-white lg:p-8">
+          <Reveal className="flex flex-col gap-5 rounded-[12px] bg-primary p-6 text-white lg:p-8">
             <h3 className="text-xl font-bold lg:text-2xl">Full journey</h3>
             <p className="text-[15px] leading-relaxed text-sky lg:text-base">
               For most students. Find your gaps, close them on a roadmap, then get matched once you&apos;re job-ready.
             </p>
             <Flow steps={["Diagnose", "Train", "Job-ready", "Place"]} light />
           </Reveal>
-          <Reveal delay={100} className="flex flex-col gap-5 rounded-[24px] border border-line bg-surface p-6 lg:p-8">
+          <Reveal delay={100} className="flex flex-col gap-5 rounded-[12px] border border-line bg-surface p-6 lg:p-8">
             <h3 className="text-xl font-bold lg:text-2xl">Direct placement</h3>
             <p className="text-[15px] leading-relaxed text-body lg:text-base">
               Already prepared? If your diagnosis passes the job-ready check, skip the roadmap and go straight to matched jobs.
@@ -178,7 +178,7 @@ function List({ title, items, accent }: { title: string; items: string[]; accent
           <li key={x} className="flex items-start gap-2.5 text-[15px] leading-snug text-body">
             <span
               className={cx(
-                "mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full",
+                "mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-[4px]",
                 accent ? "bg-success text-white" : "bg-tint text-primary",
               )}
             >
@@ -199,7 +199,7 @@ function Flow({ steps, light }: { steps: string[]; light?: boolean }) {
         <li key={s} className="flex items-center gap-2">
           <span
             className={cx(
-              "rounded-full px-3.5 py-1.5 text-[13px] font-bold",
+              "rounded-md px-3.5 py-1.5 text-[13px] font-bold",
               light ? "bg-white text-primary" : "bg-white text-ink ring-1 ring-line",
             )}
           >

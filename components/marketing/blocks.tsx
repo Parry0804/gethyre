@@ -53,7 +53,7 @@ export function FeatureCards({
         return (
           <li key={f.title}>
             <Card tone={tone} className="flex h-full flex-col gap-3">
-              <span className="flex size-11 items-center justify-center rounded-xl bg-tint text-primary">
+              <span className="flex size-11 items-center justify-center rounded-lg bg-tint text-primary">
                 <Icon size={22} />
               </span>
               <h3 className="text-lg font-bold text-ink lg:text-xl">{f.title}</h3>
@@ -85,7 +85,7 @@ export function NumberedSteps({
       {items.map((s, i) => (
         <li key={s.title}>
           <Card tone={tone} className="flex h-full gap-4 lg:flex-col lg:gap-3">
-            <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-primary text-[15px] font-bold text-white">
+            <span className="flex size-9 shrink-0 items-center justify-center rounded-md bg-primary text-[15px] font-bold text-white">
               {i + 1}
             </span>
             <span className="flex flex-col gap-1.5">
@@ -119,7 +119,7 @@ export function Bullets({ items, className }: { items: string[]; className?: str
 export function DownloadCard({ title, meta, href }: { title: string; meta: string; href: string | null }) {
   const body = (
     <>
-      <span className="flex size-11 shrink-0 items-center justify-center rounded-[10px] bg-tint text-primary">
+      <span className="flex size-11 shrink-0 items-center justify-center rounded-md bg-tint text-primary">
         <FileIcon size={22} />
       </span>
       <span className="flex min-w-0 flex-1 flex-col gap-0.5">
@@ -129,7 +129,7 @@ export function DownloadCard({ title, meta, href }: { title: string; meta: strin
       {href ? <DownloadIcon size={22} className="shrink-0 text-primary" /> : null}
     </>
   );
-  const classes = "flex w-full max-w-[460px] items-center gap-3.5 rounded-[14px] border border-line bg-white px-[18px] py-4";
+  const classes = "flex w-full max-w-[460px] items-center gap-3.5 rounded-lg border border-line bg-white px-[18px] py-4";
   return href ? (
     <a href={href} download className={cx(classes, "transition-colors hover:border-primary")} data-cta={`download-${title}`}>
       {body}
@@ -177,7 +177,7 @@ export function CtaBand({
   return (
     <section className="pb-14 lg:pb-22">
       <Container>
-        <div className="flex flex-col gap-6 rounded-[24px] bg-primary p-7 text-white lg:flex-row lg:items-center lg:justify-between lg:rounded-[28px] lg:p-14">
+        <div className="flex flex-col gap-6 rounded-[12px] bg-primary p-7 text-white lg:flex-row lg:items-center lg:justify-between lg:rounded-[12px] lg:p-14">
           <div className="flex max-w-[680px] flex-col gap-3">
             <h2 className="text-[26px] font-extrabold leading-tight tracking-[-0.02em] lg:text-[44px] lg:leading-[1.1]">{title}</h2>
             <p className="text-[15px] leading-relaxed text-sky lg:text-[17px]">{body}</p>
@@ -195,7 +195,7 @@ export function CtaBand({
 
 export function PhotoPlaceholder({ label = "[Photo]", className }: { label?: string; className?: string }) {
   return (
-    <div className={cx("flex items-center justify-center rounded-[16px] bg-sky text-sm text-body", className)}>{label}</div>
+    <div className={cx("flex items-center justify-center rounded-[10px] bg-sky text-sm text-body", className)}>{label}</div>
   );
 }
 

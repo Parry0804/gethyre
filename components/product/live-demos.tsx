@@ -29,7 +29,7 @@ export function AppWindow({
   return (
     <div
       className={cx(
-        "overflow-hidden rounded-[20px] border shadow-[0_24px_60px_rgb(10_22_51/0.18)]",
+        "overflow-hidden rounded-[10px] border shadow-[0_24px_60px_rgb(10_22_51/0.18)]",
         dark ? "border-night-line bg-night-2 text-white" : "border-line bg-white text-ink",
         className,
       )}
@@ -98,7 +98,7 @@ export function ProfileDemo() {
                 <span
                   key={r}
                   className={cx(
-                    "rounded-full border px-3 py-1.5 text-[13px] font-semibold transition-all duration-300",
+                    "rounded-md border px-3 py-1.5 text-[13px] font-semibold transition-all duration-300",
                     i === step ? "scale-105 border-primary bg-primary text-white" : "border-line bg-white text-body",
                   )}
                 >
@@ -107,7 +107,7 @@ export function ProfileDemo() {
               ))}
             </div>
           </div>
-          <p className="rounded-xl bg-tint px-3.5 py-2.5 text-[13px] text-primary-strong">
+          <p className="rounded-lg bg-tint px-3.5 py-2.5 text-[13px] text-primary-strong">
             Your assessment and roadmap are built for <b>{roles[step]}</b>.
           </p>
         </div>
@@ -120,7 +120,7 @@ function Field({ label, value }: { label: string; value: string }) {
   return (
     <span className="flex flex-col gap-1">
       <span className="text-xs font-semibold text-muted">{label}</span>
-      <span className="rounded-[10px] border border-line px-3 py-2 text-[13px] font-medium text-ink">{value}</span>
+      <span className="rounded-md border border-line px-3 py-2 text-[13px] font-medium text-ink">{value}</span>
     </span>
   );
 }
@@ -144,7 +144,7 @@ export function AssessmentDemo() {
         <div className="flex flex-col gap-4">
           <Bar value={(q / 20) * 100} />
           <div className="flex items-center gap-2">
-            <span className="rounded-full bg-tint px-2.5 py-1 text-[11px] font-bold text-primary-strong">Scenario</span>
+            <span className="rounded-md bg-tint px-2.5 py-1 text-[11px] font-bold text-primary-strong">Scenario</span>
             <span className="text-xs text-muted">Product thinking</span>
           </div>
           <p className="text-[15px] font-bold leading-snug sm:text-base">
@@ -159,7 +159,7 @@ export function AssessmentDemo() {
                 <li
                   key={o}
                   className={cx(
-                    "flex items-center gap-3 rounded-xl border px-3 py-2.5 text-[13px] transition-all duration-300 sm:text-sm",
+                    "flex items-center gap-3 rounded-lg border px-3 py-2.5 text-[13px] transition-all duration-300 sm:text-sm",
                     picked ? "border-primary bg-tint font-semibold text-ink" : hover ? "border-primary/60 bg-white" : "border-line bg-white text-body",
                   )}
                 >
@@ -182,7 +182,7 @@ export function AssessmentDemo() {
             </span>
             <span
               className={cx(
-                "rounded-[10px] px-4 py-2 text-[13px] font-semibold transition-colors",
+                "rounded-md px-4 py-2 text-[13px] font-semibold transition-colors",
                 step >= 2 ? "bg-primary text-white" : "bg-surface text-subtle",
               )}
             >
@@ -228,7 +228,7 @@ export function InterviewDemo() {
             <div key={i} className={cx("animate-pop flex", m.from === "you" ? "justify-end" : "justify-start")}>
               <div
                 className={cx(
-                  "max-w-[85%] rounded-2xl px-3.5 py-2.5 text-[13px] leading-snug sm:text-sm",
+                  "max-w-[85%] rounded-[10px] px-3.5 py-2.5 text-[13px] leading-snug sm:text-sm",
                   m.from === "you" ? "rounded-br-md bg-primary text-white" : "rounded-bl-md bg-surface text-ink",
                 )}
               >
@@ -241,7 +241,7 @@ export function InterviewDemo() {
           ))}
           {typing ? (
             <div className="flex">
-              <div className="flex gap-1 rounded-2xl rounded-bl-md bg-surface px-4 py-3" aria-hidden>
+              <div className="flex gap-1 rounded-[10px] rounded-bl-md bg-surface px-4 py-3" aria-hidden>
                 <span className="typing-dot size-1.5 rounded-full bg-muted" />
                 <span className="typing-dot size-1.5 rounded-full bg-muted" />
                 <span className="typing-dot size-1.5 rounded-full bg-muted" />
@@ -249,7 +249,7 @@ export function InterviewDemo() {
             </div>
           ) : null}
           {step >= 5 ? (
-            <div className="animate-pop mt-auto rounded-xl border border-success/30 bg-success-tint px-3.5 py-3">
+            <div className="animate-pop mt-auto rounded-lg border border-success/30 bg-success-tint px-3.5 py-3">
               <p className="text-xs font-bold text-success-strong">Live feedback</p>
               <div className="mt-2 grid grid-cols-3 gap-2 text-center">
                 {[
@@ -299,7 +299,7 @@ export function ReportDemo({ score = 75 }: { score?: number }) {
               <li key={g.skill} className="flex flex-col gap-1.5">
                 <span className="flex items-center justify-between text-[13px]">
                   <span className="font-semibold">{g.skill}</span>
-                  <span className={cx("rounded-full px-2 py-0.5 text-[11px] font-bold", g.chip)}>{g.level}</span>
+                  <span className={cx("rounded-md px-2 py-0.5 text-[11px] font-bold", g.chip)}>{g.level}</span>
                 </span>
                 <span className="block h-2 overflow-hidden rounded-full bg-surface">
                   <span
@@ -365,7 +365,7 @@ export function RoadmapDemo() {
           <Bar value={pct} className="bg-success" />
           <ol className="flex flex-col gap-3">
             {months.map((m, mi) => (
-              <li key={m.m} className="rounded-xl border border-line p-3">
+              <li key={m.m} className="rounded-lg border border-line p-3">
                 <div className="flex items-baseline justify-between">
                   <span className="text-[13px] font-bold">{m.m}</span>
                   <span className="text-xs text-muted">{m.focus}</span>
@@ -411,7 +411,7 @@ export function CvDemo() {
     <div ref={ref}>
       <AppWindow title="CV for: Product designer, fintech" meta={<span className="font-bold text-success">ATS {score}</span>}>
         <div className="grid gap-4 sm:grid-cols-[minmax(0,1fr)_150px]">
-          <div className="relative overflow-hidden rounded-xl border border-line bg-white p-3.5">
+          <div className="relative overflow-hidden rounded-lg border border-line bg-white p-3.5">
             <div className="h-3 w-28 rounded bg-ink" />
             <div className="mt-1.5 h-2 w-40 rounded bg-line-strong" />
             {[0, 1, 2].map((block) => (
@@ -463,7 +463,7 @@ export function JobReadyDemo() {
             <div
               key={c}
               className={cx(
-                "flex items-center gap-3 rounded-xl border px-3.5 py-3 text-sm font-semibold transition-all duration-300",
+                "flex items-center gap-3 rounded-lg border px-3.5 py-3 text-sm font-semibold transition-all duration-300",
                 i < passed ? "border-success/40 bg-success-tint text-ink" : "border-line text-muted",
               )}
             >
@@ -480,7 +480,7 @@ export function JobReadyDemo() {
           ))}
           <div
             className={cx(
-              "mt-1 flex items-center justify-between rounded-xl px-4 py-3.5 transition-all duration-500",
+              "mt-1 flex items-center justify-between rounded-lg px-4 py-3.5 transition-all duration-500",
               unlocked ? "bg-primary text-white" : "bg-surface text-subtle",
             )}
           >
@@ -512,7 +512,7 @@ export function JobsDemo() {
       <AppWindow title="Jobs matched to your skills" meta="12 matches">
         <ul className="flex min-h-[270px] flex-col gap-2.5">
           {jobs.slice(0, shown).map((j, i) => (
-            <li key={j.role} className="animate-pop flex items-center gap-3 rounded-xl border border-line p-3">
+            <li key={j.role} className="animate-pop flex items-center gap-3 rounded-lg border border-line p-3">
               <MatchRing value={j.match} />
               <span className="flex min-w-0 flex-1 flex-col">
                 <span className="truncate text-sm font-bold">{j.role}</span>
@@ -521,15 +521,15 @@ export function JobsDemo() {
                 </span>
               </span>
               {i === 0 && tailored ? (
-                <span className="animate-pop shrink-0 rounded-full bg-success-tint px-2.5 py-1 text-[11px] font-bold text-success-strong">
+                <span className="animate-pop shrink-0 rounded-md bg-success-tint px-2.5 py-1 text-[11px] font-bold text-success-strong">
                   CV tailored
                 </span>
               ) : (
-                <span className="shrink-0 rounded-full bg-tint px-2.5 py-1 text-[11px] font-bold text-primary-strong">View</span>
+                <span className="shrink-0 rounded-md bg-tint px-2.5 py-1 text-[11px] font-bold text-primary-strong">View</span>
               )}
             </li>
           ))}
-          <li className="mt-auto rounded-xl bg-tint px-3.5 py-2.5 text-[12px] text-primary-strong">
+          <li className="mt-auto rounded-lg bg-tint px-3.5 py-2.5 text-[12px] text-primary-strong">
             Ranked by the skills you proved in your assessment, not keywords.
           </li>
         </ul>
@@ -595,14 +595,14 @@ export function DashboardDemo() {
                 ["Roadmap", "72%", "On track"],
                 ["Mock interviews", "4", "Clarity up 2 pts"],
               ].map(([k, v, s]) => (
-                <div key={k} className="rounded-xl border border-night-line bg-night px-3 py-2.5">
+                <div key={k} className="rounded-lg border border-night-line bg-night px-3 py-2.5">
                   <span className="block text-[11px] text-subtle">{k}</span>
                   <span className="block text-lg font-extrabold tabular-nums">{v}</span>
                   <span className="block text-[10px] text-[#6ee7b7]">{s}</span>
                 </div>
               ))}
             </div>
-            <div className="rounded-xl border border-night-line bg-night p-3.5">
+            <div className="rounded-lg border border-night-line bg-night p-3.5">
               <div className="flex items-baseline justify-between">
                 <span className="text-[13px] font-semibold">Readiness over time</span>
                 <span className="text-[11px] text-subtle">Weeks 1–7</span>
@@ -649,7 +649,7 @@ export function DashboardDemo() {
                 ))}
               </svg>
             </div>
-            <div className="flex items-center justify-between gap-3 rounded-xl bg-primary px-4 py-3">
+            <div className="flex items-center justify-between gap-3 rounded-lg bg-primary px-4 py-3">
               <span className="text-[13px] font-semibold">Next: retake the assessment to confirm your progress</span>
               <span className="shrink-0 rounded-lg bg-white px-3 py-1.5 text-xs font-bold text-primary">Start</span>
             </div>

@@ -31,7 +31,6 @@ export function HeroEngine() {
   const [paused, setPaused] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   const video = useRef<HTMLVideoElement>(null);
-  const bars = useRef<(HTMLSpanElement | null)[]>([]);
   const inView = useInView(ref);
   const reduced = useReducedMotion();
   const running = inView && !paused && !reduced;
@@ -59,11 +58,6 @@ export function HeroEngine() {
         const t = v.currentTime % LOOP_S;
         const i = stepAt(t);
         setStep((s) => (s === i ? s : i));
-        const end = STEP_AT[i + 1] ?? LOOP_S;
-        bars.current.forEach((b, k) => {
-          if (!b) return;
-          b.style.width = k < i ? "100%" : k === i ? `${Math.min(100, ((t - STEP_AT[i]) / (end - STEP_AT[i])) * 100)}%` : "0%";
-        });
       }
       raf = requestAnimationFrame(tick);
     };
@@ -71,11 +65,6 @@ export function HeroEngine() {
     return () => cancelAnimationFrame(raf);
   }, []);
 
-  const goTo = (i: number) => {
-    const v = video.current;
-    if (v) v.currentTime = reduced ? STEP_HOLD[i] : STEP_AT[i] + 0.55;
-    setStep(i);
-  };
 
   const current = journey[step];
   const score = readinessAt[step];
@@ -84,16 +73,16 @@ export function HeroEngine() {
   return (
     <div
       ref={ref}
-      className="relative mx-auto w-full max-w-[560px]"
+      className="relative mx-auto w-full max-w-[600px]"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       onFocus={() => setPaused(true)}
       onBlur={() => setPaused(false)}
     >
-      <div className="relative flex justify-center overflow-hidden rounded-[28px] bg-sky pt-8 sm:pt-10 lg:h-[620px] lg:items-center lg:overflow-visible lg:rounded-none lg:bg-transparent lg:pt-0">
-        {/* Halo */}
-        <div className="absolute left-1/2 top-1/2 hidden size-[540px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle_at_50%_45%,#dbeafe_0%,#dbeafe_55%,rgb(219_234_254/0)_72%)] lg:block" aria-hidden />
-        <div className="absolute left-1/2 top-1/2 hidden size-[440px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-dashed border-primary/25 lg:block lg:animate-[gh-spin_60s_linear_infinite]" aria-hidden />
+      <div className="relative flex justify-center overflow-hidden rounded-[12px] bg-sky pt-8 sm:pt-10 lg:h-[620px] lg:items-center lg:overflow-visible lg:rounded-none lg:bg-transparent lg:pt-0">
+        {/* Backdrop panel */}
+        <div className="absolute inset-y-6 left-10 right-10 hidden rounded-[12px] border border-sky bg-[linear-gradient(180deg,#eff6ff,#dbeafe)] lg:block" aria-hidden />
+        <div className="bg-grid absolute inset-y-6 left-10 right-10 hidden rounded-[12px] opacity-60 lg:block" aria-hidden />
 
         {/* Phone playing the working prototype */}
         <div className="relative -mb-36 sm:-mb-44 lg:mb-0">
@@ -142,7 +131,7 @@ export function HeroEngine() {
           ) : (
             <>
               <span className="block text-sm font-bold">Design systems</span>
-              <span className="mt-1 inline-block rounded-full bg-danger-tint px-2 py-0.5 text-[11px] font-bold text-danger">High priority</span>
+              <span className="mt-1 inline-block rounded-md bg-danger-tint px-2 py-0.5 text-[11px] font-bold text-danger">High priority</span>
             </>
           )}
         </FloatCard>
@@ -159,39 +148,6 @@ export function HeroEngine() {
         </div>
       </div>
 
-      {/* Step rail */}
-      <div className="relative z-10 mt-5 flex flex-col gap-2.5 lg:mt-0">
-        <ol className="flex gap-1.5" aria-label="Journey steps">
-          {journey.map((s, i) => (
-            <li key={s.n} className="flex-1">
-              <button
-                type="button"
-                onClick={() => goTo(i)}
-                aria-label={`Step ${s.n}: ${s.title}`}
-                aria-current={i === step ? "step" : undefined}
-                className="group block w-full py-2"
-              >
-                <span className="block h-1.5 overflow-hidden rounded-full bg-line">
-                  <span
-                    ref={(el) => {
-                      bars.current[i] = el;
-                    }}
-                    className="block h-full w-0 rounded-full bg-primary"
-                  />
-                </span>
-              </button>
-            </li>
-          ))}
-        </ol>
-        <p className="flex items-center justify-between text-[13px]" aria-live="polite">
-          <span className="font-semibold text-ink">
-            <span className="text-primary">{current.phase}</span> · {current.title}
-          </span>
-          <span className="text-muted">
-            {current.n}/{journey.length}
-          </span>
-        </p>
-      </div>
     </div>
   );
 }
@@ -200,7 +156,7 @@ function FloatCard({ className, children, delay }: { className: string; children
   return (
     <div
       className={cx(
-        "absolute z-10 rounded-2xl border border-line bg-white/95 px-3.5 py-3 text-ink shadow-[0_14px_36px_rgb(10_22_51/0.14)] backdrop-blur",
+        "absolute z-10 rounded-[10px] border border-line bg-white/95 px-3.5 py-3 text-ink shadow-[0_14px_36px_rgb(10_22_51/0.14)] backdrop-blur",
         className,
       )}
     >
@@ -214,7 +170,7 @@ function FloatCard({ className, children, delay }: { className: string; children
 function Toast({ title, body, tone }: { title: string; body: string; tone: "primary" | "success" | "ink" }) {
   const dot = { primary: "bg-primary", success: "bg-success", ink: "bg-ink" }[tone];
   return (
-    <div className="animate-pop flex w-[240px] items-start gap-3 rounded-2xl border border-line bg-white px-3.5 py-3 shadow-[0_14px_36px_rgb(10_22_51/0.14)]">
+    <div className="animate-pop flex w-[240px] items-start gap-3 rounded-[10px] border border-line bg-white px-3.5 py-3 shadow-[0_14px_36px_rgb(10_22_51/0.14)]">
       <span className={cx("mt-1 size-2.5 shrink-0 rounded-full", dot)} />
       <span className="flex flex-col">
         <span className="text-[13px] font-bold text-ink">{title}</span>

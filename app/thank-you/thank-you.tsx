@@ -68,7 +68,7 @@ export function ThankYou() {
               ))}
             </ol>
 
-            <div className="mt-2 flex w-full max-w-[1000px] flex-col items-center gap-4 rounded-[24px] bg-tint p-6 lg:p-9">
+            <div className="mt-2 flex w-full max-w-[1000px] flex-col items-center gap-4 rounded-[12px] bg-tint p-6 lg:p-9">
               <h2 className="text-[21px] font-extrabold tracking-[-0.01em] lg:text-2xl">Bring your classmates along</h2>
               <p className="max-w-[620px] text-[15px] leading-normal text-body lg:text-[17px]">
                 The more students from your college join, the sooner we can open there.
@@ -92,7 +92,7 @@ export function ThankYou() {
                       setCopied(false);
                     }
                   }}
-                  className="inline-flex min-h-[52px] items-center justify-center rounded-[14px] border-[1.5px] border-primary bg-white px-6 font-semibold text-primary hover:bg-tint"
+                  className="inline-flex min-h-[52px] items-center justify-center rounded-lg border-[1.5px] border-primary bg-white px-6 font-semibold text-primary hover:bg-tint"
                 >
                   {copied ? "Link copied" : "Copy invite link"}
                 </button>

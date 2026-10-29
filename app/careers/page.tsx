@@ -35,7 +35,7 @@ export default function CareersPage() {
           {roles.map((r, i) => (
             <li
               key={i}
-              className="flex flex-col gap-2 rounded-[16px] bg-surface px-6 py-5 lg:flex-row lg:items-center lg:justify-between lg:px-7 lg:py-6"
+              className="flex flex-col gap-2 rounded-[10px] bg-surface px-6 py-5 lg:flex-row lg:items-center lg:justify-between lg:px-7 lg:py-6"
             >
               <div>
                 <h3 className="text-lg font-bold lg:text-xl">{r.title}</h3>
