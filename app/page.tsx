@@ -99,12 +99,14 @@ export default function HomePage() {
 
       {/* Product tour */}
       <section id="product-tour" aria-labelledby="tour-title" className="relative scroll-mt-20 overflow-hidden bg-night py-16 text-white lg:py-24">
+        <div className="bg-dots-night absolute inset-0 [mask-image:linear-gradient(180deg,#000,transparent_70%)]" aria-hidden />
+        <div className="absolute -right-40 -top-40 size-[520px] rounded-full bg-primary/25 blur-[120px]" aria-hidden />
         <Container className="relative">
           <SectionHeader
             id="tour-title"
             eyebrow="Product tour"
             title="See the app at work."
-            intro="Six steps from first assessment to a matched job. Each preview is the real flow, running live. Pick a step or let it play."
+            intro="Every screen below is a live preview of the GetHyre.ai journey. Pick a step or let it play."
             invert
           />
           <ProductTour />

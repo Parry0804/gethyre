@@ -12,14 +12,12 @@ import { track } from "@/lib/track";
 const TOUR_MS = 7000;
 const items = tourIds.map((id) => modules.find((m) => m.id === id)!);
 
-/**
- * Product tour on a dark panel: a numbered step list on the left, the live demo on the right.
- * Auto-advances until the visitor picks a step. On phones the demo sits under the open step.
- */
+/** Tabbed product tour on a dark panel. Auto-advances until the visitor picks a tab. */
 export function ProductTour() {
   const [active, setActive] = useState(0);
   const [auto, setAuto] = useState(true);
   const ref = useRef<HTMLDivElement>(null);
+  const tabsRef = useRef<HTMLDivElement>(null);
   const inView = useInView(ref);
   const reduced = useReducedMotion();
   const running = auto && inView && !reduced;
@@ -30,106 +28,88 @@ export function ProductTour() {
     return () => window.clearTimeout(t);
   }, [running, active]);
 
+  // Keep the active tab visible in the scrollable tab row on phones.
+  useEffect(() => {
+    const row = tabsRef.current;
+    const tab = row?.children[active] as HTMLElement | undefined;
+    if (!row || !tab) return;
+    row.scrollTo({ left: tab.offsetLeft - 20, behavior: reduced ? "auto" : "smooth" });
+  }, [active, reduced]);
+
   const m = items[active];
 
   return (
-    <div ref={ref} className="mt-10 grid gap-8 lg:mt-14 lg:grid-cols-[minmax(0,440px)_minmax(0,1fr)] lg:gap-16">
-      <ol role="tablist" aria-label="Product tour" aria-orientation="vertical" className="flex flex-col border-t border-night-line">
+    <div ref={ref} className="mt-8 lg:mt-12">
+      <div
+        ref={tabsRef}
+        role="tablist"
+        aria-label="Product tour"
+        className="-mx-5 flex gap-2 overflow-x-auto px-5 pb-1 [scrollbar-width:none] lg:mx-0 lg:grid lg:grid-cols-6 lg:overflow-visible lg:px-0"
+      >
         {items.map((it, i) => {
           const on = i === active;
           return (
-            <li key={it.id} className="border-b border-night-line">
-              <button
-                type="button"
-                role="tab"
-                id={`tour-tab-${it.id}`}
-                aria-selected={on}
-                aria-controls="tour-panel"
-                onClick={() => {
-                  setActive(i);
-                  setAuto(false);
-                  track("tour_tab", { tab: it.id });
-                }}
-                className="group relative flex w-full items-baseline gap-5 py-5 text-left"
-              >
-                {/* Progress line on the left edge of the open step */}
-                <span className="absolute -left-px bottom-0 top-0 w-0.5 bg-transparent" aria-hidden>
-                  {on ? (
-                    <span
-                      key={`${active}-${running}`}
-                      className={cx(
-                        "block h-full w-full origin-top bg-sky",
-                        running ? "animate-[gh-bar-y_7s_linear_both]" : "",
-                      )}
-                    />
-                  ) : null}
-                </span>
-                <span
-                  className={cx(
-                    "w-8 shrink-0 pl-4 text-sm font-bold tabular-nums transition-colors",
-                    on ? "text-sky" : "text-[#6b7da6] group-hover:text-[#b6c4e0]",
-                  )}
-                >
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <span className="flex min-w-0 flex-1 flex-col gap-1 pl-3">
-                  <span className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#6b7da6]">{it.phase}</span>
+            <button
+              key={it.id}
+              type="button"
+              role="tab"
+              id={`tour-tab-${it.id}`}
+              aria-selected={on}
+              aria-controls="tour-panel"
+              onClick={() => {
+                setActive(i);
+                setAuto(false);
+                track("tour_tab", { tab: it.id });
+              }}
+              className={cx(
+                "relative shrink-0 overflow-hidden rounded-lg border px-4 py-3 text-left transition-colors",
+                on ? "border-primary bg-primary/15 text-white" : "border-night-line text-subtle hover:border-sky/40 hover:text-sky",
+              )}
+            >
+              <span className="block text-[11px] font-semibold opacity-70">{it.phase}</span>
+              <span className="block whitespace-nowrap text-sm font-bold">{it.tab}</span>
+              <span className="absolute inset-x-0 bottom-0 h-0.5 bg-night-line">
+                {on ? (
                   <span
-                    className={cx(
-                      "text-lg font-bold leading-snug transition-colors lg:text-xl",
-                      on ? "text-white" : "text-[#b6c4e0] group-hover:text-white",
-                    )}
-                  >
-                    {it.title}
-                  </span>
-                </span>
-              </button>
-
-              {on ? (
-                <div className="animate-fade flex flex-col gap-4 pb-6 pl-[60px] pr-2">
-                  <p className="text-[15px] leading-relaxed text-[#b6c4e0]">{it.summary}</p>
-                  <ul className="flex flex-col gap-2">
-                    {it.youDo.map((x) => (
-                      <li key={x} className="flex items-start gap-2.5 text-[14px] text-[#dbe5f7]">
-                        <span className="mt-0.5 flex size-[18px] shrink-0 items-center justify-center rounded-[4px] bg-primary text-white">
-                          <CheckIcon size={11} />
-                        </span>
-                        {x}
-                      </li>
-                    ))}
-                  </ul>
-                  <Link
-                    href={`/product#${it.id}`}
-                    className="inline-flex w-fit items-center gap-1.5 text-[14px] font-bold text-sky underline-offset-4 hover:underline"
-                  >
-                    How {it.tab.toLowerCase()} works
-                    <span aria-hidden>→</span>
-                  </Link>
-                  {/* Phones: the demo sits under the open step */}
-                  <div className="mt-2 lg:hidden">
-                    <Demo name={it.demo} />
-                  </div>
-                </div>
-              ) : null}
-            </li>
+                    key={`${active}-${running}`}
+                    className={cx("block h-full origin-left bg-sky", running ? "animate-[gh-bar_7s_linear_both]" : "")}
+                  />
+                ) : null}
+              </span>
+            </button>
           );
         })}
-      </ol>
+      </div>
 
       <div
         id="tour-panel"
         role="tabpanel"
         aria-labelledby={`tour-tab-${m.id}`}
-        className="relative hidden lg:block"
+        className="mt-6 grid items-center gap-8 lg:mt-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,560px)] lg:gap-14"
       >
-        <div className="sticky top-28 flex min-h-[560px] items-center justify-center rounded-[12px] border border-night-line bg-night-2 p-10">
-          <div className="absolute left-5 top-4 flex items-center gap-2 text-[12px] font-semibold text-[#6b7da6]">
-            <span className="size-1.5 rounded-full bg-sky" />
-            Live preview · {m.tab}
-          </div>
-          <div key={`demo-${m.id}`} className="animate-pop w-full max-w-[600px]">
-            <Demo name={m.demo} />
-          </div>
+        <div key={m.id} className="animate-fade flex flex-col gap-4">
+          <h3 className="text-[26px] font-extrabold leading-tight tracking-[-0.02em] text-white lg:text-[34px]">{m.title}</h3>
+          <p className="text-base leading-relaxed text-[#b6c4e0] lg:text-lg">{m.summary}</p>
+          <ul className="mt-1 flex flex-col gap-2.5">
+            {m.youDo.map((x) => (
+              <li key={x} className="flex items-start gap-3 text-[15px] text-[#dbe5f7]">
+                <span className="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full bg-primary text-white">
+                  <CheckIcon size={12} />
+                </span>
+                {x}
+              </li>
+            ))}
+          </ul>
+          <Link
+            href={`/product#${m.id}`}
+            className="mt-2 inline-flex w-fit items-center gap-1.5 text-[15px] font-bold text-sky underline-offset-4 hover:underline"
+          >
+            How {m.tab.toLowerCase()} works
+            <span aria-hidden>→</span>
+          </Link>
+        </div>
+        <div key={`demo-${m.id}`} className="animate-pop">
+          <Demo name={m.demo} />
         </div>
       </div>
     </div>

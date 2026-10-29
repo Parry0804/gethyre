@@ -111,14 +111,6 @@
     opacity: 1;
   }
 }
-@keyframes gh-bar-y {
-  from {
-    transform: scaleY(0);
-  }
-  to {
-    transform: scaleY(1);
-  }
-}
 @keyframes gh-bar {
   from {
     transform: scaleX(0);
