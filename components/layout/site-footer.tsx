@@ -17,7 +17,7 @@ export function SiteFooter() {
         <div className="grid gap-8 lg:grid-cols-[340px_repeat(4,minmax(0,1fr))] lg:gap-12">
           <div className="flex flex-col items-start gap-4">
             <Link href="/" aria-label="GetHyre.ai home">
-              <Image src="/brand/logo.png" alt="GetHyre.ai" width={498} height={96} className="h-8 w-auto" />
+              <Image src="/brand/logo.png" alt="GetHyre.ai" width={623} height={160} className="h-10 w-auto" />
             </Link>
             <p className="max-w-[320px] text-[15px] leading-relaxed text-body">{site.tagline}</p>
             <AppBadge />

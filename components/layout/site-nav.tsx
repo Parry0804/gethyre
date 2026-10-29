@@ -60,7 +60,7 @@ export function SiteNav() {
         Skip to content
       </a>
       <div className="mx-auto flex h-16 w-full max-w-[1440px] items-center justify-between gap-6 px-5 lg:h-[76px] lg:px-10 xl:px-14">
-        <Logo className="h-7 w-auto lg:h-8" priority />
+        <Logo className="h-[34px] w-auto lg:h-10" priority />
 
         <nav aria-label="Main" className="hidden lg:block">
           <ul className="flex items-center gap-7">
@@ -112,7 +112,7 @@ export function SiteNav() {
           className="fixed inset-0 z-50 flex flex-col overflow-y-auto bg-white lg:hidden"
         >
           <div className="flex h-16 items-center justify-between px-5">
-            <Logo className="h-7 w-auto" />
+            <Logo className="h-[34px] w-auto" />
             <button
               type="button"
               autoFocus
