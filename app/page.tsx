@@ -7,8 +7,7 @@ import { Reveal } from "@/components/motion";
 import { HeroEngine } from "@/components/product/hero-engine";
 import { DashboardDemo } from "@/components/product/live-demos";
 import { ProductTour } from "@/components/product/product-tour";
-import { BuiltForThree, CampusToCareer, Differences, FactsBand, ScatteredVsConnected } from "@/components/product/sections";
-import { JourneyStepper } from "@/components/marketing/journey-stepper";
+import { CampusToCareer, Differences, FactsBand, ScatteredVsConnected } from "@/components/product/sections";
 import { VideoPlayer } from "@/components/marketing/video-player";
 import { ButtonLink, Container, H2, Section, SectionHeader } from "@/components/ui";
 import { faqs } from "@/content/journey";
@@ -127,17 +126,6 @@ export default function HomePage() {
         <CampusToCareer />
       </Section>
 
-      {/* How it works */}
-      <Section id="how-it-works" tone="white" labelledBy="how-title">
-        <SectionHeader
-          id="how-title"
-          eyebrow="How it works"
-          title="Diagnose. Train. Place."
-          intro="Seven steps across three phases. Each step unlocks the next, so every hour of prep goes where your gaps are."
-        />
-        <JourneyStepper />
-      </Section>
-
       {/* Why */}
       <Section labelledBy="why-title">
         <SectionHeader id="why-title" eyebrow="Why GetHyre.ai" title="Not another prep app. The whole path, connected." />
@@ -172,14 +160,6 @@ export default function HomePage() {
             <DashboardDemo />
           </Reveal>
         </div>
-      </Section>
-
-      {/* Built for three */}
-      <Section labelledBy="three-title">
-        <H2 id="three-title" className="text-ink">
-          Built for three people.
-        </H2>
-        <BuiltForThree />
       </Section>
 
       {/* Campus survey */}

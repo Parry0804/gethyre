@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { CheckIcon } from "@/components/icons";
 import { useInView, useReducedMotion } from "@/components/motion";
@@ -9,26 +8,74 @@ import { cx } from "@/components/ui";
 import { journey } from "@/content/journey";
 
 /** Readiness shown in the floating card at each journey step (illustrative student). */
-const readinessAt = [0, 0, 0, 75, 78, 86, 86];
-const STEP_MS = 2800;
+const readinessAt = [0, 0, 0, 75, 78, 84, 84];
+
+/** Where each journey step starts in /video/hero-flow.mp4 (seconds), and the loop length. */
+const STEP_AT = [0, 4.6, 7.25, 11.85, 17.15, 23.95, 27.35];
+const LOOP_S = 32.5;
+/** A representative moment inside each step, used when a step is picked or motion is reduced. */
+const STEP_HOLD = [3.6, 6.4, 10.2, 15.6, 21.5, 26.2, 31.2];
+
+function stepAt(t: number) {
+  let i = 0;
+  while (i + 1 < STEP_AT.length && t >= STEP_AT[i + 1]) i++;
+  return i;
+}
 
 /**
- * The home hero's centrepiece: the real app screens play through the seven-step journey,
- * while floating cards show the readiness score, gaps and job matches change with each step.
+ * The home hero's centrepiece: a looping, muted screen recording of the working app that runs
+ * through the seven-step journey on one phone. The step rail and floating cards follow the video.
  */
 export function HeroEngine() {
   const [step, setStep] = useState(0);
   const [paused, setPaused] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
+  const video = useRef<HTMLVideoElement>(null);
+  const bars = useRef<(HTMLSpanElement | null)[]>([]);
   const inView = useInView(ref);
   const reduced = useReducedMotion();
   const running = inView && !paused && !reduced;
 
+  // Play only while visible, not hovered and motion is allowed.
   useEffect(() => {
-    if (!running) return;
-    const t = window.setTimeout(() => setStep((s) => (s + 1) % journey.length), STEP_MS);
-    return () => window.clearTimeout(t);
-  }, [running, step]);
+    const v = video.current;
+    if (!v) return;
+    if (running) v.play().catch(() => {});
+    else v.pause();
+  }, [running]);
+
+  // Reduced motion: show a still frame of the chosen step instead of playing.
+  useEffect(() => {
+    const v = video.current;
+    if (v && reduced) v.currentTime = STEP_HOLD[step];
+  }, [reduced, step]);
+
+  // Keep the step rail in sync with the video.
+  useEffect(() => {
+    let raf = 0;
+    const tick = () => {
+      const v = video.current;
+      if (v) {
+        const t = v.currentTime % LOOP_S;
+        const i = stepAt(t);
+        setStep((s) => (s === i ? s : i));
+        const end = STEP_AT[i + 1] ?? LOOP_S;
+        bars.current.forEach((b, k) => {
+          if (!b) return;
+          b.style.width = k < i ? "100%" : k === i ? `${Math.min(100, ((t - STEP_AT[i]) / (end - STEP_AT[i])) * 100)}%` : "0%";
+        });
+      }
+      raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, []);
+
+  const goTo = (i: number) => {
+    const v = video.current;
+    if (v) v.currentTime = reduced ? STEP_HOLD[i] : STEP_AT[i] + 0.55;
+    setStep(i);
+  };
 
   const current = journey[step];
   const score = readinessAt[step];
@@ -48,26 +95,23 @@ export function HeroEngine() {
         <div className="absolute left-1/2 top-1/2 hidden size-[540px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle_at_50%_45%,#dbeafe_0%,#dbeafe_55%,rgb(219_234_254/0)_72%)] lg:block" aria-hidden />
         <div className="absolute left-1/2 top-1/2 hidden size-[440px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-dashed border-primary/25 lg:block lg:animate-[gh-spin_60s_linear_infinite]" aria-hidden />
 
-        {/* Phone with the real screens cross-fading */}
+        {/* Phone playing the working prototype */}
         <div className="relative -mb-36 sm:-mb-44 lg:mb-0">
           <div className="w-[236px] rounded-[36px] bg-ink p-[9px] shadow-[0_30px_70px_rgb(10_22_51/0.28)] sm:w-[270px] lg:w-[292px] lg:rounded-[44px] lg:p-[12px]">
-            <div className="relative aspect-[390/844] overflow-hidden rounded-[28px] bg-surface lg:rounded-[33px]">
-              {journey.map((s, i) => (
-                <Image
-                  key={s.screen}
-                  src={s.screen}
-                  alt={i === step ? s.alt : ""}
-                  aria-hidden={i !== step}
-                  width={780}
-                  height={1688}
-                  priority={i === 0}
-                  sizes="292px"
-                  className={cx(
-                    "absolute inset-0 h-full w-full object-cover transition-all duration-700",
-                    i === step ? "scale-100 opacity-100" : "scale-[1.03] opacity-0",
-                  )}
-                />
-              ))}
+            <div className="relative aspect-[360/800] overflow-hidden rounded-[28px] bg-surface lg:rounded-[33px]">
+              <video
+                ref={video}
+                className="absolute inset-0 h-full w-full object-cover"
+                src="/video/hero-flow.mp4"
+                poster="/video/hero-flow-poster.webp"
+                autoPlay={!reduced}
+                muted
+                loop
+                playsInline
+                preload="auto"
+                disablePictureInPicture
+                aria-label={`GetHyre.ai app demo. Step ${current.n} of ${journey.length}: ${current.title}. ${current.description}`}
+              />
             </div>
           </div>
         </div>
@@ -122,19 +166,17 @@ export function HeroEngine() {
             <li key={s.n} className="flex-1">
               <button
                 type="button"
-                onClick={() => setStep(i)}
+                onClick={() => goTo(i)}
                 aria-label={`Step ${s.n}: ${s.title}`}
                 aria-current={i === step ? "step" : undefined}
                 className="group block w-full py-2"
               >
                 <span className="block h-1.5 overflow-hidden rounded-full bg-line">
                   <span
-                    key={i === step ? `on-${step}` : "off"}
-                    className={cx(
-                      "block h-full rounded-full",
-                      i < step ? "w-full bg-primary" : i === step ? "w-full bg-primary" : "w-0",
-                      i === step && running ? "animate-[gh-bar_2.8s_linear_both] origin-left" : "",
-                    )}
+                    ref={(el) => {
+                      bars.current[i] = el;
+                    }}
+                    className="block h-full w-0 rounded-full bg-primary"
                   />
                 </span>
               </button>
