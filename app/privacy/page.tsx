@@ -1,34 +1,36 @@
 import type { Metadata } from "next";
-import { LegalPage } from "@/components/marketing/legal-page";
-import { site } from "@/lib/site";
+import { PolicyPage } from "@/components/marketing/policy";
+import { policyMeta, policySections, policySummary } from "@/content/privacy";
 
 export const metadata: Metadata = {
   title: "Privacy policy",
+  description:
+    "How GetHyre.ai collects, uses, shares and protects your personal data across our Android and iOS apps and website, and how to delete your account.",
   alternates: { canonical: "/privacy" },
 };
 
-// Draft structure only. Have the final text reviewed by a lawyer before launch.
+// Draft: fill every [bracket] and have the final text reviewed by a lawyer before launch.
 export default function PrivacyPage() {
   return (
-    <LegalPage
+    <PolicyPage
       title="Privacy policy"
-      updated="[date]"
-      sections={[
+      intro="What personal data GetHyre.ai collects, why, who we share it with, how long we keep it, and the choices you have."
+      effective={policyMeta.effective}
+      updated={policyMeta.updated}
+      summary={policySummary}
+      sections={policySections}
+      contact={[
+        { label: "Grievance Officer", value: policyMeta.officer },
+        { label: "Email", value: policyMeta.privacyEmail },
+        { label: "Company", value: policyMeta.company },
+        { label: "Address", value: `${policyMeta.address}, India` },
         {
-          heading: "What we collect",
-          body: "[Name, email, WhatsApp number, college, course and target role from our forms; assessment and interview data once you use the app.]",
-        },
-        {
-          heading: "How we use it",
-          body: "[To run your journey, send launch updates you agreed to, and match you to jobs. We never sell your data.]",
-        },
-        {
-          heading: "Who we share it with",
-          body: "[Partner colleges and hiring companies only as described, and only with your consent.]",
-        },
-        {
-          heading: "Your rights",
-          body: `[Access, correction and deletion under India's Digital Personal Data Protection Act. Contact: ${site.contact.email}.]`,
+          label: "Website",
+          value: (
+            <a href="https://www.gethyre.ai" className="font-semibold text-primary underline-offset-4 hover:underline">
+              www.gethyre.ai
+            </a>
+          ),
         },
       ]}
     />
