@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { LeadForm } from "@/components/forms/lead-form";
 import { StoreButtons } from "@/components/layout/store-buttons";
 import Link from "next/link";
-import { Bullets, DownloadCard, Faq } from "@/components/marketing/blocks";
+import { Bullets, DownloadCard } from "@/components/marketing/blocks";
 import { Photo } from "@/components/marketing/photos";
 import { Reveal } from "@/components/motion";
 import { HeroEngine } from "@/components/product/hero-engine";
@@ -10,8 +10,7 @@ import { ReportDemo } from "@/components/product/live-demos";
 import { ProductTour } from "@/components/product/product-tour";
 import { CampusToCareer, Differences, FactsBand, ScatteredVsConnected } from "@/components/product/sections";
 import { VideoPlayer } from "@/components/marketing/video-player";
-import { ButtonLink, Container, H2, Section, SectionHeader } from "@/components/ui";
-import { faqs } from "@/content/journey";
+import { ButtonLink, Container, Section, SectionHeader } from "@/components/ui";
 import type { PhotoName } from "@/content/photos";
 import { fields } from "@/lib/forms";
 import { site } from "@/lib/site";
@@ -232,16 +231,6 @@ export default function HomePage() {
           </div>
         </Container>
       </section>
-
-      {/* FAQ */}
-      <Section id="faq" tone="white" labelledBy="faq-title">
-        <div className="grid gap-6 lg:grid-cols-[360px_minmax(0,1fr)] lg:gap-12">
-          <H2 id="faq-title" className="text-ink">
-            Questions, answered.
-          </H2>
-          <Faq items={faqs} />
-        </div>
-      </Section>
 
       {/* Early access */}
       <section id="early-access" aria-labelledby="ea-title" className="scroll-mt-20 py-14 lg:py-22">

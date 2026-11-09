@@ -29,8 +29,8 @@ export const site = {
   },
 
   social: {
-    instagram: process.env.NEXT_PUBLIC_INSTAGRAM_URL ?? "",
-    linkedin: process.env.NEXT_PUBLIC_LINKEDIN_URL ?? "",
+    instagram: process.env.NEXT_PUBLIC_INSTAGRAM_URL || "https://www.instagram.com/gethyre.ai/",
+    linkedin: process.env.NEXT_PUBLIC_LINKEDIN_URL || "https://www.linkedin.com/company/gethyre-ai/",
     youtube: process.env.NEXT_PUBLIC_YOUTUBE_URL ?? "",
   },
 

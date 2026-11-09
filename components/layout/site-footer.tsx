@@ -1,14 +1,10 @@
 import Link from "next/link";
 import Image from "next/image";
+import { SocialLinks } from "@/components/layout/social-links";
 import { StoreButtons } from "@/components/layout/store-buttons";
 import { footerNav, site, whatsappLink } from "@/lib/site";
 
 export function SiteFooter() {
-  const social = [
-    { label: "Instagram", href: site.social.instagram },
-    { label: "LinkedIn", href: site.social.linkedin },
-    { label: "YouTube", href: site.social.youtube },
-  ].filter((s) => s.href);
   const wa = whatsappLink();
 
   return (
@@ -21,22 +17,7 @@ export function SiteFooter() {
             </Link>
             <p className="max-w-[320px] text-[15px] leading-relaxed text-body">{site.tagline}</p>
             <StoreButtons />
-            {social.length > 0 ? (
-              <ul className="flex gap-4">
-                {social.map((s) => (
-                  <li key={s.label}>
-                    <a
-                      href={s.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-sm font-semibold text-primary-strong hover:underline"
-                    >
-                      {s.label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            ) : null}
+            <SocialLinks />
           </div>
 
           <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:gap-12">

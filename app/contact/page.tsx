@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { LeadForm } from "@/components/forms/lead-form";
+import { SocialLinks } from "@/components/layout/social-links";
 import { ChatIcon, FileIcon, TargetIcon } from "@/components/icons";
 import { Reveal } from "@/components/motion";
 import { Container, Eyebrow, H1, Lead, Section, SectionHeader } from "@/components/ui";
@@ -112,6 +113,11 @@ export default function ContactPage() {
                 </li>
               ))}
             </ul>
+
+            <div className="flex flex-col gap-3 pt-2">
+              <span className="text-sm font-bold text-ink">Follow GetHyre.ai</span>
+              <SocialLinks />
+            </div>
           </div>
 
           <LeadForm
@@ -160,12 +166,12 @@ export default function ContactPage() {
                 Have a question about the product?
               </h2>
               <p className="max-w-[560px] text-base text-[#b6c4e0]">
-                Most answers are already on the site: how the journey works, how scores are built and how we handle your data.
+                Most answers are already on the site: how the product works, how scores are built and how we handle your data.
               </p>
             </div>
             <div className="flex flex-wrap gap-3">
               {[
-                { label: "Read the FAQ", href: "/#faq" },
+                { label: "Product tour", href: "/product" },
                 { label: "How we assess", href: "/how-we-assess" },
                 { label: "Privacy policy", href: "/privacy" },
               ].map((l) => (
