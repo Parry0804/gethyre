@@ -46,16 +46,25 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   // Never ship source maps to browsers (this is the default; kept explicit).
   productionBrowserSourceMaps: false,
-  images: {
-    // Photos from Unsplash (see content/photos.ts).
-    remotePatterns: [{ protocol: "https", hostname: "images.unsplash.com", pathname: "/photo-**" }],
-  },
-  // The Students page was merged into the home page.
   async redirects() {
-    return [{ source: "/students", destination: "/", permanent: true }];
+    return [
+      // Merged into the home page.
+      { source: "/students", destination: "/", permanent: true },
+      // Placeholder pages removed before launch.
+      { source: "/guides", destination: "/", permanent: false },
+      { source: "/press", destination: "/contact", permanent: false },
+      { source: "/ambassadors", destination: "/contact", permanent: false },
+    ];
   },
   async headers() {
-    return [{ source: "/(.*)", headers: securityHeaders }];
+    // Long browser caching for media. Rename a file (e.g. hero-flow-v2.mp4) when you replace it.
+    const media = { key: "Cache-Control", value: "public, max-age=2592000, stale-while-revalidate=86400" };
+    return [
+      { source: "/(.*)", headers: securityHeaders },
+      { source: "/video/:path*", headers: [media] },
+      { source: "/screens/:path*", headers: [media] },
+      { source: "/brand/:path*", headers: [media] },
+    ];
   },
   turbopack: {
     rules: {

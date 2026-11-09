@@ -12,10 +12,16 @@ export default function TermsPage() {
   return (
     <LegalPage
       title="Terms of use"
-      updated="[date]"
+      updated="9 November 2026"
       sections={[
-        { heading: "Using this website", body: "[Who may use the site and the early-access list.]" },
-        { heading: "No job guarantee", body: "[GetHyre.ai helps students prepare and connects them with matched roles; it does not guarantee placement.]" },
+        {
+          heading: "Using this website",
+          body: "You may use this website to learn about GetHyre.ai, join the early-access list and contact us. Please don't misuse it: no automated scraping, spam, attempts to break its security, or false information in our forms.",
+        },
+        {
+          heading: "No job guarantee",
+          body: "GetHyre.ai helps students prepare and connects them with matched roles. It does not guarantee a placement, a job offer or a particular salary. Employers make their own hiring decisions.",
+        },
         {
           heading: "Who we are",
           body: `GetHyre.ai is a product of ${site.contact.companyName}, ${site.contact.city}, India, which owns and operates this website and the GetHyre.ai apps for iOS and Android.`,

@@ -10,10 +10,7 @@ const routes = [
   "/contact",
   "/early-access",
   "/how-we-assess",
-  "/ambassadors",
-  "/guides",
   "/careers",
-  "/press",
   "/privacy",
   "/terms",
 ];

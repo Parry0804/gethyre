@@ -37,7 +37,7 @@ function istTimestamp() {
 
 /**
  * Handles all four lead forms: validate, check spam, save to Google Sheets,
- * then send the auto-reply and (for colleges, companies and ambassadors) an alert.
+ * then send the auto-reply and (for colleges, companies and contact messages) an alert.
  */
 export async function submitLead(_prev: LeadState, formData: FormData): Promise<LeadState> {
   const kindRaw = String(formData.get("kind") ?? "");

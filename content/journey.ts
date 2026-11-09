@@ -9,12 +9,6 @@ export type JourneyStep = {
   alt: string;
 };
 
-export const phaseNotes: Record<Phase, string> = {
-  Diagnose: "Find your gaps",
-  Train: "Close them",
-  Place: "Get hired",
-};
-
 /** The Diagnose → Train → Place journey, with the real app screen for each step. */
 export const journey: JourneyStep[] = [
   {
@@ -72,28 +66,5 @@ export const journey: JourneyStep[] = [
     description: "Jobs ranked by your assessed skills, each with a CV tailored to the role.",
     screen: "/screens/home-place.webp",
     alt: "Home screen showing 12 jobs that match the student's skills",
-  },
-];
-
-export const faqs = [
-  {
-    q: "When does GetHyre.ai launch?",
-    a: "We're piloting with partner colleges first. Join early access and you'll hear the moment it opens.",
-  },
-  {
-    q: "Which roles does GetHyre.ai cover?",
-    a: "[List the target roles and courses covered at launch.]",
-  },
-  {
-    q: "Is this a job guarantee?",
-    a: "No. We help you find and close your gaps and connect you with matched roles; the offer is yours to win.",
-  },
-  {
-    q: "How can my college join?",
-    a: "Book a call from the Colleges page and we'll walk your placement team through a pilot.",
-  },
-  {
-    q: "Is my data safe?",
-    a: "We only use your data to run your journey and never sell it. Details are in our privacy policy.",
   },
 ];

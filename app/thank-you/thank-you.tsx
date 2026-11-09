@@ -22,7 +22,7 @@ export function ThankYou() {
     }
   }, []);
 
-  const student = !lead || lead.kind === "student" || lead.kind === "ambassador";
+  const student = !lead || lead.kind === "student";
   const name = lead?.firstName ? `, ${lead.firstName}` : "";
   const shareUrl = `${site.url}/early-access?utm_source=referral&utm_medium=whatsapp`;
   const shareText = `I just joined GetHyre.ai early access. It shows you your skill gaps before placement season. Join here: ${shareUrl}`;
@@ -32,8 +32,6 @@ export function ThankYou() {
       ? `Message sent${name}.`
       : lead?.kind === "college" || lead?.kind === "company"
       ? `Thanks${name}. We'll be in touch.`
-      : lead?.kind === "ambassador"
-        ? `Application received${name}.`
         : `You're on the list${name}.`;
 
   const body =
@@ -41,8 +39,6 @@ export function ThankYou() {
       ? "Thanks for getting in touch. Our team will reply to your email soon."
       : lead?.kind === "college" || lead?.kind === "company"
       ? "We'll reply within 2 working days. A confirmation is on its way to your inbox."
-      : lead?.kind === "ambassador"
-        ? "We'll reply within a week. A confirmation is on its way to your inbox."
         : "We've sent you a confirmation. We'll invite you as soon as GetHyre.ai goes live at your campus.";
 
   return (

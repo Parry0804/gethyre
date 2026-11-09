@@ -48,7 +48,7 @@ export function ScatteredVsConnected() {
 
       <Reveal delay={120} className="flex flex-col rounded-[12px] bg-primary p-6 text-white lg:p-8">
         <h3 className="text-lg font-bold lg:text-xl">With GetHyre.ai</h3>
-        <p className="mt-1.5 text-[15px] text-sky">One journey. Each step feeds the next, so nothing you do is wasted.</p>
+        <p className="mt-1.5 text-[15px] text-white">One journey. Each step feeds the next, so nothing you do is wasted.</p>
         <ol className="relative mt-6 flex flex-col gap-2.5">
           <span className="absolute bottom-6 left-[19px] top-6 w-0.5 overflow-hidden bg-white/20" aria-hidden>
             <span className="absolute left-0 h-16 w-full animate-[gh-scan_3s_linear_infinite] bg-gradient-to-b from-white/0 via-white to-white/0" />
@@ -60,7 +60,7 @@ export function ScatteredVsConnected() {
               </span>
               <span className="flex flex-col">
                 <span className="text-[15px] font-bold">{x.t}</span>
-                <span className="text-[13px] text-sky">{x.s}</span>
+                <span className="text-[13px] text-white/90">{x.s}</span>
               </span>
             </li>
           ))}

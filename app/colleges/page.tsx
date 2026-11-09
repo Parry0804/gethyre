@@ -130,7 +130,7 @@ function BatchDashboard() {
       <div className="flex items-start justify-between gap-3">
         <div>
           <p className="text-[17px] font-bold lg:text-xl">Batch readiness</p>
-          <p className="text-xs text-muted lg:text-[13px]">[College name] · Final year, 2027</p>
+          <p className="text-xs text-muted lg:text-[13px]">Your college · Final year, 2027</p>
         </div>
         <Pill className="bg-warning-tint text-[#92400e]">Illustrative</Pill>
       </div>

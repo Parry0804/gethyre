@@ -34,14 +34,15 @@ export function HeroEngine() {
   const inView = useInView(ref);
   const reduced = useReducedMotion();
   const running = inView && !paused && !reduced;
+  const [src, setSrc] = useState<string | undefined>(undefined);
 
   // Play only while visible, not hovered and motion is allowed.
   useEffect(() => {
     const v = video.current;
-    if (!v) return;
+    if (!v || !src) return;
     if (running) v.play().catch(() => {});
     else v.pause();
-  }, [running]);
+  }, [running, src]);
 
   // Reduced motion: show a still frame of the chosen step instead of playing.
   useEffect(() => {
@@ -49,8 +50,21 @@ export function HeroEngine() {
     if (v && reduced) v.currentTime = STEP_HOLD[step];
   }, [reduced, step]);
 
-  // Keep the step rail in sync with the video.
+  // Load the video only after the page has finished loading, so it never competes with
+  // the page itself. The poster frame shows until then.
   useEffect(() => {
+    const start = () => {
+      const idle = window.requestIdleCallback ?? ((cb: () => void) => window.setTimeout(cb, 200));
+      idle(() => setSrc("/video/hero-flow.mp4"));
+    };
+    if (document.readyState === "complete") start();
+    else window.addEventListener("load", start, { once: true });
+    return () => window.removeEventListener("load", start);
+  }, []);
+
+  // Keep the step rail in sync with the video (only while it's playing).
+  useEffect(() => {
+    if (!running) return;
     let raf = 0;
     const tick = () => {
       const v = video.current;
@@ -63,8 +77,7 @@ export function HeroEngine() {
     };
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
-  }, []);
-
+  }, [running]);
 
   const current = journey[step];
   const score = readinessAt[step];
@@ -91,7 +104,7 @@ export function HeroEngine() {
               <video
                 ref={video}
                 className="absolute inset-0 h-full w-full object-cover"
-                src="/video/hero-flow.mp4"
+                src={src}
                 poster="/video/hero-flow-poster.webp"
                 autoPlay={!reduced}
                 muted

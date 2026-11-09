@@ -266,7 +266,7 @@ export default function AboutPage() {
               <h2 id="app-title" className="text-[28px] font-extrabold leading-tight tracking-[-0.02em] lg:text-[40px]">
                 Get GetHyre.ai on your phone.
               </h2>
-              <p className="max-w-[520px] text-base text-sky lg:text-lg">Available for iPhone and Android.</p>
+              <p className="max-w-[520px] text-base text-white lg:text-lg">Available for iPhone and Android.</p>
             </div>
             <StoreButtons tone="light" size="lg" className="relative" />
           </div>

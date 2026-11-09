@@ -45,6 +45,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en-IN" className={inter.variable} suppressHydrationWarning>
       <head>
+        {/* Photos are served by Unsplash's CDN; open the connection early. */}
+        <link rel="preconnect" href="https://images.unsplash.com" />
         {/* Marks JS as available so scroll-reveal styles only hide content when they can show it again. */}
         <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
         {/* Tells search engines (and app-store reviewers' tools) that GetHyre.ai is a product of the registered company. */}

@@ -240,7 +240,7 @@ export default function HomePage() {
               <h2 id="ea-title" className="text-[28px] font-extrabold leading-[1.12] tracking-[-0.025em] lg:text-[44px] lg:leading-[1.1]">
                 Be first in line when GetHyre.ai opens.
               </h2>
-              <p className="text-[15px] leading-relaxed text-sky lg:text-[17px]">
+              <p className="text-[15px] leading-relaxed text-white lg:text-[17px]">
                 Early-access students get the first invites to campus pilots.
               </p>
               <a href="/colleges" className="hidden text-base font-bold text-white underline-offset-4 hover:underline lg:inline">

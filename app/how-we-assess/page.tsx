@@ -37,7 +37,7 @@ export default function HowWeAssessPage() {
           ]}
         />
         <p className="mt-5 text-sm text-muted lg:text-[15px]">
-          Weighting: [Skills X% · Interview Y% · Profile Z%]. Shown on every report under &ldquo;How is this calculated?&rdquo;
+          The exact weighting for your target role is shown on every report under &ldquo;How is this calculated?&rdquo;
         </p>
       </Section>
 
@@ -77,9 +77,9 @@ export default function HowWeAssessPage() {
             items={[
               "We use your answers only to build your report, roadmap and job matches.",
               "We never sell your data.",
-              "Colleges see [batch-level / individual] progress only with your consent.",
+              "Your college sees your progress only with your consent.",
               "Companies see your profile only when you apply or opt in.",
-              "You can download or delete your data at any time. [Confirm with legal review.]",
+              "You can ask for a copy of your data or delete it at any time.",
             ]}
           />
         </div>

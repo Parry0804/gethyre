@@ -143,7 +143,7 @@ export default function ProductPage() {
         <div className="mt-8 grid gap-4 lg:mt-12 lg:grid-cols-2 lg:gap-6">
           <Reveal className="flex flex-col gap-5 rounded-[12px] bg-primary p-6 text-white lg:p-8">
             <h3 className="text-xl font-bold lg:text-2xl">Full journey</h3>
-            <p className="text-[15px] leading-relaxed text-sky lg:text-base">
+            <p className="text-[15px] leading-relaxed text-white lg:text-base">
               For most students. Find your gaps, close them on a roadmap, then get matched once you&apos;re job-ready.
             </p>
             <Flow steps={["Diagnose", "Train", "Job-ready", "Place"]} light />

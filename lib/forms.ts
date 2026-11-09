@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 /** The lead forms on the site. Each writes to its own Google Sheet tab. */
-export const leadKinds = ["student", "college", "company", "ambassador", "contact"] as const;
+export const leadKinds = ["student", "college", "company", "contact"] as const;
 export type LeadKind = (typeof leadKinds)[number];
 
 export type FieldConfig = {
@@ -39,7 +39,7 @@ const consent = z.literal("on", { error: "Please tick the box to continue." });
 /** Fields that hold phone numbers: validated by regex, so they may start with "+". */
 export const phoneFields = new Set(["phone", "whatsapp"]);
 /** Fields where line breaks are allowed. */
-export const multilineFields = new Set(["roles", "why", "message"]);
+export const multilineFields = new Set(["roles", "message"]);
 
 /** Topics on the Contact page form. */
 export const contactTopics = [
@@ -79,15 +79,6 @@ export const schemas = {
     freshers: optionalShort,
     consent,
   }),
-  ambassador: z.object({
-    name,
-    email,
-    whatsapp: phone,
-    college: short("college and city"),
-    course: short("course and year"),
-    why: z.string().trim().min(10, "Please add a line or two about you.").max(600),
-    consent,
-  }),
   contact: z.object({
     name,
     email,
@@ -103,7 +94,6 @@ export const sheetColumns: Record<LeadKind, string[]> = {
   student: ["name", "email", "whatsapp", "college", "course", "role"],
   college: ["name", "designation", "college", "phone", "email", "students"],
   company: ["name", "company", "email", "phone", "roles", "freshers"],
-  ambassador: ["name", "email", "whatsapp", "college", "course", "why"],
   contact: ["name", "email", "topic", "organisation", "message"],
 };
 
@@ -111,7 +101,6 @@ export const sheetTabs: Record<LeadKind, string> = {
   student: "Students",
   college: "Colleges",
   company: "Companies",
-  ambassador: "Ambassadors",
   contact: "Contact",
 };
 
@@ -150,14 +139,6 @@ export const fields = {
     { name: "phone", label: "Phone", placeholder: "+91", type: "tel", autoComplete: "tel", half: true },
     { name: "roles", label: "Roles you're hiring for", placeholder: "e.g. Junior data analyst, UI designer" },
     { name: "freshers", label: "Freshers per year", placeholder: "Approximate number", type: "number", optional: true },
-  ],
-  ambassador: [
-    { name: "name", label: "Full name", placeholder: "Your name", autoComplete: "name" },
-    { name: "email", label: "Email", placeholder: "you@college.edu", type: "email", autoComplete: "email", half: true },
-    { name: "whatsapp", label: "WhatsApp number", placeholder: "+91", type: "tel", autoComplete: "tel", half: true },
-    { name: "college", label: "College and city", placeholder: "College name, city", autoComplete: "organization" },
-    { name: "course", label: "Course and year", placeholder: "e.g. B.Tech CSE, 3rd year" },
-    { name: "why", label: "Why you?", placeholder: "One or two lines about you", multiline: true },
   ],
   contact: [
     { name: "name", label: "Full name", placeholder: "Your name", autoComplete: "name", half: true },

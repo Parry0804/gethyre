@@ -67,27 +67,10 @@ export function ChevronRightIcon(props: IconProps) {
   );
 }
 
-export function ChevronLeftIcon(props: IconProps) {
-  return (
-    <svg {...base(props)}>
-      <path d="M15 6l-6 6 6 6" />
-    </svg>
-  );
-}
-
 export function PlusIcon(props: IconProps) {
   return (
     <svg {...base(props)}>
       <path d="M12 5v14M5 12h14" />
-    </svg>
-  );
-}
-
-export function PhoneIcon(props: IconProps) {
-  return (
-    <svg {...base(props)}>
-      <rect x="6" y="2" width="12" height="20" rx="3" />
-      <path d="M11 18h2" />
     </svg>
   );
 }

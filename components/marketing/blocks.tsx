@@ -1,8 +1,6 @@
 import type { ReactNode } from "react";
-import { CheckIcon, DownloadIcon, FileIcon, PlusIcon, featureIcons, type FeatureIconName } from "@/components/icons";
-import { ArrowLink, ButtonLink, Card, Container, Eyebrow, H1, Lead, cx } from "@/components/ui";
-
-/* ---------- Page hero (inner pages) ---------- */
+import { CheckIcon, DownloadIcon, FileIcon, featureIcons, type FeatureIconName } from "@/components/icons";
+import { ButtonLink, Card, Container, Eyebrow, H1, Lead, cx } from "@/components/ui";
 
 export function PageHero({
   eyebrow,
@@ -66,8 +64,6 @@ export function FeatureCards({
   );
 }
 
-/* ---------- Numbered steps ---------- */
-
 export function NumberedSteps({
   items,
   tone = "white",
@@ -99,8 +95,6 @@ export function NumberedSteps({
   );
 }
 
-/* ---------- Check-mark bullets ---------- */
-
 export function Bullets({ items, className }: { items: string[]; className?: string }) {
   return (
     <ul className={cx("flex flex-col gap-3", className)}>
@@ -113,8 +107,6 @@ export function Bullets({ items, className }: { items: string[]; className?: str
     </ul>
   );
 }
-
-/* ---------- Download card ---------- */
 
 export function DownloadCard({ title, meta, href }: { title: string; meta: string; href: string | null }) {
   const body = (
@@ -141,26 +133,6 @@ export function DownloadCard({ title, meta, href }: { title: string; meta: strin
   );
 }
 
-/* ---------- FAQ ---------- */
-
-export function Faq({ items }: { items: { q: string; a: string }[] }) {
-  return (
-    <div className="flex flex-col">
-      {items.map((item) => (
-        <details key={item.q} className="group border-b border-line last:border-b-0">
-          <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-5 text-base font-bold text-ink lg:py-6 lg:text-lg">
-            {item.q}
-            <PlusIcon size={20} className="shrink-0 text-primary transition-transform group-open:rotate-45" />
-          </summary>
-          <p className="-mt-1 pb-5 text-[15px] leading-relaxed text-body lg:pb-6 lg:text-base">{item.a}</p>
-        </details>
-      ))}
-    </div>
-  );
-}
-
-/* ---------- Blue call-to-action band ---------- */
-
 export function CtaBand({
   title,
   body,
@@ -180,7 +152,7 @@ export function CtaBand({
         <div className="flex flex-col gap-6 rounded-[12px] bg-primary p-7 text-white lg:flex-row lg:items-center lg:justify-between lg:rounded-[12px] lg:p-14">
           <div className="flex max-w-[680px] flex-col gap-3">
             <h2 className="text-[26px] font-extrabold leading-tight tracking-[-0.02em] lg:text-[44px] lg:leading-[1.1]">{title}</h2>
-            <p className="text-[15px] leading-relaxed text-sky lg:text-[17px]">{body}</p>
+            <p className="text-[15px] leading-relaxed text-white lg:text-[17px]">{body}</p>
           </div>
           <ButtonLink href={href} variant="light" track={track} className="w-full shrink-0 lg:w-auto">
             {cta}
@@ -191,43 +163,3 @@ export function CtaBand({
   );
 }
 
-/* ---------- Placeholder photo ---------- */
-
-export function PhotoPlaceholder({ label = "[Photo]", className }: { label?: string; className?: string }) {
-  return (
-    <div className={cx("flex items-center justify-center rounded-[10px] bg-sky text-sm text-body", className)}>{label}</div>
-  );
-}
-
-/* ---------- Contact / audience link card ---------- */
-
-export function LinkCard({
-  kicker,
-  title,
-  link,
-  href,
-  tone = "white",
-}: {
-  kicker: string;
-  title: string;
-  link: string;
-  href: string;
-  tone?: "white" | "primary";
-}) {
-  const primary = tone === "primary";
-  return (
-    <Card tone={primary ? "primary" : "white"} className="flex h-full min-h-[220px] flex-col gap-3.5 lg:min-h-[260px] lg:p-8">
-      <p className={cx("text-[13px] font-bold uppercase tracking-[0.1em]", primary ? "text-sky" : "text-muted")}>{kicker}</p>
-      <p className={cx("text-[21px] font-extrabold leading-tight lg:text-2xl", primary ? "text-white" : "text-ink")}>{title}</p>
-      <div className="mt-auto">
-        {primary ? (
-          <a href={href} className="inline-flex items-center gap-1 text-[15px] font-bold text-white underline-offset-4 hover:underline lg:text-base">
-            {link} <span aria-hidden>→</span>
-          </a>
-        ) : (
-          <ArrowLink href={href}>{link}</ArrowLink>
-        )}
-      </div>
-    </Card>
-  );
-}

@@ -183,7 +183,7 @@ export function AssessmentDemo() {
             <span
               className={cx(
                 "rounded-md px-4 py-2 text-[13px] font-semibold transition-colors",
-                step >= 2 ? "bg-primary text-white" : "bg-surface text-subtle",
+                step >= 2 ? "bg-primary text-white" : "bg-surface text-muted",
               )}
             >
               Next question

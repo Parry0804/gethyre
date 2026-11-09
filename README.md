@@ -1,128 +1,125 @@
 # GetHyre.ai website
 
-The pre-launch showcase site for GetHyre.ai, built from the Figma file
-[gethyred-personal → Website · v1](https://www.figma.com/design/nsOByI1JdY2hEIJx6fGirm/gethyred-personal?node-id=302-1274).
+The marketing website for GetHyre.ai, a product of Edvantage Learning.
+Live: https://www.gethyre.ai · Repo: `Parry0804/gethyre` · Hosting: Vercel
 
 - **Stack:** Next.js 16 (App Router, Turbopack), React 19, TypeScript, Tailwind CSS 4, Zod.
-- **Pages (all static):** Home, Students, Colleges, Companies, About, Early access, How we assess,
-  Campus ambassadors, Guides, Careers, Press kit, Privacy, Terms, Thank you, 404.
-- **Forms:** student early access, college partnership, company hiring interest, campus ambassador.
-  One Server Action validates, checks spam, saves to Google Sheets and sends emails through Resend.
+- **Pages (all static):** Home, Product, Colleges, Companies, About, Contact, Early access, How we assess,
+  Careers, Privacy, Terms, Thank you, 404.
+- **Forms:** student early access, college partnership, company hiring interest, contact. One Server Action
+  validates, rate-limits, checks spam, saves to Google Sheets and sends emails through Resend.
+- **Launch checklist and risks:** see [`docs/LAUNCH.md`](docs/LAUNCH.md).
 
-## Run it on your computer
+## Run it locally
 
-You need [Node.js](https://nodejs.org) 20.9 or newer.
+Node.js 20.9 or newer (`.nvmrc` pins 22).
 
 ```bash
 npm install
-npm run dev
+npm run dev        # http://localhost:3000
 ```
 
-Open http://localhost:3000. With no settings, forms work in development and print each lead in the terminal.
+With no settings, forms work in development and print each lead in the terminal.
 
-Other commands:
+| Command | What it does |
+| --- | --- |
+| `npm run dev` | Local dev server with hot reload |
+| `npm run build` | Production build |
+| `npm run start` | Serve the production build |
+| `npm run check` | Type-check and lint (run before every push) |
 
-```bash
-npm run build   # production build (also type-checks)
-npm run start   # serve the production build
-npm run lint    # ESLint
+> This project uses Next.js 16. APIs differ from older versions: check `node_modules/next/dist/docs/`
+> before changing framework code (see `AGENTS.md`).
+
+## Project structure
+
 ```
+app/                     Routes. One folder per page; page.tsx is the page.
+  page.tsx               Home
+  actions/leads.ts       The single Server Action behind every form
+  layout.tsx             Header, footer, fonts, metadata, structured data
+  globals.css            Design tokens (colours, radii, shadows) and motion utilities
+  robots.ts, sitemap.ts  Search engine files
+components/
+  ui.tsx                 Base building blocks: Container, Section, headings, buttons, cards
+  icons.tsx              Inline SVG icons
+  motion.tsx             Scroll reveal, count-up and visibility hooks
+  layout/                Header + phone menu, footer, store buttons, social links, WhatsApp button, analytics
+  marketing/             Page hero, feature cards, photos, phone mockup, video players, legal page templates
+  product/               Live product demos, hero video, product tour, phase illustrations, home sections
+  forms/lead-form.tsx    The shared form used by every lead form
+content/                 Copy and data, kept out of components
+  product.ts             The product modules (Product page and tour)
+  journey.ts             The 7-step journey (hero)
+  photos.ts              Unsplash photos with credits
+  privacy.ts             Privacy policy text
+lib/
+  site.ts                Company details, links, navigation, downloads. Most edits start here.
+  forms.ts               Form fields, validation rules, Google Sheet columns
+  sheets.ts, email.ts    Google Sheets and Resend (server only)
+  turnstile.ts           Cloudflare Turnstile check (server only)
+  rate-limit.ts          Per-IP and per-email submission limits
+  sanitize.ts            Cleans form input; blocks spreadsheet formula injection
+  utm.ts, track.ts       Campaign tags and analytics events
+public/
+  brand/                 Logo and social share image
+  screens/               App screens (780×1688 WebP)
+  video/                 Hero loop and demo video (H.264, web-optimised)
+docs/LAUNCH.md           Go-live checklist, security notes, risks
+```
+
+### Common edits
+
+| To change | Edit |
+| --- | --- |
+| Company name, emails, city, social links, store links | `lib/site.ts` (or the matching env variable) |
+| Main menu and footer links | `mainNav` / `footerNav` in `lib/site.ts`, `mobileLinks` in `components/layout/site-nav.tsx` |
+| Product modules and copy | `content/product.ts` |
+| A form's fields or validation | `lib/forms.ts` |
+| Photos | `content/photos.ts` (Unsplash photo IDs) |
+| Privacy policy | `content/privacy.ts` |
+| Colours and fonts | `app/globals.css` (`@theme`) and `app/layout.tsx` |
+| Replacing a video or screen | Upload with a **new file name** (files are cached for 30 days) and update the path |
 
 ## Settings
 
-Copy `.env.example` to `.env.local` and fill in what you have. Every setting is optional for local work.
-
-| Setting | What it turns on |
-| --- | --- |
-| `NEXT_PUBLIC_WHATSAPP_NUMBER` | The floating "Chat on WhatsApp" button and WhatsApp links |
-| `NEXT_PUBLIC_SURVEY_URL` | The campus survey buttons |
-| `NEXT_PUBLIC_BOOKING_URL` | "Book a partnership call" opens your calendar link |
-| `NEXT_PUBLIC_DEMO_VIDEO_URL` | Replaces the video placeholder with the embedded video |
-| `GOOGLE_*` | Saves every lead as a row in Google Sheets |
-| `RESEND_API_KEY`, `EMAIL_FROM`, `LEADS_ALERT_EMAIL` | Auto-reply emails, and alerts for college, company and ambassador leads |
-| `*_TURNSTILE_*` | Cloudflare Turnstile spam check on all forms |
-| `NEXT_PUBLIC_GA_ID`, `NEXT_PUBLIC_CLARITY_ID` | GA4 events and Clarity heatmaps |
+Copy `.env.example` to `.env.local` locally, and add the same keys in Vercel → Project → Settings →
+Environment Variables. Everything is optional for local work. In production, forms need Google Sheets
+and/or Resend, otherwise they show "Our form isn't connected yet".
 
 ### Google Sheets
 
-1. Create a Google Sheet with four tabs: `Students`, `Colleges`, `Companies`, `Ambassadors`.
-2. Add headers in row 1 (optional but helpful):
+1. Create a Google Sheet with tabs `Students`, `Colleges`, `Companies`, `Contact`, and these headers in row 1:
    - Students: `Submitted (IST), Name, Email, WhatsApp, College, Course, Target role, Page, UTM source, UTM medium, UTM campaign, Consent version`
    - Colleges: `Submitted (IST), Name, Designation, College, Phone, Email, Final-year students, Page, UTM source, UTM medium, UTM campaign, Consent version`
    - Companies: `Submitted (IST), Name, Company, Email, Phone, Roles, Freshers per year, Page, UTM source, UTM medium, UTM campaign, Consent version`
-   - Ambassadors: `Submitted (IST), Name, Email, WhatsApp, College, Course, Why, Page, UTM source, UTM medium, UTM campaign, Consent version`
-3. In Google Cloud, create a service account, enable the Google Sheets API and create a JSON key.
-4. Share the sheet with the service account's email as **Editor**.
-5. Set `GOOGLE_SHEET_ID` (the long ID in the sheet's URL), `GOOGLE_SERVICE_ACCOUNT_EMAIL` and `GOOGLE_PRIVATE_KEY`.
+   - Contact: `Submitted (IST), Name, Email, Topic, College or company, Message, Page, UTM source, UTM medium, UTM campaign, Consent version`
+2. In Google Cloud, create a service account, enable the Google Sheets API and create a JSON key.
+3. Share **only this sheet** with the service account's email as Editor.
+4. Set `GOOGLE_SHEET_ID`, `GOOGLE_SERVICE_ACCOUNT_EMAIL` and `GOOGLE_PRIVATE_KEY`.
 
 If a sheet write fails and Resend is set up, the lead is emailed to `LEADS_ALERT_EMAIL` so nothing is lost.
-In production, if neither Sheets nor Resend is configured, forms show "Our form isn't connected yet" instead of losing the lead.
 
 ### Campus tracking
 
-Give each college its own link, for example `https://gethyre.ai/early-access?utm_source=college-name&utm_medium=qr`.
+Give each college its own link, for example `https://www.gethyre.ai/early-access?utm_source=college-name&utm_medium=qr`.
 The first UTM tags a visitor arrives with are saved with their form, so the sheet shows sign-ups per college.
-
-## Deploy
-
-1. Push this folder to a GitHub repository.
-2. Import it in [Vercel](https://vercel.com/new). The free Hobby plan is for non-commercial use only, so use a Pro seat for the live site.
-3. Add the settings from `.env.example` in Vercel → Project → Settings → Environment Variables.
-4. Add your domain in Vercel → Project → Domains and update `NEXT_PUBLIC_SITE_URL`.
-5. Submit `https://<domain>/sitemap.xml` in Google Search Console.
-
-## Where things live
-
-```
-app/                 one folder per page; actions/leads.ts handles every form
-components/ui.tsx    buttons, sections, headings, cards
-components/layout/   nav + mobile menu, footer, WhatsApp button, analytics
-components/marketing/ phone mockup, journey stepper, FAQ, download cards, page hero
-components/forms/    the shared lead form
-content/journey.ts   the 7 journey steps and the FAQ
-lib/site.ts          contact details, social links, downloads, nav
-lib/forms.ts         form fields, validation rules, sheet columns
-public/screens/      app screens exported from Figma (780×1688, 2×)
-public/brand/        logo, logo mark, social share image
-content/photos.ts    photos (Unsplash License, loaded from images.unsplash.com) with credits
-app/globals.css      design tokens from Figma (colours, font, radii)
-```
 
 ## Security
 
-What's in place (see `next.config.ts`, `app/actions/leads.ts` and `lib/`):
+- **Secrets stay on the server.** Only `NEXT_PUBLIC_*` values reach the browser. Google, Resend and Turnstile
+  keys are read only in files marked `server-only`. Never commit `.env.local` (git-ignored).
+- **Headers on every response:** Content-Security-Policy, HSTS, X-Frame-Options / frame-ancestors, nosniff,
+  Referrer-Policy, Permissions-Policy, COOP; no `X-Powered-By`. Adding a new outside service (chat widget,
+  analytics) means adding its domain to the CSP in `next.config.ts`.
+- **Forms:** field allow-list, input cleaning and length caps, letters-only names, spreadsheet formula
+  neutralising, honeypot, rate limits (5 per IP per 10 min, 3 per email per hour), Turnstile when configured,
+  same-origin Server Actions (no CORS surface), no personal data in logs.
+- No logins, user accounts, database or admin area exist on this site.
 
-- **Secrets stay on the server.** Only `NEXT_PUBLIC_*` values reach the browser, and none of them are secret.
-  Google, Resend and Turnstile keys are read only in files marked `server-only`. Never put a secret in a
-  `NEXT_PUBLIC_` variable, and never commit `.env.local` (it's git-ignored).
-- **Security headers on every page:** Content-Security-Policy, HSTS, X-Frame-Options/frame-ancestors (no
-  embedding in other sites), nosniff, Referrer-Policy, Permissions-Policy, COOP. No `X-Powered-By` header.
-  If you add a new outside service (a chat widget, a new analytics tool), add its domain to the CSP in
-  `next.config.ts` or the browser will block it.
-- **Forms:** only the expected fields are accepted; text is cleaned of control and invisible characters and
-  length-capped; names may only contain letters; values that would run as spreadsheet formulas are neutralised;
-  personal data is kept out of server logs.
-- **Spam and abuse:** hidden honeypot field; rate limits of 5 valid submissions per IP per 10 minutes and 3 per
-  email address per hour (in memory, per server instance); Cloudflare Turnstile when its keys are set.
-  Server Actions only accept same-origin requests (built into Next.js), so there's no CORS to configure.
+## Deploy
 
-Recommended before launch:
+Every push to `main` deploys to production on Vercel automatically. Pushes to other branches get a
+private preview URL (kept out of search engines by `app/robots.ts`).
 
-1. Turn on **Cloudflare Turnstile** (`NEXT_PUBLIC_TURNSTILE_SITE_KEY` + `TURNSTILE_SECRET_KEY`).
-2. Add a **Vercel Firewall rate-limit rule** for POST requests to `/`, `/early-access`, `/colleges`,
-   `/companies` and `/ambassadors` (Vercel → Project → Firewall). It works across all instances.
-3. In Google Cloud, give the service account access to **only the leads sheet** (share just that sheet with it)
-   and keep its JSON key out of email and chat. Rotate the key if it's ever exposed.
-4. Keep dependencies patched: run `npm audit` and `npm outdated` monthly, and update `next`, `react` and
-   `react-dom` as soon as a security release comes out.
-5. If you add logins, a database or an admin area later, those need authentication, per-user access checks
-   and password hashing; none exist today because the site has no accounts.
-
-## Before launch
-
-- Search the code for `[` and replace every bracketed placeholder (team, college logos, survey stat,
-  company name, city, roles covered, legal text).
-- Put the brochure and sample report PDFs in `public/downloads/` and set their `href` in `lib/site.ts`.
-- Replace `public/brand/logo.png` with a vector logo when you have one (the current one is cut from a JPEG).
-- Have the privacy policy and terms reviewed.
-- Keep pricing and business-model wording off the site.
+Before pushing: `npm run check && npm run build`.

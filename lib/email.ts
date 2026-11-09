@@ -34,11 +34,6 @@ const replies: Record<LeadKind, { subject: string; body: (first: string) => stri
     body: (first) =>
       `Hi ${first},\n\nThanks for telling us about your hiring plans. We'll get back to you within two working days with how a matched shortlist would work for your roles.\n\nTeam GetHyre.ai`,
   },
-  ambassador: {
-    subject: "We've received your GetHyre.ai ambassador application",
-    body: (first) =>
-      `Hi ${first},\n\nThanks for applying to be a GetHyre.ai campus ambassador. We'll reply within a week.\n\nTeam GetHyre.ai`,
-  },
   contact: {
     subject: "We've received your message",
     body: (first) =>

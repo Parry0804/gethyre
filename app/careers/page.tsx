@@ -9,11 +9,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/careers" },
 };
 
-const roles = [
-  { title: "[Role title]", team: "[Team]", type: "[Full-time · City / Remote]" },
-  { title: "[Role title]", team: "[Team]", type: "[Internship · Remote]" },
-  { title: "[Role title]", team: "[Team]", type: "[Full-time · City]" },
-];
+const roles = [{ title: "Full Stack AI Developer", team: "Engineering", type: "Contract" }];
 
 export default function CareersPage() {
   return (
@@ -32,9 +28,9 @@ export default function CareersPage() {
       <Section tone="white" labelledBy="roles-title">
         <SectionHeader id="roles-title" eyebrow="Open roles" title="Join us." />
         <ul className="mt-8 flex flex-col gap-3 lg:mt-10">
-          {roles.map((r, i) => (
+          {roles.map((r) => (
             <li
-              key={i}
+              key={r.title}
               className="flex flex-col gap-2 rounded-[10px] bg-surface px-6 py-5 lg:flex-row lg:items-center lg:justify-between lg:px-7 lg:py-6"
             >
               <div>

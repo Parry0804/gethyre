@@ -1,5 +1,5 @@
-import Image from "next/image";
 import type { ReactNode } from "react";
+import { UnsplashImage } from "@/components/marketing/unsplash-image";
 import { Reveal } from "@/components/motion";
 import { Container, cx } from "@/components/ui";
 import { photos, type PhotoName } from "@/content/photos";
@@ -24,7 +24,7 @@ export function Photo({
   const p = photos[name];
   return (
     <div className={cx("relative overflow-hidden rounded-[12px] bg-sky", className)}>
-      <Image
+      <UnsplashImage
         src={p.src}
         alt={p.alt}
         fill

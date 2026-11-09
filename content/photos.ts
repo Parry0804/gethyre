@@ -1,8 +1,8 @@
 /**
  * Photos used across the site. All are free to use under the Unsplash License
  * (https://unsplash.com/license): commercial use allowed, no attribution required.
- * Credits are kept here anyway. They load from Unsplash's image server via next/image
- * (allowed in next.config.ts). To self-host later, download each one into public/photos/.
+ * Credits are kept here anyway. They are resized and served by Unsplash's CDN
+ * (see components/marketing/unsplash-image.tsx).
  */
 
 export type Photo = {
@@ -14,7 +14,7 @@ export type Photo = {
   page: string;
 };
 
-const u = (id: string) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=1600&q=80`;
+const u = (id: string) => `https://images.unsplash.com/${id}`;
 
 export const photos = {
   studentOutdoor: {
