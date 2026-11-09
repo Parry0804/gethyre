@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { CheckIcon } from "@/components/icons";
 import type { ReactNode } from "react";
 import { Photo } from "@/components/marketing/photos";
