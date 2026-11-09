@@ -4,9 +4,8 @@ import { CheckIcon } from "@/components/icons";
 import { StoreButtons } from "@/components/layout/store-buttons";
 import { Photo } from "@/components/marketing/photos";
 import { Reveal } from "@/components/motion";
-import { ButtonLink, Container, Eyebrow, H1, Lead, Section, SectionHeader, cx } from "@/components/ui";
-import type { PhotoName } from "@/content/photos";
-import { site } from "@/lib/site";
+import { DiagnoseArt, PlaceArt, TrainArt } from "@/components/product/phase-art";
+import { ButtonLink, Container, Eyebrow, H1, Lead, Section, SectionHeader } from "@/components/ui";
 
 export const metadata: Metadata = {
   title: "About us",
@@ -30,26 +29,26 @@ const problems = [
   },
 ];
 
-const phases: { phase: string; title: string; body: string; photo: PhotoName; href: string }[] = [
+const phases: { phase: string; title: string; body: string; Art: () => React.JSX.Element; href: string }[] = [
   {
     phase: "Diagnose",
     title: "Find out where you stand",
     body: "A role-specific skill assessment and an AI mock interview produce one readiness score and a ranked list of gaps.",
-    photo: "studentDesk",
+    Art: DiagnoseArt,
     href: "/product#assessment",
   },
   {
     phase: "Train",
     title: "Close the gaps that matter",
     body: "A month-by-month roadmap built from those gaps, progress you can see, and an ATS-ready CV written from what you've proved.",
-    photo: "studyGroup",
+    Art: TrainArt,
     href: "/product#roadmap",
   },
   {
     phase: "Place",
     title: "Get matched on proven skills",
     body: "Once the job-ready check is passed, students are matched to roles by assessed skills, with a CV tailored to each job.",
-    photo: "youngProfessional",
+    Art: PlaceArt,
     href: "/product#jobs",
   },
 ];
@@ -191,11 +190,12 @@ export default function AboutPage() {
         <ol className="mt-8 grid gap-4 md:grid-cols-3 lg:mt-12 lg:gap-6">
           {phases.map((p, i) => (
             <Reveal as="li" key={p.phase} delay={i * 100} className="flex flex-col overflow-hidden rounded-[20px] border border-line bg-white">
-              <Photo name={p.photo} className="h-[200px] rounded-none lg:h-[230px]" sizes="(min-width: 768px) 33vw, 100vw" position="50% 30%">
-                <span className="absolute left-4 top-4 rounded-md bg-white/95 px-2.5 py-1 text-xs font-bold text-primary-strong">
+              <div className="relative">
+                <p.Art />
+                <span className="absolute left-4 top-4 z-10 rounded-md bg-white/95 px-2.5 py-1 text-xs font-bold text-primary-strong shadow-sm">
                   {i + 1} · {p.phase}
                 </span>
-              </Photo>
+              </div>
               <div className="flex flex-1 flex-col gap-2.5 p-6">
                 <h3 className="text-xl font-bold">{p.title}</h3>
                 <p className="text-[15px] leading-relaxed text-body">{p.body}</p>
@@ -271,44 +271,16 @@ export default function AboutPage() {
 
       {/* Contact */}
       <Section id="contact" tone="white" labelledBy="contact-title">
-        <div className="grid gap-10 lg:grid-cols-[400px_minmax(0,1fr)] lg:gap-16">
-          <div className="flex flex-col gap-5">
-            <SectionHeader id="contact-title" eyebrow="Get in touch" title="Talk to us." />
-            <dl className="flex flex-col gap-3 text-[15px]">
-              <div>
-                <dt className="font-bold text-ink">Company</dt>
-                <dd className="text-body">{site.contact.companyName}</dd>
-              </div>
-              <div>
-                <dt className="font-bold text-ink">Based in</dt>
-                <dd className="text-body">{site.contact.city}, India</dd>
-              </div>
-              <div>
-                <dt className="font-bold text-ink">Email</dt>
-                <dd>
-                  <a href={`mailto:${site.contact.email}`} className="font-semibold text-primary-strong hover:underline">
-                    {site.contact.email}
-                  </a>
-                </dd>
-              </div>
-            </dl>
-          </div>
-          <ul className="grid gap-px overflow-hidden rounded-[20px] border border-line bg-line sm:grid-cols-2">
-            {[
-              { k: "Colleges and universities", t: "Bring GetHyre.ai to your placement cell.", l: "Book a partnership call", h: "/colleges#book-a-call" },
-              { k: "Hiring teams", t: "Hire assessed freshers from partner campuses.", l: "Register hiring interest", h: "/companies#register" },
-              { k: "Press and media", t: "Logos, app screens and company facts.", l: "Open the press kit", h: "/press" },
-              { k: "Careers", t: "Help us build the future of campus hiring.", l: "See open roles", h: "/careers" },
-            ].map((c) => (
-              <li key={c.k} className="flex flex-col gap-2 bg-white p-6 lg:p-7">
-                <span className="text-sm font-bold text-primary">{c.k}</span>
-                <span className={cx("text-lg font-bold leading-snug text-ink")}>{c.t}</span>
-                <Link href={c.h} className="mt-auto pt-2 text-[15px] font-bold text-primary-strong underline-offset-4 hover:underline">
-                  {c.l} <span aria-hidden>→</span>
-                </Link>
-              </li>
-            ))}
-          </ul>
+        <div className="flex flex-col items-start gap-6 lg:flex-row lg:items-end lg:justify-between">
+          <SectionHeader
+            id="contact-title"
+            eyebrow="Get in touch"
+            title="Want to work with us?"
+            intro="Colleges, hiring teams, press or future teammates: we'd love to hear from you."
+          />
+          <ButtonLink href="/contact" track="about-contact">
+            Contact us
+          </ButtonLink>
         </div>
       </Section>
     </>

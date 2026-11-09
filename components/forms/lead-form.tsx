@@ -111,13 +111,35 @@ export function LeadForm({
                 {f.label}
                 {f.optional ? <span className="font-normal text-muted"> (optional)</span> : null}
               </label>
-              {f.multiline ? (
+              {f.type === "select" ? (
+                <select
+                  id={id(f.name)}
+                  name={f.name}
+                  defaultValue={value(f.name) ?? ""}
+                  required={!f.optional}
+                  aria-invalid={Boolean(error(f.name))}
+                  aria-describedby={error(f.name) ? `${id(f.name)}-error` : undefined}
+                  className={cx(inputClass(Boolean(error(f.name))), "appearance-none bg-[length:16px] bg-[right_14px_center] bg-no-repeat pr-10")}
+                  style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234B5563' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E\")" }}
+                >
+                  <option value="" disabled>
+                    {f.placeholder}
+                  </option>
+                  {"options" in f && f.options
+                    ? f.options.map((o) => (
+                        <option key={o} value={o}>
+                          {o}
+                        </option>
+                      ))
+                    : null}
+                </select>
+              ) : f.multiline ? (
                 <textarea
                   id={id(f.name)}
                   name={f.name}
                   placeholder={f.placeholder}
                   defaultValue={value(f.name)}
-                  rows={3}
+                  rows={f.name === "message" ? 5 : 3}
                   aria-invalid={Boolean(error(f.name))}
                   aria-describedby={error(f.name) ? `${id(f.name)}-error` : undefined}
                   className={inputClass(Boolean(error(f.name)))}

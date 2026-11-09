@@ -28,14 +28,18 @@ export function ThankYou() {
   const shareText = `I just joined GetHyre.ai early access. It shows you your skill gaps before placement season. Join here: ${shareUrl}`;
 
   const headline =
-    lead?.kind === "college" || lead?.kind === "company"
+    lead?.kind === "contact"
+      ? `Message sent${name}.`
+      : lead?.kind === "college" || lead?.kind === "company"
       ? `Thanks${name}. We'll be in touch.`
       : lead?.kind === "ambassador"
         ? `Application received${name}.`
         : `You're on the list${name}.`;
 
   const body =
-    lead?.kind === "college" || lead?.kind === "company"
+    lead?.kind === "contact"
+      ? "Thanks for getting in touch. Our team will reply to your email soon."
+      : lead?.kind === "college" || lead?.kind === "company"
       ? "We'll reply within 2 working days. A confirmation is on its way to your inbox."
       : lead?.kind === "ambassador"
         ? "We'll reply within a week. A confirmation is on its way to your inbox."

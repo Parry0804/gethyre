@@ -15,7 +15,7 @@ const mobileLinks = [
   { href: "/colleges", label: "For colleges" },
   { href: "/companies", label: "For companies" },
   { href: "/about", label: "About" },
-  { href: "/guides", label: "Guides" },
+  { href: "/contact", label: "Contact" },
 ];
 
 export function SiteNav() {

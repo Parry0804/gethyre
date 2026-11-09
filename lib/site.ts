@@ -93,6 +93,7 @@ export const mainNav = [
   { href: "/colleges", label: "Colleges" },
   { href: "/companies", label: "Companies" },
   { href: "/about", label: "About" },
+  { href: "/contact", label: "Contact" },
 ] as const;
 
 export const footerNav = [
@@ -103,27 +104,14 @@ export const footerNav = [
       { href: "/students", label: "For students" },
       { href: "/colleges", label: "For colleges" },
       { href: "/companies", label: "For companies" },
-      { href: "/early-access", label: "Early access" },
     ],
   },
   {
     title: "Company",
     links: [
-      { href: "/about", label: "About" },
+      { href: "/about", label: "About us" },
       { href: "/careers", label: "Careers" },
-      { href: "/press", label: "Press kit" },
-      { href: "/about#contact", label: "Contact" },
-    ],
-  },
-  {
-    title: "Resources",
-    links: [
-      { href: "/#faq", label: "FAQ" },
-      { href: "/how-we-assess", label: "How we assess" },
-      { href: "/students#sample-report", label: "Sample skill report" },
-      { href: "/#campus-survey", label: "Campus survey" },
-      { href: "/ambassadors", label: "Campus ambassadors" },
-      { href: "/guides", label: "Guides" },
+      { href: "/contact", label: "Contact us" },
     ],
   },
   {

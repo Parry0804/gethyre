@@ -14,7 +14,7 @@ export function SiteFooter() {
   return (
     <footer className="border-t border-line bg-white">
       <div className="mx-auto w-full max-w-[1440px] px-5 pb-7 pt-12 lg:px-10 xl:px-14 lg:pt-16">
-        <div className="grid gap-8 lg:grid-cols-[340px_repeat(4,minmax(0,1fr))] lg:gap-12">
+        <div className="grid gap-10 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,2fr)] lg:gap-16">
           <div className="flex flex-col items-start gap-4">
             <Link href="/" aria-label="GetHyre.ai home">
               <Image src="/brand/logo.png" alt="GetHyre.ai" width={623} height={160} className="h-10 w-auto" />
@@ -39,7 +39,7 @@ export function SiteFooter() {
             ) : null}
           </div>
 
-          <div className="grid grid-cols-2 gap-8 lg:col-span-4 lg:grid-cols-4 lg:gap-12">
+          <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:gap-12">
             {footerNav.map((group) => (
               <nav key={group.title} aria-label={group.title}>
                 <h2 className="text-xs font-bold uppercase tracking-[0.08em] text-muted">{group.title}</h2>
@@ -69,9 +69,7 @@ export function SiteFooter() {
               <a href={wa} target="_blank" rel="noopener noreferrer" className="hover:text-primary">
                 WhatsApp
               </a>
-            ) : (
-              <span>WhatsApp [number]</span>
-            )}
+            ) : null}
           </p>
         </div>
       </div>

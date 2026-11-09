@@ -39,6 +39,11 @@ const replies: Record<LeadKind, { subject: string; body: (first: string) => stri
     body: (first) =>
       `Hi ${first},\n\nThanks for applying to be a GetHyre.ai campus ambassador. We'll reply within a week.\n\nTeam GetHyre.ai`,
   },
+  contact: {
+    subject: "We've received your message",
+    body: (first) =>
+      `Hi ${first},\n\nThanks for getting in touch with GetHyre.ai. Your message has reached our team and we'll reply to this email address soon.\n\nTeam GetHyre.ai`,
+  },
 };
 
 export async function sendAutoReply(kind: LeadKind, to: string, firstName: string) {

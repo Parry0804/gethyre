@@ -8,6 +8,7 @@ const routes = [
   "/colleges",
   "/companies",
   "/about",
+  "/contact",
   "/early-access",
   "/how-we-assess",
   "/ambassadors",
