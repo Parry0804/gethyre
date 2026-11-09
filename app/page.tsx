@@ -1,16 +1,39 @@
 import type { Metadata } from "next";
 import { LeadForm } from "@/components/forms/lead-form";
 import { StoreButtons } from "@/components/layout/store-buttons";
-import { Faq } from "@/components/marketing/blocks";
+import Link from "next/link";
+import { Bullets, DownloadCard, Faq } from "@/components/marketing/blocks";
+import { Photo } from "@/components/marketing/photos";
 import { Reveal } from "@/components/motion";
 import { HeroEngine } from "@/components/product/hero-engine";
+import { ReportDemo } from "@/components/product/live-demos";
 import { ProductTour } from "@/components/product/product-tour";
 import { CampusToCareer, Differences, FactsBand, ScatteredVsConnected } from "@/components/product/sections";
 import { VideoPlayer } from "@/components/marketing/video-player";
 import { ButtonLink, Container, H2, Section, SectionHeader } from "@/components/ui";
 import { faqs } from "@/content/journey";
+import type { PhotoName } from "@/content/photos";
 import { fields } from "@/lib/forms";
 import { site } from "@/lib/site";
+
+const partners: { who: string; title: string; points: string[]; cta: string; href: string; photo: PhotoName }[] = [
+  {
+    who: "For colleges",
+    title: "A placement-readiness partner for your campus.",
+    points: ["Batch-level readiness and skill gaps", "Students prepared before drives begin", "Onboarding support for your placement cell"],
+    cta: "Partner with us",
+    href: "/colleges",
+    photo: "campusModern",
+  },
+  {
+    who: "For companies",
+    title: "Freshers who arrive assessed and interview-ready.",
+    points: ["Profiles backed by role-specific assessments", "Candidates matched to the roles you share", "Shortlists from partner campuses"],
+    cta: "Register hiring interest",
+    href: "/companies",
+    photo: "freshersTeam",
+  },
+];
 
 export const metadata: Metadata = {
   title: { absolute: "GetHyre.ai · Know your gaps. Close them. Get hired." },
@@ -113,6 +136,32 @@ export default function HomePage() {
         </Container>
       </section>
 
+      {/* Skill report (from the former Students page) */}
+      <Section id="sample-report" tone="white" labelledBy="report-title">
+        <div className="grid items-center gap-10 lg:grid-cols-[auto_minmax(0,1fr)] lg:gap-18">
+          <div className="order-2 w-full max-w-[460px] justify-self-center lg:order-1 lg:w-[460px]">
+            <ReportDemo />
+          </div>
+          <div className="order-1 flex flex-col gap-5 lg:order-2">
+            <SectionHeader
+              id="report-title"
+              eyebrow="Your skill report"
+              title="A report that tells you the truth."
+              intro="No vague scores. Your report shows exactly where you stand against the role you want, and what to do next."
+            />
+            <Bullets
+              items={[
+                "A readiness score out of 100, and how it's calculated",
+                "Skill gaps ranked against what your target role needs",
+                "Interview scores, your best moment and what to work on",
+                "A roadmap preview built from your gaps",
+              ]}
+            />
+            <DownloadCard {...site.downloads.sampleReport} />
+          </div>
+        </div>
+      </Section>
+
       {/* People */}
       <Section labelledBy="people-title">
         <SectionHeader
@@ -133,8 +182,35 @@ export default function HomePage() {
         </Reveal>
       </Section>
 
+      {/* For colleges and companies */}
+      <Section tone="white" labelledBy="partners-title">
+        <SectionHeader
+          id="partners-title"
+          eyebrow="Beyond students"
+          title="Working with colleges and hiring teams."
+          intro="GetHyre.ai is built for students, together with the placement cells that support them and the companies that hire them."
+        />
+        <ul className="mt-8 grid gap-4 md:grid-cols-2 lg:mt-12 lg:gap-6">
+          {partners.map((p, i) => (
+            <Reveal as="li" key={p.who} delay={i * 100}>
+              <Link href={p.href} className="group flex h-full flex-col overflow-hidden rounded-[20px] border border-line bg-surface transition-shadow hover:shadow-[var(--shadow-lift)]">
+                <Photo name={p.photo} className="h-[220px] rounded-none lg:h-[260px]" sizes="(min-width: 768px) 50vw, 100vw" position="50% 35%" />
+                <div className="flex flex-1 flex-col gap-3 p-6 lg:p-8">
+                  <span className="text-sm font-bold text-primary">{p.who}</span>
+                  <h3 className="text-[22px] font-extrabold leading-tight tracking-[-0.01em] lg:text-[26px]">{p.title}</h3>
+                  <Bullets items={p.points} />
+                  <span className="mt-auto pt-2 text-[15px] font-bold text-primary-strong group-hover:underline">
+                    {p.cta} <span aria-hidden>→</span>
+                  </span>
+                </div>
+              </Link>
+            </Reveal>
+          ))}
+        </ul>
+      </Section>
+
       {/* Campus survey */}
-      <section id="campus-survey" aria-labelledby="survey-title" className="scroll-mt-20 pb-14 lg:pb-22">
+      <section id="campus-survey" aria-labelledby="survey-title" className="scroll-mt-20 py-14 lg:py-22">
         <Container>
           <div className="flex flex-col gap-5 rounded-[12px] border border-sky bg-tint p-6 lg:flex-row lg:items-center lg:justify-between lg:p-10">
             <div className="flex flex-col gap-2">

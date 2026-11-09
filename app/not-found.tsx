@@ -17,7 +17,6 @@ export default function NotFound() {
           </ButtonLink>
         </div>
         <ul className="mt-3 flex flex-wrap justify-center gap-x-6 gap-y-2 text-[15px] font-semibold text-primary-strong lg:text-base">
-          <li><Link href="/students">For students</Link></li>
           <li><Link href="/colleges">For colleges</Link></li>
           <li><Link href="/companies">For companies</Link></li>
           <li><Link href="/#faq">FAQ</Link></li>

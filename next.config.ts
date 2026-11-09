@@ -50,6 +50,10 @@ const nextConfig: NextConfig = {
     // Photos from Unsplash (see content/photos.ts).
     remotePatterns: [{ protocol: "https", hostname: "images.unsplash.com", pathname: "/photo-**" }],
   },
+  // The Students page was merged into the home page.
+  async redirects() {
+    return [{ source: "/students", destination: "/", permanent: true }];
+  },
   async headers() {
     return [{ source: "/(.*)", headers: securityHeaders }];
   },

@@ -11,7 +11,6 @@ import { mainNav, whatsappLink } from "@/lib/site";
 
 const mobileLinks = [
   { href: "/product", label: "Product" },
-  { href: "/students", label: "For students" },
   { href: "/colleges", label: "For colleges" },
   { href: "/companies", label: "For companies" },
   { href: "/about", label: "About" },
