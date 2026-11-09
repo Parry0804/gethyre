@@ -16,6 +16,9 @@ export function SiteFooter() {
               <Image src="/brand/logo.png" alt="GetHyre.ai" width={623} height={160} className="h-10 w-auto" />
             </Link>
             <p className="max-w-[320px] text-[15px] leading-relaxed text-body">{site.tagline}</p>
+            <p className="text-sm text-muted">
+              A product of <span className="font-semibold text-ink">{site.contact.companyName}</span>
+            </p>
             <StoreButtons />
             <SocialLinks />
           </div>
@@ -40,7 +43,7 @@ export function SiteFooter() {
 
         <div className="mt-10 flex flex-col gap-2 border-t border-line pt-6 text-sm lg:flex-row lg:items-center lg:justify-between">
           <p className="text-muted">
-            © {site.copyrightYear} {site.contact.companyName} · {site.contact.city}, India
+            © {site.copyrightYear} {site.contact.companyName}, {site.contact.city}, India. All rights reserved.
           </p>
           <p className="flex flex-wrap gap-x-6 gap-y-1 font-medium text-ink">
             <a href={`mailto:${site.contact.email}`} className="hover:text-primary">

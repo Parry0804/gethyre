@@ -75,7 +75,7 @@ export default function ContactPage() {
     { icon: <MailIcon />, label: "Email", value: site.contact.email, href: `mailto:${site.contact.email}` },
     ...(wa ? [{ icon: <ChatIcon size={20} />, label: "WhatsApp", value: "Chat with us", href: wa }] : []),
     { icon: <PinIcon />, label: "Based in", value: `${site.contact.city}, India` },
-    { icon: <BuildingIcon />, label: "Company", value: site.contact.companyName },
+    { icon: <BuildingIcon />, label: "GetHyre.ai is a product of", value: site.contact.companyName },
   ];
 
   return (

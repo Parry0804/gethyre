@@ -19,13 +19,14 @@ export const site = {
   copyrightYear: 2026,
 
   contact: {
-    email: process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "hello@[domain]",
-    careersEmail: process.env.NEXT_PUBLIC_CAREERS_EMAIL ?? "careers@[domain]",
-    pressEmail: process.env.NEXT_PUBLIC_PRESS_EMAIL ?? "press@[domain]",
+    email: process.env.NEXT_PUBLIC_CONTACT_EMAIL || "info@gethyre.in",
+    careersEmail: process.env.NEXT_PUBLIC_CAREERS_EMAIL || "info@gethyre.in",
+    pressEmail: process.env.NEXT_PUBLIC_PRESS_EMAIL || "info@gethyre.in",
     /** Digits only with country code, e.g. 919876543210. Leave empty to hide WhatsApp links. */
     whatsapp: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "",
-    city: "[City]",
-    companyName: "[Registered company name]",
+    city: "New Delhi",
+    /** The registered company that owns and operates GetHyre.ai (shown in the footer, About, Contact, Privacy, Terms). */
+    companyName: "Edvantage Learning",
   },
 
   social: {

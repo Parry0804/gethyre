@@ -5,6 +5,7 @@ import { StoreButtons } from "@/components/layout/store-buttons";
 import { Photo } from "@/components/marketing/photos";
 import { Reveal } from "@/components/motion";
 import { DiagnoseArt, PlaceArt, TrainArt } from "@/components/product/phase-art";
+import { site } from "@/lib/site";
 import { ButtonLink, Container, Eyebrow, H1, Lead, Section, SectionHeader } from "@/components/ui";
 
 export const metadata: Metadata = {
@@ -96,6 +97,9 @@ export default function AboutPage() {
             GetHyre.ai is an AI placement platform for college students. We find what stands between a student and their first
             job, help them close it, and connect them to employers on the strength of skills they&apos;ve proved.
           </Lead>
+          <p className="text-sm text-muted">
+            GetHyre.ai is a product of <span className="font-semibold text-ink">{site.contact.companyName}</span>, {site.contact.city}.
+          </p>
           <div className="flex w-full flex-col justify-center gap-3 pt-2 sm:w-auto sm:flex-row">
             <ButtonLink href="/product" track="about-product">
               Explore the product
@@ -282,6 +286,18 @@ export default function AboutPage() {
             Contact us
           </ButtonLink>
         </div>
+        <dl className="mt-10 grid gap-px overflow-hidden rounded-[16px] border border-line bg-line sm:grid-cols-3">
+          {[
+            ["Product of", site.contact.companyName],
+            ["Headquarters", `${site.contact.city}, India`],
+            ["Email", site.contact.email],
+          ].map(([k, v]) => (
+            <div key={k} className="flex flex-col gap-1 bg-surface p-5 lg:p-6">
+              <dt className="text-xs font-semibold text-muted">{k}</dt>
+              <dd className="text-[17px] font-bold text-ink">{v}</dd>
+            </div>
+          ))}
+        </dl>
       </Section>
     </>
   );

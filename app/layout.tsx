@@ -23,6 +23,9 @@ export const metadata: Metadata = {
   },
   description: site.description,
   applicationName: site.name,
+  publisher: site.contact.companyName,
+  creator: site.contact.companyName,
+  authors: [{ name: site.contact.companyName }],
   openGraph: {
     type: "website",
     siteName: site.name,
@@ -44,6 +47,34 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <head>
         {/* Marks JS as available so scroll-reveal styles only hide content when they can show it again. */}
         <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
+        {/* Tells search engines (and app-store reviewers' tools) that GetHyre.ai is a product of the registered company. */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@graph": [
+                {
+                  "@type": "Organization",
+                  "@id": `${site.url}/#company`,
+                  name: site.contact.companyName,
+                  email: site.contact.email,
+                  address: { "@type": "PostalAddress", addressLocality: site.contact.city, addressCountry: "IN" },
+                  brand: { "@id": `${site.url}/#product` },
+                },
+                {
+                  "@type": "SoftwareApplication",
+                  "@id": `${site.url}/#product`,
+                  name: site.name,
+                  url: site.url,
+                  applicationCategory: "EducationalApplication",
+                  operatingSystem: "iOS, Android",
+                  publisher: { "@id": `${site.url}/#company` },
+                },
+              ],
+            }).replace(/</g, "\\u003c"),
+          }}
+        />
       </head>
       <body className="flex min-h-dvh flex-col">
         <SiteNav />

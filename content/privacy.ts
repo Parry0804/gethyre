@@ -19,10 +19,10 @@ export type PolicySection = { id: string; title: string; blocks: PolicyBlock[] }
 export const policyMeta = {
   effective: "[DD Month YYYY]",
   updated: "[DD Month YYYY]",
-  privacyEmail: "[privacy@gethyre.ai]",
-  supportEmail: "[support@gethyre.ai]",
-  company: "[Registered company name]",
-  address: "[registered address]",
+  privacyEmail: "info@gethyre.in",
+  supportEmail: "info@gethyre.in",
+  company: "Edvantage Learning",
+  address: "[registered address], New Delhi",
   officer: "[Full name]",
 };
 
@@ -45,7 +45,7 @@ export const policySections: PolicySection[] = [
       {
         type: "list",
         items: [
-          `**Who we are:** GetHyre.ai is operated by ${policyMeta.company}, a company registered in India at ${policyMeta.address} ("GetHyre.ai", "we", "us"). Under India's Digital Personal Data Protection Act, 2023 ("DPDP Act"), we are the Data Fiduciary for the personal data described here.`,
+          `**Who we are:** GetHyre.ai is a product of ${policyMeta.company}, which owns and operates it. ${policyMeta.company} is a company registered in India at ${policyMeta.address} ("${policyMeta.company}", "GetHyre.ai", "we", "us"). Under India's Digital Personal Data Protection Act, 2023 ("DPDP Act"), we are the Data Fiduciary for the personal data described here.`,
           "**What it covers:** the GetHyre.ai mobile apps for Android and iOS, the website www.gethyre.ai, and related services such as campus programmes, emails and WhatsApp messages (together, the \"Services\").",
           "**What it doesn't cover:** websites, apps or services of colleges, employers and other third parties, even when we link to them. Their own privacy policies apply.",
           `**Contact:** ${policyMeta.privacyEmail}. Our Grievance Officer's details are in [section 13](#contact).`,
