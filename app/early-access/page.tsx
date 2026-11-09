@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { LeadForm } from "@/components/forms/lead-form";
 import { Bullets } from "@/components/marketing/blocks";
 import { PhoneMockup } from "@/components/marketing/phone-mockup";
+import { Photo } from "@/components/marketing/photos";
 import { Container, Eyebrow, H1, Lead } from "@/components/ui";
 import { fields } from "@/lib/forms";
 
@@ -24,8 +25,11 @@ export default function EarlyAccessPage() {
             className="text-ink"
             items={["Your skill report with a readiness score", "First invites to campus pilots", "Launch updates only. No spam."]}
           />
-          <div className="hidden pt-3 lg:block">
-            <PhoneMockup src="/screens/home-diagnose.webp" alt="GetHyre.ai app home screen" width={240} />
+          <div className="relative hidden pt-3 lg:block">
+            <Photo name="studentPortrait" className="h-[340px] w-[86%]" sizes="560px" position="60% 30%" />
+            <div className="absolute -bottom-6 right-0 rotate-3">
+              <PhoneMockup src="/screens/home-diagnose.webp" alt="GetHyre.ai app home screen" width={150} />
+            </div>
           </div>
         </div>
         <LeadForm

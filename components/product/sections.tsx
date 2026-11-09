@@ -172,66 +172,6 @@ function ScorePill({ label, value, strong }: { label: string; value: number; str
   );
 }
 
-/* ---------- Built for three ---------- */
-
-export function BuiltForThree() {
-  return (
-    <ul className="mt-8 grid gap-4 md:grid-cols-3 lg:mt-12 lg:gap-6">
-      <Reveal as="li" className="flex flex-col overflow-hidden rounded-[12px] bg-primary text-white">
-        <Photo name="studentLaptop" className="h-[220px] rounded-none" sizes="(min-width: 768px) 33vw, 100vw" position="50% 35%">
-          <OverlayChip>
-            <span className="text-muted">Readiness</span> <b className="text-ink">81</b>
-            <span className="ml-1.5 rounded-md bg-success-tint px-2 py-0.5 text-[11px] font-bold text-success-strong">Job-ready</span>
-          </OverlayChip>
-        </Photo>
-        <Card3
-          kicker="Students"
-          title="See your real gaps, follow one roadmap, get matched to jobs that fit."
-          link="Get early access"
-          href="/early-access"
-          light
-        />
-      </Reveal>
-      <Reveal as="li" delay={100} className="flex flex-col overflow-hidden rounded-[12px] border border-line bg-white">
-        <Photo name="campusWalk" className="h-[220px] rounded-none" sizes="(min-width: 768px) 33vw, 100vw">
-          <OverlayChip>
-            <span className="text-muted">Batch readiness</span> <b className="text-ink">68</b>
-            <span className="ml-1.5 text-[11px] font-bold text-success-strong">▲ 14 this term</span>
-          </OverlayChip>
-        </Photo>
-        <Card3
-          kicker="Colleges"
-          title="A placement-readiness partner with batch-level progress you can report on."
-          link="Partner with us"
-          href="/colleges"
-        />
-      </Reveal>
-      <Reveal as="li" delay={200} className="flex flex-col overflow-hidden rounded-[12px] border border-line bg-white">
-        <Photo name="hiringTeam" className="h-[220px] rounded-none" sizes="(min-width: 768px) 33vw, 100vw">
-          <OverlayChip>
-            <span className="text-muted">Shortlist</span> <b className="text-ink">12 assessed</b>
-            <span className="ml-1.5 rounded-md bg-tint px-2 py-0.5 text-[11px] font-bold text-primary-strong">92% match</span>
-          </OverlayChip>
-        </Photo>
-        <Card3
-          kicker="Companies"
-          title="Shortlist freshers who are already assessed and interview-practised."
-          link="Register hiring interest"
-          href="/companies"
-        />
-      </Reveal>
-    </ul>
-  );
-}
-
-function OverlayChip({ children }: { children: ReactNode }) {
-  return (
-    <span className="absolute bottom-3 left-3 right-3 flex w-fit max-w-[calc(100%-24px)] items-center gap-1 rounded-lg bg-white/95 px-3 py-2 text-[13px] shadow-sm backdrop-blur">
-      {children}
-    </span>
-  );
-}
-
 /* ---------- From campus to career (photo mosaic) ---------- */
 
 export function CampusToCareer() {
@@ -259,7 +199,7 @@ export function CampusToCareer() {
         </Photo>
       </Reveal>
       <Reveal delay={150} className="col-span-2 lg:col-span-1">
-        <Photo name="graduate" className="aspect-[2/1] lg:aspect-auto lg:h-full" sizes="(min-width: 1024px) 25vw, 100vw" position="50% 25%">
+        <Photo name="graduateWoman" className="aspect-[2/1] lg:aspect-auto lg:h-full" sizes="(min-width: 1024px) 25vw, 100vw" position="70% 30%">
           <MosaicChip>Final year, placement-ready</MosaicChip>
         </Photo>
       </Reveal>
@@ -275,17 +215,3 @@ function MosaicChip({ children }: { children: ReactNode }) {
   );
 }
 
-function Card3({ kicker, title, link, href, light }: { kicker: string; title: string; link: string; href: string; light?: boolean }) {
-  return (
-    <div className="flex flex-1 flex-col gap-3 p-6 lg:p-7">
-      <span className={cx("text-sm font-bold", light ? "text-sky" : "text-primary")}>{kicker}</span>
-      <p className={cx("text-lg font-bold leading-snug lg:text-xl", light ? "text-white" : "text-ink")}>{title}</p>
-      <Link
-        href={href}
-        className={cx("mt-auto pt-3 text-[15px] font-bold underline-offset-4 hover:underline", light ? "text-white" : "text-primary-strong")}
-      >
-        {link} <span aria-hidden>→</span>
-      </Link>
-    </div>
-  );
-}

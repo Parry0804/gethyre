@@ -16,7 +16,6 @@ const mobileLinks = [
   { href: "/companies", label: "For companies" },
   { href: "/about", label: "About" },
   { href: "/guides", label: "Guides" },
-  { href: "/download", label: "Get the app" },
 ];
 
 export function SiteNav() {

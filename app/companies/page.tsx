@@ -29,7 +29,7 @@ export default function CompaniesPage() {
       />
 
       <PhotoBand
-        names={["hiringTeam", "recruiter", "youngProfessional"]}
+        names={["freshersTeam", "techTeam", "youngProfessional"]}
         captions={["Your hiring team", "Shortlists you can trust", "Freshers ready on day one"]}
       />
 

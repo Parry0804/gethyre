@@ -36,7 +36,7 @@ export default function CollegesPage() {
       />
 
       <PhotoBand
-        names={["campusWalk", "campusBuilding", "studyGroup"]}
+        names={["campusModern", "campusClassic", "studyGroup"]}
         captions={["Final-year students", "Your campus", "Batch-wide prep"]}
       />
 

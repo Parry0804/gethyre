@@ -3,7 +3,7 @@ import Link from "next/link";
 import { CheckIcon } from "@/components/icons";
 import { StoreButtons } from "@/components/layout/store-buttons";
 import { Photo } from "@/components/marketing/photos";
-import { CountUp, Reveal } from "@/components/motion";
+import { Reveal } from "@/components/motion";
 import { ButtonLink, Container, Eyebrow, H1, Lead, Section, SectionHeader, cx } from "@/components/ui";
 import type { PhotoName } from "@/content/photos";
 import { site } from "@/lib/site";
@@ -14,13 +14,6 @@ export const metadata: Metadata = {
     "GetHyre.ai is an AI placement platform that takes college students from campus to career: it diagnoses skill gaps, trains on a personal roadmap and matches students to jobs by proven skills.",
   alternates: { canonical: "/about" },
 };
-
-const glance = [
-  { n: 1, suffix: "", label: "connected journey, from first test to first job" },
-  { n: 7, suffix: "", label: "steps from profile to matched jobs" },
-  { n: 3, suffix: "", label: "phases: Diagnose, Train, Place" },
-  { n: 2, suffix: "", label: "apps, on iPhone and Android" },
-];
 
 const problems = [
   {
@@ -42,7 +35,7 @@ const phases: { phase: string; title: string; body: string; photo: PhotoName; hr
     phase: "Diagnose",
     title: "Find out where you stand",
     body: "A role-specific skill assessment and an AI mock interview produce one readiness score and a ranked list of gaps.",
-    photo: "studentOutdoor",
+    photo: "studentDesk",
     href: "/product#assessment",
   },
   {
@@ -66,30 +59,6 @@ const principles = [
   { title: "One path, not ten apps", body: "Diagnosis, training and placement belong in one connected journey where each step feeds the next." },
   { title: "Skills over keywords", body: "What a student can do should decide which jobs they see, not the words on their CV." },
   { title: "Built with colleges", body: "Placement cells know their students best. We work alongside them, not around them." },
-];
-
-const audiences: { who: string; line: string; cta: string; href: string; photo: PhotoName }[] = [
-  {
-    who: "Students",
-    line: "A clear picture of your skills, a plan to close the gaps and jobs that fit what you can do.",
-    cta: "For students",
-    href: "/students",
-    photo: "studentLaptop",
-  },
-  {
-    who: "Colleges",
-    line: "A placement-readiness partner with batch-level progress your placement cell can act on.",
-    cta: "For colleges",
-    href: "/colleges",
-    photo: "campusWalk",
-  },
-  {
-    who: "Companies",
-    line: "Freshers who arrive assessed, interview-practised and matched to the role.",
-    cta: "For companies",
-    href: "/companies",
-    photo: "hiringTeam",
-  },
 ];
 
 const commitments = [
@@ -142,7 +111,7 @@ export default function AboutPage() {
       {/* Wide photo */}
       <Container>
         <Reveal>
-          <Photo name="campusWalk" priority className="h-[260px] sm:h-[380px] lg:h-[520px]" sizes="(min-width: 1440px) 1360px, 100vw" position="50% 40%">
+          <Photo name="businessSchool" priority className="h-[280px] sm:h-[400px] lg:h-[560px]" sizes="(min-width: 1440px) 1360px, 100vw" position="50% 35%">
             <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-night/80 to-night/0 px-5 pb-5 pt-24 lg:px-10 lg:pb-9">
               <p className="max-w-[640px] text-left text-lg font-bold leading-snug text-white lg:text-[28px]">
                 Built for the millions of students who graduate every year ready to work, but not yet sure how to get there.
@@ -151,20 +120,7 @@ export default function AboutPage() {
           </Photo>
         </Reveal>
       </Container>
-
-      {/* At a glance */}
-      <section aria-label="GetHyre.ai at a glance" className="py-12 lg:py-16">
-        <Container>
-          <ul className="grid grid-cols-2 gap-px overflow-hidden rounded-[20px] border border-line bg-line lg:grid-cols-4">
-            {glance.map((g) => (
-              <li key={g.label} className="flex flex-col gap-1.5 bg-white p-5 lg:p-7">
-                <CountUp to={g.n} suffix={g.suffix} className="text-[40px] font-extrabold tracking-[-0.03em] text-primary lg:text-[52px]" />
-                <span className="text-[14px] leading-snug text-body lg:text-[15px]">{g.label}</span>
-              </li>
-            ))}
-          </ul>
-        </Container>
-      </section>
+      <div className="h-12 lg:h-20" aria-hidden />
 
       {/* The problem */}
       <Section tone="white" labelledBy="problem-title">
@@ -174,19 +130,8 @@ export default function AboutPage() {
               id="problem-title"
               eyebrow="Why we exist"
               title="Degrees are rising. Job-readiness isn't keeping up."
-              intro="India produces one of the world's largest graduating classes every year. Yet close to half of the graduates assessed nationally aren't considered employable yet. The gap usually isn't talent. It's knowing what to work on, and getting seen for it."
+              intro="India produces one of the world's largest graduating classes every year, and many of those graduates leave college unsure what employers want from them. The gap usually isn't talent. It's knowing what to work on, and getting seen for it."
             />
-            <Reveal className="rounded-[20px] bg-night p-6 text-white lg:p-8">
-              <p className="text-[56px] font-extrabold leading-none tracking-[-0.04em] lg:text-[72px]">
-                <CountUp to={56} />%
-              </p>
-              <p className="mt-3 max-w-[440px] text-base text-[#c7d4ee] lg:text-lg">
-                of candidates assessed were found employable in 2026, which means nearly 44 in every 100 weren&apos;t.
-              </p>
-              <p className="mt-4 text-xs text-subtle">
-                Source: India Skills Report 2026 (Wheebox ETS with CII, AICTE and AIU), 100,000+ candidates assessed.
-              </p>
-            </Reveal>
           </div>
           <ul className="flex flex-col gap-3 lg:justify-center lg:gap-4">
             {problems.map((p, i) => (
@@ -282,29 +227,6 @@ export default function AboutPage() {
             ))}
           </ul>
         </div>
-      </Section>
-
-      {/* Who we serve */}
-      <Section labelledBy="serve-title">
-        <SectionHeader id="serve-title" eyebrow="Who we serve" title="Built for students, with colleges and employers." />
-        <ul className="mt-8 grid gap-4 md:grid-cols-3 lg:mt-12 lg:gap-6">
-          {audiences.map((a, i) => (
-            <Reveal as="li" key={a.who} delay={i * 100}>
-              <Link href={a.href} className="group relative block overflow-hidden rounded-[20px]">
-                <Photo name={a.photo} className="h-[340px] rounded-none lg:h-[400px]" sizes="(min-width: 768px) 33vw, 100vw">
-                  <div className="absolute inset-0 bg-gradient-to-t from-night/90 via-night/30 to-night/0" />
-                  <div className="absolute inset-x-0 bottom-0 flex flex-col gap-2 p-6 text-white">
-                    <span className="text-2xl font-extrabold">{a.who}</span>
-                    <span className="text-[15px] leading-relaxed text-[#dbe5f7]">{a.line}</span>
-                    <span className="pt-1 text-[15px] font-bold text-sky group-hover:underline">
-                      {a.cta} <span aria-hidden>→</span>
-                    </span>
-                  </div>
-                </Photo>
-              </Link>
-            </Reveal>
-          ))}
-        </ul>
       </Section>
 
       {/* Trust */}

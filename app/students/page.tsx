@@ -63,7 +63,7 @@ export default function StudentsPage() {
       />
 
       <PhotoBand
-        names={["studentLaptop", "peerReview", "graduate"]}
+        names={["studentPhone", "peerReview", "graduateWoman"]}
         captions={["Know where you stand", "Practise and improve", "Walk into placements ready"]}
       />
 
