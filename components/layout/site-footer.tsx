@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { AppBadge } from "@/components/layout/app-badge";
+import { StoreButtons } from "@/components/layout/store-buttons";
 import { footerNav, site, whatsappLink } from "@/lib/site";
 
 export function SiteFooter() {
@@ -20,7 +20,7 @@ export function SiteFooter() {
               <Image src="/brand/logo.png" alt="GetHyre.ai" width={623} height={160} className="h-10 w-auto" />
             </Link>
             <p className="max-w-[320px] text-[15px] leading-relaxed text-body">{site.tagline}</p>
-            <AppBadge />
+            <StoreButtons />
             {social.length > 0 ? (
               <ul className="flex gap-4">
                 {social.map((s) => (

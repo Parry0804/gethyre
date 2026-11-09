@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { ChevronRightIcon, CloseIcon, MenuIcon } from "@/components/icons";
 import { Logo } from "@/components/layout/logo";
-import { AppBadge } from "@/components/layout/app-badge";
+import { StoreButtons } from "@/components/layout/store-buttons";
 import { ButtonLink, cx } from "@/components/ui";
 import { mainNav, whatsappLink } from "@/lib/site";
 
@@ -16,6 +16,7 @@ const mobileLinks = [
   { href: "/companies", label: "For companies" },
   { href: "/about", label: "About" },
   { href: "/guides", label: "Guides" },
+  { href: "/download", label: "Get the app" },
 ];
 
 export function SiteNav() {
@@ -63,7 +64,7 @@ export function SiteNav() {
         <Logo className="h-[34px] w-auto lg:h-10" priority />
 
         <nav aria-label="Main" className="hidden lg:block">
-          <ul className="flex items-center gap-7">
+          <ul className="flex items-center gap-6">
             {mainNav.map((item) => (
               <li key={item.href}>
                 <Link
@@ -146,7 +147,7 @@ export function SiteNav() {
             <ButtonLink href="/early-access" className="w-full" track="mobile-menu">
               Get early access
             </ButtonLink>
-            <AppBadge />
+            <StoreButtons />
             {wa ? (
               <a href={wa} target="_blank" rel="noopener noreferrer" className="text-[15px] font-semibold text-success">
                 Questions? Chat with us on WhatsApp

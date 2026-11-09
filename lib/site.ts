@@ -34,6 +34,14 @@ export const site = {
     youtube: process.env.NEXT_PUBLIC_YOUTUBE_URL ?? "",
   },
 
+  /**
+   * Store listings for the mobile apps. Until a link is set, its button opens /download instead.
+   */
+  apps: {
+    ios: process.env.NEXT_PUBLIC_APP_STORE_URL ?? "",
+    android: process.env.NEXT_PUBLIC_PLAY_STORE_URL ?? "",
+  },
+
   /** The Google Form used for the campus survey. */
   surveyUrl: process.env.NEXT_PUBLIC_SURVEY_URL ?? "",
 
@@ -85,6 +93,7 @@ export const mainNav = [
   { href: "/colleges", label: "Colleges" },
   { href: "/companies", label: "Companies" },
   { href: "/about", label: "About" },
+  { href: "/download", label: "Get the app" },
 ] as const;
 
 export const footerNav = [
@@ -95,6 +104,7 @@ export const footerNav = [
       { href: "/students", label: "For students" },
       { href: "/colleges", label: "For colleges" },
       { href: "/companies", label: "For companies" },
+      { href: "/download", label: "Download the app" },
       { href: "/early-access", label: "Early access" },
     ],
   },

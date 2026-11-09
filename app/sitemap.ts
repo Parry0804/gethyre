@@ -4,6 +4,7 @@ import { site } from "@/lib/site";
 const routes = [
   "",
   "/product",
+  "/download",
   "/students",
   "/colleges",
   "/companies",

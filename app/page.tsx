@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { LeadForm } from "@/components/forms/lead-form";
-import { AppBadge } from "@/components/layout/app-badge";
+import { StoreButtons } from "@/components/layout/store-buttons";
 import { Faq } from "@/components/marketing/blocks";
 import { Reveal } from "@/components/motion";
 import { HeroEngine } from "@/components/product/hero-engine";
@@ -52,9 +52,9 @@ export default function HomePage() {
                 See how it works
               </ButtonLink>
             </div>
-            <div className="flex flex-wrap items-center gap-4 pt-1">
-              <AppBadge />
-              <a href="/colleges" className="text-[15px] font-semibold text-primary-strong underline-offset-4 hover:underline">
+            <div className="flex flex-col gap-3 pt-1">
+              <StoreButtons />
+              <a href="/colleges" className="w-fit text-[15px] font-semibold text-primary-strong underline-offset-4 hover:underline">
                 Run placements at a college?
               </a>
             </div>
