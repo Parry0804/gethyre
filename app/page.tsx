@@ -8,6 +8,7 @@ import { Reveal } from "@/components/motion";
 import { HeroEngine } from "@/components/product/hero-engine";
 import { ReportDemo } from "@/components/product/live-demos";
 import { ProductTour } from "@/components/product/product-tour";
+import { RoleExplorer } from "@/components/product/role-explorer";
 import { CampusToCareer, Differences, FactsBand, ScatteredVsConnected } from "@/components/product/sections";
 import { VideoPlayer } from "@/components/marketing/video-player";
 import { ButtonLink, Container, Section, SectionHeader } from "@/components/ui";
@@ -117,6 +118,17 @@ export default function HomePage() {
           intro="Most students prepare with scattered tools and never find out which skill is holding them back. GetHyre.ai joins every step into one journey."
         />
         <ScatteredVsConnected />
+      </Section>
+
+      {/* Target roles */}
+      <Section id="roles" tone="white" labelledBy="roles-title">
+        <SectionHeader
+          id="roles-title"
+          eyebrow="Roles we prepare you for"
+          title="Pick a role. See exactly what you'll be assessed on."
+          intro="Your assessment, mock interview and roadmap are built around the role you choose, so you train for the skills recruiters actually check."
+        />
+        <RoleExplorer />
       </Section>
 
       {/* Product tour */}
