@@ -8,7 +8,7 @@ import { Reveal } from "@/components/motion";
 import { HeroEngine } from "@/components/product/hero-engine";
 import { ReportDemo } from "@/components/product/live-demos";
 import { ProductTour } from "@/components/product/product-tour";
-import { RoleExplorer } from "@/components/product/role-explorer";
+import { RoleMarquee } from "@/components/product/role-marquee";
 import { CampusToCareer, Differences, FactsBand, ScatteredVsConnected } from "@/components/product/sections";
 import { VideoPlayer } from "@/components/marketing/video-player";
 import { ButtonLink, Container, Section, SectionHeader } from "@/components/ui";
@@ -121,15 +121,18 @@ export default function HomePage() {
       </Section>
 
       {/* Target roles */}
-      <Section id="roles" tone="white" labelledBy="roles-title">
-        <SectionHeader
-          id="roles-title"
-          eyebrow="Roles we prepare you for"
-          title="Pick a role. See exactly what you'll be assessed on."
-          intro="Your assessment, mock interview and roadmap are built around the role you choose, so you train for the skills recruiters actually check."
-        />
-        <RoleExplorer />
-      </Section>
+      <section id="roles" aria-labelledby="roles-title" className="scroll-mt-20 overflow-hidden bg-white py-12 lg:py-16">
+        <Container className="flex flex-col items-center gap-2 text-center">
+          <span className="text-[13px] font-bold uppercase tracking-[0.1em] text-primary">Roles we prepare you for</span>
+          <h2 id="roles-title" className="text-[24px] font-extrabold tracking-[-0.02em] lg:text-[32px]">
+            30+ roles across 8 industries. Pick yours.
+          </h2>
+          <p className="max-w-[560px] text-[15px] text-body lg:text-[17px]">
+            Your assessment, mock interview and roadmap are built around the role you choose.
+          </p>
+        </Container>
+        <RoleMarquee />
+      </section>
 
       {/* Product tour */}
       <section id="product-tour" aria-labelledby="tour-title" className="relative scroll-mt-20 overflow-hidden bg-night py-16 text-white lg:py-24">

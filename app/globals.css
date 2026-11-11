@@ -232,3 +232,22 @@ summary::-webkit-details-marker {
     linear-gradient(to bottom, rgb(37 99 235 / 0.08) 1px, transparent 1px);
   background-size: 32px 32px;
 }
+
+/* Moving role bar (home page) */
+@keyframes gh-marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+.gh-marquee-track {
+  animation: gh-marquee 70s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .gh-marquee {
+    overflow-x: auto;
+    mask-image: none;
+  }
+  .gh-marquee-track {
+    animation: none !important;
+  }
+}
